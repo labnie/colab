@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Co-Laboratorio de Didáctica y Currículum · Secundaria No. 35 "Raúl Enrique Guerrero"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fondo: #f7f6f2;
+  --blanco: #ffffff;
+  --superficie: #f0efe9;
+  --borde: #e2e0d8;
+  --borde-fuerte: #c8c5bc;
+  --texto: #1c1b18;
+  --texto-sec: #5a5850;
+  --texto-ter: #9a9890;
+  --acento: #2d5a4e;
+  --radius: 12px;
+  --radius-sm: 7px;
+  --sombra: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.05);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--borde) 1px, transparent 1px),
+    linear-gradient(90deg, var(--borde) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--borde);
+  animation: fadeUp 0.6s ease both;
+}
+.header-texto { flex: 1; }
+.escuela-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-ter);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--texto);
+  margin-bottom: 6px;
+}
+header .subtitulo { font-size: 13px; color: var(--texto-ter); }
+.header-logo {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  background: var(--blanco);
+}
+.barra-info {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.btn-info {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 99px;
+  border: 1px solid var(--borde-fuerte);
+  background: var(--blanco);
+  color: var(--texto-sec);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex; align-items: center; gap: 7px;
+  box-shadow: var(--sombra);
+}
+.btn-info:hover { background: var(--acento); color: #fff; border-color: var(--acento); }
+.btn-info .pip { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.card-problema {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--sombra);
+  animation: fadeUp 0.6s 0.15s ease both;
+  position: relative; overflow: hidden;
+}
+.card-problema::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--acento);
+  border-radius: 4px 0 0 4px;
+}
+.card-problema h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; font-weight: 500;
+  color: var(--acento);
+  margin-bottom: 0.7rem;
+}
+.card-problema p { font-size: 13.5px; color: var(--texto-sec); line-height: 1.85; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+.tag {
+  font-size: 11px; padding: 3px 10px;
+  border-radius: 99px;
+  background: #eef4f2; color: var(--acento);
+  border: 1px solid #c9ddd8; font-weight: 500;
+}
+.instruccion {
+  text-align: center; font-size: 12px;
+  color: var(--texto-ter); margin-bottom: 1.25rem;
+  letter-spacing: 0.04em;
+  animation: fadeUp 0.6s 0.25s ease both;
+}
+.zona-central {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem; align-items: center;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.col-ejes { display: flex; flex-direction: column; gap: 7px; }
+.col-ejes.izq { align-items: flex-end; }
+.col-ejes.der { align-items: flex-start; }
+.eje-btn {
+  display: flex; align-items: center; gap: 9px;
+  padding: 9px 14px; cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--borde);
+  background: var(--blanco);
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px; font-weight: 500;
+  color: var(--texto-sec);
+  transition: all 0.2s ease;
+  width: 100%; max-width: 275px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.col-ejes.izq .eje-btn { flex-direction: row-reverse; text-align: right; }
+.eje-btn:hover { border-color: var(--borde-fuerte); color: var(--texto); background: var(--superficie); transform: translateX(-2px); }
+.col-ejes.der .eje-btn:hover { transform: translateX(2px); }
+.eje-btn.activo { border-width: 1.5px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+#canvas-wrap { display: flex; align-items: center; justify-content: center; }
+canvas {
+  border-radius: 50%; display: block;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.1), 0 0 0 6px var(--blanco), 0 0 0 7px var(--borde);
+}
+#panel {
+  display: none;
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra);
+  animation: fadeUp 0.3s ease both;
+  background: var(--blanco);
+}
+.p-head {
+  padding: 1.1rem 1.75rem;
+  border-bottom: 1px solid var(--borde);
+  display: flex; align-items: center; gap: 12px;
+}
+.p-head-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.p-head h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-weight: 500; flex: 1;
+}
+.p-head .sub { font-size: 11px; color: var(--texto-ter); letter-spacing: 0.04em; margin-top: 2px; }
+.p-body {
+  padding: 1.5rem 1.75rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2.5rem;
+}
+.bloque h4 {
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.6rem; color: var(--texto-ter);
+}
+.bloque p, .bloque li { font-size: 13px; color: var(--texto-sec); line-height: 1.8; }
+.bloque ul { padding-left: 1rem; }
+.bloque li { margin-bottom: 4px; }
+.bloque-lectura { grid-column: 1 / -1; }
+.preg {
+  border-radius: var(--radius-sm); padding: 9px 13px; margin-top: 6px;
+  font-size: 13px; font-style: italic; color: var(--texto); line-height: 1.7;
+  border-left-width: 2.5px; border-left-style: solid;
+  background: var(--superficie);
+}
+.p-foot {
+  padding: 0.85rem 1.75rem;
+  border-top: 1px solid var(--borde);
+  display: flex; align-items: center; justify-content: flex-end;
+  background: var(--superficie);
+}
+.btn-cerrar {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; color: var(--texto-ter);
+  background: none; border: none; cursor: pointer; letter-spacing: 0.03em;
+}
+.btn-cerrar:hover { color: var(--texto-sec); }
+footer {
+  text-align: center; margin-top: 3.5rem;
+  padding-top: 1.5rem; border-top: 1px solid var(--borde);
+  font-size: 11.5px; color: var(--texto-ter); letter-spacing: 0.05em;
+}
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(28,27,24,0.5);
+  z-index: 100; align-items: flex-start; justify-content: center;
+  padding: 2.5rem 1rem; overflow-y: auto;
+  backdrop-filter: blur(3px);
+}
+.overlay.abierto { display: flex; }
+.modal {
+  background: var(--blanco); border: 1px solid var(--borde);
+  border-radius: var(--radius); width: 100%; max-width: 700px;
+  overflow: hidden; animation: fadeUp 0.28s ease both; margin: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+}
+.modal-head {
+  padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--borde);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  background: var(--superficie);
+}
+.modal-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 500; color: var(--texto);
+}
+.modal-head .sub-modal { font-size: 11px; color: var(--texto-ter); margin-top: 3px; letter-spacing: 0.04em; }
+.btn-x {
+  background: none; border: 1px solid var(--borde); border-radius: 50%;
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  color: var(--texto-ter); font-size: 14px; cursor: pointer; flex-shrink: 0; transition: all 0.15s;
+}
+.btn-x:hover { background: var(--borde); color: var(--texto); }
+.modal-body { padding: 1.5rem 1.75rem; }
+.modal-intro {
+  font-size: 13.5px; color: var(--texto-sec); line-height: 1.85;
+  margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--borde);
+}
+.modal-intro strong { color: var(--texto); font-weight: 500; }
+.ejes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 9px; }
+.eje-card { border-radius: var(--radius-sm); padding: 11px 13px; border: 1px solid; }
+.eje-card .eje-nombre { font-size: 12.5px; font-weight: 500; margin-bottom: 4px; }
+.eje-card .eje-desc { font-size: 11.5px; line-height: 1.65; color: var(--texto-sec); }
+.jc-bloque {
+  margin-bottom: 1rem; padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm); border-left: 3px solid; background: var(--superficie);
+}
+.jc-bloque p { font-size: 13.5px; color: var(--texto-sec); line-height: 1.85; }
+.jc-bloque .fuente { font-size: 11px; color: var(--texto-ter); margin-top: 7px; font-style: italic; letter-spacing: 0.03em; }
+.jc-nota {
+  margin-top: 1rem; padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm); background: #eef4f2;
+  border: 1px solid #c9ddd8; font-size: 12.5px; color: var(--acento); line-height: 1.7;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 720px) {
+  .zona-central { grid-template-columns: 1fr; justify-items: center; }
+  .col-ejes.izq, .col-ejes.der { align-items: center; }
+  .col-ejes.izq .eje-btn { flex-direction: row; text-align: left; }
+  .eje-btn:hover { transform: none; }
+  .p-body { grid-template-columns: 1fr; }
+  .bloque-lectura { grid-column: 1; }
+  header { flex-direction: column-reverse; align-items: flex-start; }
+  .wrap { padding: 1.25rem 1rem 3rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="header-texto">
+      <div class="escuela-label">Co-Laboratorio de Didáctica y Currículum · Secundaria No. 35 Raúl Enrique Guerrero Montaño</div>
+      <h1>Caleidoscopio de saberes<br>desde la NEM</h1>
+      <p class="subtitulo">Una plataforma para problematizar desde los ejes articuladores</p>
+    </div>
+    <div class="header-logo">
+      <img src="https://raw.githubusercontent.com/labnie/logotipos/main/original-logo-2-lab.png" alt="Logotipo LabNIE" style="width:52px;height:52px;object-fit:contain;border-radius:50%;">
+    </div>
+  </header>
+
+  <div class="barra-info">
+    <button class="btn-info" onclick="abrirModal('modal-ejes')">
+      <span class="pip" style="background:var(--acento)"></span>
+      ¿Qué son los ejes articuladores?
+    </button>
+    <button class="btn-info" onclick="abrirModal('modal-jc')">
+      <span class="pip" style="background:#BA7517"></span>
+      Justicia curricular desde la NEM
+    </button>
+  </div>
+
+  <!-- MODAL EJES -->
+  <div class="overlay" id="modal-ejes" onclick="cerrarModalFondo(event,'modal-ejes')">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2>Los ejes articuladores de la NEM</h2>
+          <div class="sub-modal">Nueva Escuela Mexicana · Componente curricular · Sec. No. 35 Raúl Enrique Guerrero Montaño</div>
+        </div>
+        <button class="btn-x" onclick="cerrarModal('modal-ejes')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-intro">
+          Los ejes articuladores constituyen un componente que permite desarrollar el currículo desde una <strong>perspectiva ética para aprender y enseñar en, desde y para la comunidad</strong>. Ayudan a mirar, desde diferentes perspectivas, las situaciones o problemas de nuestra realidad para evitar generar, profundizar o acrecentar las condiciones de desigualdad y exclusión basadas en el género, la condición física, sociocultural, económica o de otro tipo.
+          <br><br>
+          Tienen una <strong>doble función</strong>: vincular el currículo con situaciones o problemas de nuestra realidad concreta; y ampliar las formas en que miramos y pensamos los conocimientos, las sociedades, el mundo y la vida.
+        </div>
+        <div class="ejes-grid">
+          <div class="eje-card" style="background:#f4f3fd;border-color:#c5c2ef;">
+            <div class="eje-nombre" style="color:#4a44a0;">Inclusión y equidad</div>
+            <div class="eje-desc">Centra la mirada en desigualdad, exclusión, racismo y barreras estructurales que limitan la participación y dignidad de las personas.</div>
+          </div>
+          <div class="eje-card" style="background:#f1f7ea;border-color:#b5d18a;">
+            <div class="eje-nombre" style="color:#3b6d11;">Pensamiento crítico</div>
+            <div class="eje-desc">Cuestiona normas, prácticas y formas de organización naturalizadas; busca analizar de dónde provienen y si pueden transformarse.</div>
+          </div>
+          <div class="eje-card" style="background:#fef3ee;border-color:#f0b49a;">
+            <div class="eje-nombre" style="color:#8a3a1a;">Interculturalidad crítica</div>
+            <div class="eje-desc">Reconoce distintas maneras de vivir, pensar y organizar la vida; problematiza relaciones de poder y visiones dominantes.</div>
+          </div>
+          <div class="eje-card" style="background:#eef4f2;border-color:#9fd4c1;">
+            <div class="eje-nombre" style="color:#0f6e56;">Vida saludable</div>
+            <div class="eje-desc">Relaciona bienestar físico, emocional y comunitario con condiciones materiales y sociales de vida, no sólo con hábitos individuales.</div>
+          </div>
+          <div class="eje-card" style="background:#edf4fd;border-color:#93c0ec;">
+            <div class="eje-nombre" style="color:#0c447c;">Apropiación de culturas y lectoescritura</div>
+            <div class="eje-desc">Entiende la lectura y escritura como herramientas para recuperar memoria colectiva, narrar experiencias y fortalecer identidades culturales.</div>
+          </div>
+          <div class="eje-card" style="background:#fdf0f5;border-color:#efaac6;">
+            <div class="eje-nombre" style="color:#7a2248;">Igualdad de género</div>
+            <div class="eje-desc">Analiza cómo los roles y estereotipos de género generan desigualdades en la experiencia cotidiana.</div>
+          </div>
+          <div class="eje-card" style="background:#fdf5e8;border-color:#f0c97a;">
+            <div class="eje-nombre" style="color:#633806;">Artes y experiencias estéticas</div>
+            <div class="eje-desc">Propone reconocer emociones, sensibilidades y formas de expresión como parte de la comprensión y transformación de la realidad.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL JUSTICIA CURRICULAR -->
+  <div class="overlay" id="modal-jc" onclick="cerrarModalFondo(event,'modal-jc')">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2>Justicia curricular desde la NEM</h2>
+          <div class="sub-modal">Nueva Escuela Mexicana · Fundamento pedagógico</div>
+        </div>
+        <button class="btn-x" onclick="cerrarModal('modal-jc')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-intro">
+          La justicia curricular es un principio central de la Nueva Escuela Mexicana que orienta la construcción de un currículo <strong>contextualizado, inclusivo y comunitario</strong>, capaz de reconocer la diversidad y combatir activamente las desigualdades presentes en la realidad social.
+        </div>
+        <div class="jc-bloque" style="border-color:#1D9E75;">
+          <p>La justicia curricular es una propuesta educativa orientada a que <strong>nadie quede atrás ni fuera de la escuela</strong>, mediante un currículo contextualizado, inclusivo y comunitario que reconozca la diversidad y combata la desigualdad, la exclusión y el racismo presentes en la realidad social.</p>
+          <div class="fuente">MEJOREDU, 2023</div>
+        </div>
+        <div class="jc-bloque" style="border-color:#7F77DD;">
+          <p>La justicia curricular implica construir una <strong>educación democrática y plural</strong> que reconozca la diversidad cultural, social y epistémica como fundamento del currículo, articulando escuela y comunidad para desarrollar capacidades humanas orientadas a la dignidad, la inclusión, la crítica social y la transformación de las desigualdades históricas.</p>
+          <div class="fuente">Rosa, 2024</div>
+        </div>
+        <div class="jc-nota">
+          En esta plataforma, los siete ejes articuladores son la operacionalización de la justicia curricular: cada eje ofrece una lente diferente para leer la problemática de nuestra comunidad escolar y construir respuestas pedagógicas situadas, éticas y transformadoras.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMÁTICA -->
+  <div class="card-problema">
+    <h2>La problemática · Escuela Secundaria No. 35 Raúl Enrique Guerrero Montaño</h2>
+    <p>Muchas de las familias de las y los jóvenes que estudian en la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", en Cabo San Lucas, son migrantes y viven en condiciones económicas limitadas. Debido a las necesidades del hogar, varios estudiantes se han visto en la necesidad de buscar empleos de medio tiempo o incluso de tiempo completo para contribuir al gasto familiar. Esta situación ha comenzado a impactar de manera significativa en la vida escolar y personal de los adolescentes. Algunos estudiantes presentan problemas de alimentación, cansancio constante y poca energía para participar en las actividades académicas. Asimismo, se ha observado baja participación en clase, dificultades para realizar tareas escolares, ausentismo y, en algunos casos, aislamiento social respecto a sus compañeros. Frente a esta realidad, la comunidad escolar se pregunta de qué manera la escuela puede acompañar a las y los estudiantes considerando las condiciones sociales, económicas y culturales que atraviesan sus vidas, y cómo generar estrategias educativas más inclusivas, solidarias y vinculadas con su contexto.</p>
+    <div class="tags">
+      <span class="tag">Trabajo adolescente</span>
+      <span class="tag">Familias migrantes</span>
+      <span class="tag">Ausentismo escolar</span>
+      <span class="tag">Desigualdad económica</span>
+      <span class="tag">Derecho a la educación</span>
+    </div>
+  </div>
+
+  <p class="instruccion">Selecciona un eje articulador para leer la problemática desde ese ángulo</p>
+
+  <div class="zona-central">
+    <div class="col-ejes izq">
+      <button class="eje-btn" onclick="selEje(0)"><span class="dot" style="background:#D4537E"></span>Igualdad de género</button>
+      <button class="eje-btn" onclick="selEje(1)"><span class="dot" style="background:#D85A30"></span>Interculturalidad crítica</button>
+      <button class="eje-btn" onclick="selEje(2)"><span class="dot" style="background:#7F77DD"></span>Inclusión y equidad</button>
+      <button class="eje-btn" onclick="selEje(3)"><span class="dot" style="background:#378ADD"></span>Culturas y lectoescritura</button>
+    </div>
+    <div id="canvas-wrap">
+      <canvas id="kaleido" width="250" height="250"></canvas>
+    </div>
+    <div class="col-ejes der">
+      <button class="eje-btn" onclick="selEje(4)"><span class="dot" style="background:#BA7517"></span>Artes y experiencias estéticas</button>
+      <button class="eje-btn" onclick="selEje(5)"><span class="dot" style="background:#1D9E75"></span>Vida saludable</button>
+      <button class="eje-btn" onclick="selEje(6)"><span class="dot" style="background:#639922"></span>Pensamiento crítico</button>
+    </div>
+  </div>
+
+  <div id="panel"></div>
+
+  <footer>
+    <div style="margin-bottom:1rem;">
+      Nueva Escuela Mexicana &nbsp;·&nbsp; 7 Ejes articuladores &nbsp;·&nbsp; Co-Laboratorio de Didáctica y Currículum &nbsp;·&nbsp; Sec. No. 35 Raúl Enrique Guerrero Montaño · Cabo San Lucas, BCS
+    </div>
+    <div style="max-width:780px;margin:0 auto;text-align:left;border-top:1px solid var(--borde);padding-top:1rem;">
+      <p style="font-size:10.5px;color:var(--texto-ter);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Referencias</p>
+      <p style="font-size:11px;color:var(--texto-ter);line-height:1.8;margin-bottom:4px;">Comisión Nacional para la Mejora Continua de la Educación. (2023). <em>¡Aprendamos en comunidad! Los ejes articuladores: pensar desde nuestra diversidad</em> (Fascículo 4). Mejoredu.</p>
+      <p style="font-size:11px;color:var(--texto-ter);line-height:1.8;">Rosa, C. (2024). Ejes articuladores: capacidades humanas para una sociedad democrática y plural. Luces y algunos claroscuros. En <em>La educación en el sexenio 2018-2024: Miradas desde la investigación educativa</em> (pp. 212–217). Instituto de Investigaciones sobre la Universidad y la Educación, UNAM.</p>
+    </div>
+  </footer>
+
+</div>
+<script>
+const EJES = [
+  {
+    nombre:"Igualdad de género", color:"#c04070", bg:"#fdf0f5", txt:"#7a2248", dotColor:"#D4537E",
+    paleta:['#D4537E','#ED93B1','#f9dce9','#993556','#e07090','#F4C0D1','#7a2248'],
+    lectura:"El eje de igualdad de género permite identificar cómo las condiciones económicas y familiares afectan de manera diferenciada a hombres y mujeres jóvenes. En contextos de migración y precariedad, muchas estudiantes pueden asumir labores domésticas, de cuidado o responsabilidades familiares además de las escolares, mientras que algunos estudiantes varones pueden verse presionados socialmente a incorporarse tempranamente al trabajo remunerado. El eje ayuda a reconocer cómo los estereotipos y roles de género influyen en la participación escolar, el cansancio, la permanencia educativa y las oportunidades de desarrollo.",
+    puntos:["Identificar desigualdades relacionadas con roles familiares y laborales.","Generar espacios de diálogo sobre estereotipos de género.","Evitar prácticas escolares que refuercen desigualdades.","Promover relaciones basadas en el respeto y la equidad.","Acompañar a estudiantes en situaciones de sobrecarga familiar o laboral."],
+    preguntas:["¿Las responsabilidades familiares y laborales afectan igual a hombres y mujeres jóvenes? ¿Por qué?","¿Qué ideas o expectativas sociales influyen en las actividades que realizan las y los estudiantes fuera de la escuela?"]
+  },
+  {
+    nombre:"Interculturalidad crítica", color:"#8a3a1a", bg:"#fef3ee", txt:"#6b2c12", dotColor:"#D85A30",
+    paleta:['#D85A30','#F0997B','#fde5d8','#993C1D','#e07050','#F5C4B3','#6b2c12'],
+    lectura:"El eje de interculturalidad crítica permite comprender que el trabajo infantil y adolescente no puede analizarse únicamente como una decisión individual o familiar, sino como una situación vinculada con condiciones históricas, económicas, sociales y culturales que atraviesan a muchas familias migrantes. En distintos contextos, el trabajo de niñas, niños y jóvenes puede ser visto como una forma de apoyo familiar, supervivencia o responsabilidad comunitaria. Este eje ayuda a cuestionar las desigualdades estructurales que obligan a muchas familias a incorporar a sus hijos e hijas al trabajo, así como las formas de discriminación y exclusión que viven dentro y fuera de la escuela.",
+    puntos:["Reconocer las condiciones sociales y culturales que viven las familias migrantes.","Evitar estigmatizar a estudiantes que trabajan.","Generar espacios de escucha y diálogo sobre las experiencias laborales de las y los jóvenes.","Incorporar problemáticas comunitarias y territoriales en las actividades escolares.","Promover una cultura escolar basada en el respeto y la dignidad."],
+    preguntas:["¿Por qué algunos adolescentes necesitan trabajar mientras estudian?","¿Qué desigualdades sociales y económicas influyen en el trabajo infantil y adolescente en nuestra comunidad?"]
+  },
+  {
+    nombre:"Inclusión y equidad", color:"#4a44a0", bg:"#f4f3fd", txt:"#32307a", dotColor:"#7F77DD",
+    paleta:['#7F77DD','#AFA9EC','#e8e6fa','#534AB7','#9088e0','#CECBF6','#32307a'],
+    lectura:"El eje de inclusión permite reconocer que el trabajo infantil y adolescente genera condiciones de desigualdad que afectan la participación, el aprendizaje y la permanencia escolar de muchas y muchos estudiantes. Las jornadas laborales, el cansancio, la mala alimentación y las responsabilidades familiares colocan a algunos jóvenes en desventaja frente a otros compañeros. Este eje ayuda a comprender que las dificultades académicas no deben interpretarse únicamente como falta de interés o compromiso, sino como resultado de condiciones sociales y económicas que limitan el acceso pleno al derecho a la educación.",
+    puntos:["Identificar barreras que dificultan la participación y aprendizaje de estudiantes que trabajan.","Evitar prácticas de exclusión, estigmatización o castigo.","Generar estrategias de acompañamiento académico y emocional.","Fortalecer la comunicación con las familias.","Construir ambientes escolares más empáticos y solidarios."],
+    preguntas:["¿De qué manera el trabajo afecta las oportunidades educativas de algunos adolescentes?","¿Cómo puede la escuela apoyar a estudiantes que viven situaciones económicas difíciles sin excluirlos o señalarlos?"]
+  },
+  {
+    nombre:"Apropiación de culturas y lectoescritura", color:"#0c447c", bg:"#edf4fd", txt:"#083060", dotColor:"#378ADD",
+    paleta:['#378ADD','#85B7EB','#d8eaf8','#185FA5','#5090d0','#B5D4F4','#083060'],
+    lectura:"Este eje permite reconocer que las experiencias de trabajo infantil y adolescente forman parte de las historias, saberes y realidades que viven muchas familias migrantes en la comunidad. La lectura y la escritura pueden convertirse en herramientas para que las y los estudiantes narren sus experiencias, recuperen la memoria de sus familias y reflexionen críticamente sobre las condiciones sociales y económicas que atraviesan sus vidas. Asimismo, ayuda a visibilizar que las prácticas escolares pueden fortalecerse cuando incorporan las voces, lenguajes y experiencias reales del alumnado.",
+    puntos:["Promover actividades de lectura y escritura vinculadas con la vida cotidiana del estudiantado.","Recuperar relatos, historias y experiencias de las familias migrantes.","Favorecer espacios de expresión oral y escrita sobre problemáticas comunitarias.","Incorporar diversos lenguajes y formas de comunicación.","Utilizar la lectura y escritura como herramientas de reflexión crítica y participación."],
+    preguntas:["¿Qué historias y experiencias sobre el trabajo existen en nuestras familias y comunidad?","¿Cómo pueden la lectura y la escritura ayudarnos a comprender y expresar las problemáticas que viven las y los jóvenes?"]
+  },
+  {
+    nombre:"Artes y experiencias estéticas", color:"#633806", bg:"#fdf5e8", txt:"#4a2904", dotColor:"#BA7517",
+    paleta:['#BA7517','#EF9F27','#fdebc8','#854F0B','#d08520','#FAC775','#4a2904'],
+    lectura:"Este eje permite reconocer que el trabajo infantil y adolescente no sólo tiene consecuencias económicas o escolares, sino también emocionales y humanas. Las y los estudiantes pueden experimentar cansancio, frustración, estrés, preocupación o sentimientos de exclusión que muchas veces no logran expresar en los espacios escolares tradicionales. Las artes y las experiencias estéticas abren posibilidades para representar, comunicar y reflexionar sobre las vivencias relacionadas con el trabajo, la migración, la desigualdad y la vida cotidiana, favoreciendo la empatía y la sensibilidad colectiva.",
+    puntos:["Generar espacios de expresión artística sobre experiencias de vida y trabajo.","Promover actividades de teatro, dibujo, fotografía, música o narrativa comunitaria.","Favorecer el reconocimiento y expresión de emociones.","Utilizar el arte para reflexionar sobre problemáticas sociales.","Fortalecer la empatía y el sentido de comunidad."],
+    preguntas:["¿Qué emociones experimentan las y los jóvenes que trabajan mientras estudian?","¿Cómo puede el arte ayudarnos a expresar y comprender las desigualdades presentes en nuestra comunidad?"]
+  },
+  {
+    nombre:"Vida saludable", color:"#0f6e56", bg:"#eef4f2", txt:"#08503d", dotColor:"#1D9E75",
+    paleta:['#1D9E75','#5DCAA5','#d0ede5','#0F6E56','#30b080','#9FE1CB','#08503d'],
+    lectura:"El eje de vida saludable permite reconocer que el trabajo infantil y adolescente impacta directamente en el bienestar físico, emocional y social de las y los estudiantes. Las largas jornadas laborales, la mala alimentación, el cansancio y la falta de descanso afectan la concentración, la participación escolar y la salud integral de los jóvenes. Este eje ayuda a comprender que la salud no depende únicamente de decisiones individuales, sino también de las condiciones económicas y sociales en las que viven las familias.",
+    puntos:["Identificar factores que afectan el bienestar físico y emocional del alumnado.","Promover hábitos de descanso, alimentación y autocuidado.","Generar espacios de escucha y acompañamiento emocional.","Evitar dinámicas escolares que incrementen el agotamiento.","Vincular a la comunidad escolar con acciones de apoyo y cuidado colectivo."],
+    preguntas:["¿Cómo afecta el trabajo al descanso, la alimentación y la salud de las y los adolescentes?","¿Qué acciones puede realizar la comunidad escolar para favorecer el bienestar de estudiantes que trabajan?"]
+  },
+  {
+    nombre:"Pensamiento crítico", color:"#3b6d11", bg:"#f1f7ea", txt:"#2a5009", dotColor:"#639922",
+    paleta:['#639922','#97C459','#dff0c0','#3B6D11','#70aa28','#C0DD97','#2a5009'],
+    lectura:"El eje de pensamiento crítico permite cuestionar las condiciones sociales, económicas y culturales que normalizan el trabajo infantil y adolescente en la comunidad. Ayuda a reflexionar sobre por qué algunos jóvenes deben trabajar para sostener a sus familias mientras otros pueden dedicar mayor tiempo al estudio, así como analizar las desigualdades estructurales relacionadas con la pobreza, la migración y el acceso a oportunidades educativas. Este eje invita a problematizar las ideas que consideran el abandono escolar, el cansancio o la baja participación académica como responsabilidad exclusiva del estudiante.",
+    puntos:["Promover el análisis crítico de las desigualdades sociales presentes en la comunidad.","Generar espacios de diálogo sobre pobreza, migración y derechos de niñas, niños y adolescentes.","Relacionar los contenidos escolares con problemáticas reales del contexto.","Favorecer la reflexión colectiva y la participación estudiantil.","Cuestionar prácticas escolares que invisibilicen las condiciones de vida del alumnado."],
+    preguntas:["¿Por qué algunas niñas, niños y adolescentes necesitan trabajar para apoyar económicamente a sus familias?","¿Qué responsabilidades tienen la sociedad, el Estado y la escuela frente al trabajo infantil y adolescente?"]
+  }
+];
+
+const canvas = document.getElementById('kaleido');
+const ctx = canvas.getContext('2d');
+const W=250,H=250,R=123;
+let angle=0,ejeActivo=-1;
+const palDef=['#7F77DD','#D4537E','#D85A30','#1D9E75','#BA7517','#378ADD','#639922'];
+
+function getPal(){return ejeActivo<0?palDef:EJES[ejeActivo].paleta;}
+
+function drawSlice(n){
+  const a=(Math.PI*2)/12;
+  ctx.save();
+  ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,R,0,a);ctx.closePath();ctx.clip();
+  const p=getPal();
+  for(let i=0;i<7;i++){
+    const t=angle*0.35+i*0.8+n*0.55;
+    ctx.beginPath();
+    ctx.arc(Math.cos(t*1.2)*48,Math.sin(t*0.85)*48,20+Math.sin(t*2)*11,0,Math.PI*2);
+    ctx.fillStyle=p[i%p.length];ctx.globalAlpha=0.85;ctx.fill();
+  }
+  for(let i=0;i<4;i++){
+    const t=angle*0.55+i*1.5+n*0.9;
+    ctx.beginPath();
+    ctx.arc(Math.cos(t*0.65)*72,Math.sin(t*1.05)*38,10+Math.sin(t*3)*5,0,Math.PI*2);
+    ctx.fillStyle=p[(i+3)%p.length];ctx.globalAlpha=0.55;ctx.fill();
+  }
+  ctx.restore();
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.save();ctx.translate(W/2,H/2);
+  ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.clip();
+  const slices=12,a=(Math.PI*2)/slices;
+  for(let i=0;i<slices;i++){
+    ctx.save();ctx.rotate(a*i+angle*0.003);
+    if(i%2===1)ctx.scale(1,-1);
+    drawSlice(i);ctx.restore();
+  }
+  ctx.restore();
+  angle++;requestAnimationFrame(draw);
+}
+
+function selEje(idx){
+  document.querySelectorAll('.eje-btn').forEach((b,i)=>{
+    b.classList.toggle('activo',i===idx);
+    if(i===idx){b.style.color=EJES[idx].txt;b.style.borderColor=EJES[idx].dotColor;b.style.background=EJES[idx].bg;}
+    else{b.style.color='';b.style.borderColor='';b.style.background='';}
+  });
+  ejeActivo=idx;
+  const e=EJES[idx];
+  const panel=document.getElementById('panel');
+  panel.style.display='block';
+  panel.innerHTML=`
+    <div class="p-head" style="background:${e.bg};">
+      <div class="p-head-dot" style="background:${e.dotColor};"></div>
+      <div style="flex:1;">
+        <h3 style="color:${e.txt};">${e.nombre}</h3>
+        <div class="sub">Eje articulador · Nueva Escuela Mexicana · Sec. No. 35 Raúl Enrique Guerrero Montaño</div>
+      </div>
+    </div>
+    <div class="p-body">
+      <div class="bloque bloque-lectura">
+        <h4 style="color:${e.color};">¿Qué revela este eje?</h4>
+        <p>${e.lectura}</p>
+      </div>
+      <div class="bloque">
+        <h4 style="color:${e.color};">¿Qué puede hacer la escuela?</h4>
+        <ul>${e.puntos.map(p=>`<li>${p}</li>`).join('')}</ul>
+      </div>
+      <div class="bloque">
+        <h4 style="color:${e.color};">Preguntas para el aula</h4>
+        ${e.preguntas.map(q=>`<div class="preg" style="border-left-color:${e.dotColor};">${q}</div>`).join('')}
+      </div>
+    </div>
+    <div class="p-foot">
+      <button class="btn-cerrar" onclick="cerrar()">↑ Elegir otro eje</button>
+    </div>`;
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function cerrar(){
+  document.getElementById('panel').style.display='none';
+  document.querySelectorAll('.eje-btn').forEach(b=>{b.classList.remove('activo');b.style.color='';b.style.borderColor='';b.style.background='';});
+  ejeActivo=-1;
+}
+
+function abrirModal(id){document.getElementById(id).classList.add('abierto');document.body.style.overflow='hidden';}
+function cerrarModal(id){document.getElementById(id).classList.remove('abierto');document.body.style.overflow='';}
+function cerrarModalFondo(e,id){if(e.target===document.getElementById(id))cerrarModal(id);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.querySelectorAll('.overlay.abierto').forEach(o=>{o.classList.remove('abierto');document.body.style.overflow='';});
+});
+
+draw();
+</script>
+</body>
+</html>
