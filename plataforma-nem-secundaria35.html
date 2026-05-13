@@ -330,14 +330,66 @@ footer {
   to   { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 720px) {
-  .zona-central { grid-template-columns: 1fr; justify-items: center; }
-  .col-ejes.izq, .col-ejes.der { align-items: center; }
-  .col-ejes.izq .eje-btn { flex-direction: row; text-align: left; }
-  .eje-btn:hover { transform: none; }
+  .wrap { padding: 1rem 0.9rem 3rem; }
+  header { flex-direction: row; align-items: flex-start; gap: 0.75rem; }
+  header h1 { font-size: 1.3rem; }
+  .header-logo img { width: 54px !important; height: 54px !important; }
+  .escuela-label { font-size: 9.5px; }
+  .barra-info { gap: 7px; }
+  .btn-info { font-size: 11px; padding: 6px 11px; }
+  /* Zona orbital → iconos en cuadrícula 4+3 debajo del caleidoscopio */
+  #kaleido-orbit {
+    width: 100% !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: static !important;
+  }
+  #kaleido-orbit > div:first-child {
+    position: static !important;
+    transform: none !important;
+    margin-bottom: 1.25rem;
+  }
+  #kaleido-orbit canvas {
+    width: 220px !important;
+    height: 220px !important;
+  }
+  #iconos-ejes {
+    position: static !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .icono-eje-wrap {
+    position: static !important;
+    transform: none !important;
+  }
+  .icono-eje { width: 56px; height: 56px; }
+  /* Tooltip arriba en móvil puede salirse, mejor abajo */
+  .icono-tooltip {
+    bottom: auto;
+    top: calc(100% + 6px);
+    font-size: 10px;
+  }
+  .icono-tooltip::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: var(--texto);
+  }
   .p-body { grid-template-columns: 1fr; }
   .bloque-lectura { grid-column: 1; }
-  header { flex-direction: column-reverse; align-items: flex-start; }
-  .wrap { padding: 1.25rem 1rem 3rem; }
+  .p-head h3 { font-size: 0.95rem; }
+  .modal-body { padding: 1rem 1.1rem; }
+  .ejes-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) {
+  #kaleido-orbit canvas { width: 180px !important; height: 180px !important; }
+  .icono-eje { width: 48px; height: 48px; }
+  header h1 { font-size: 1.15rem; }
 }
 </style>
 </head>
@@ -350,8 +402,9 @@ footer {
       <h1>Caleidoscopio de saberes<br>desde la NEM</h1>
       <p class="subtitulo">Una plataforma para problematizar desde los ejes articuladores</p>
     </div>
-    <div class="header-logo">
+    <div class="header-logo" style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
       <img src="https://raw.githubusercontent.com/labnie/logotipos/main/original-logo-2-lab.png" alt="Logotipo LabNIE" style="width:90px;height:90px;object-fit:contain;">
+      <img src="https://raw.githubusercontent.com/labnie/colab/main/ISUEE.png" alt="Logotipo ISUEE" style="width:120px;height:120px;object-fit:contain;">
     </div>
   </header>
 
