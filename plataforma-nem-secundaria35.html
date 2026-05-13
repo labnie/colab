@@ -133,9 +133,10 @@ header .subtitulo { font-size: 13px; color: var(--texto-ter); }
 }
 .card-problema h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 14px; font-weight: 500;
+  font-size: 22px; font-weight: 600;
   color: var(--acento);
   margin-bottom: 0.7rem;
+  letter-spacing: 0.01em;
 }
 .card-problema p { font-size: 13.5px; color: var(--texto-sec); line-height: 1.85; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
@@ -331,6 +332,10 @@ footer {
     </div>
   </header>
 
+  <div style="background:rgba(45,90,78,0.06);border-left:3px solid var(--acento);border-radius:var(--radius-sm);padding:0.9rem 1.25rem;margin-bottom:1.5rem;animation:fadeUp 0.6s 0.05s ease both;">
+    <p style="font-size:13px;color:var(--texto-sec);line-height:1.8;">Esta es una plataforma para ejemplificar cómo hacer una lectura de la realidad desde distintas perspectivas. Recomendamos leer el problema identificado en la comunidad escolar de la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", y posteriormente seleccionar cualquiera de los siete ejes articuladores de la Nueva Escuela Mexicana para avanzar en la problematización desde ángulos diferentes. Cada eje revela dimensiones distintas del problema. Lo importante para nosotros es reconocer que los ejes articuladores son <strong style="color:var(--acento);">lentes que nos permiten hacer lecturas complejas de la realidad</strong> en la que participamos.</p>
+  </div>
+
   <div class="barra-info">
     <button class="btn-info" onclick="abrirModal('modal-ejes')">
       <span class="pip" style="background:var(--acento)"></span>
@@ -425,8 +430,8 @@ footer {
 
   <!-- PROBLEMÁTICA -->
   <div class="card-problema">
-    <h2>La problemática · Escuela Secundaria No. 35 Raúl Enrique Guerrero Montaño</h2>
-    <p>Muchas de las familias de las y los jóvenes que estudian en la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", en Cabo San Lucas, son migrantes y viven en condiciones económicas limitadas. Debido a las necesidades del hogar, varios estudiantes se han visto en la necesidad de buscar empleos de medio tiempo o incluso de tiempo completo para contribuir al gasto familiar. Esta situación ha comenzado a impactar de manera significativa en la vida escolar y personal de los adolescentes. Algunos estudiantes presentan problemas de alimentación, cansancio constante y poca energía para participar en las actividades académicas. Asimismo, se ha observado baja participación en clase, dificultades para realizar tareas escolares, ausentismo y, en algunos casos, aislamiento social respecto a sus compañeros. Frente a esta realidad, la comunidad escolar se pregunta de qué manera la escuela puede acompañar a las y los estudiantes considerando las condiciones sociales, económicas y culturales que atraviesan sus vidas, y cómo generar estrategias educativas más inclusivas, solidarias y vinculadas con su contexto.</p>
+    <h2>El problema</h2>
+    <p>Muchas de las familias de las y los jóvenes que estudian en la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", en Cabo San Lucas, son migrantes y viven en condiciones económicas muy precarias. Debido a las necesidades del hogar, varios estudiantes se han visto en la necesidad de buscar empleos de medio tiempo o incluso de tiempo completo para contribuir al gasto familiar. Esta situación ha comenzado a impactar de manera significativa en la vida escolar y personal de los adolescentes. Algunos estudiantes presentan problemas de alimentación, cansancio constante y poca energía para participar en las actividades académicas. Asimismo, se ha observado baja participación en clase, dificultades para realizar tareas escolares, ausentismo y, en algunos casos, aislamiento social respecto a sus compañeros. Frente a esta realidad, la comunidad escolar se pregunta de qué manera la escuela puede acompañar a las y los estudiantes considerando las condiciones sociales, económicas y culturales que atraviesan sus vidas, y cómo generar estrategias educativas más inclusivas, solidarias y vinculadas con su contexto.</p>
     <div class="tags">
       <span class="tag">Trabajo adolescente</span>
       <span class="tag">Familias migrantes</span>
@@ -466,6 +471,9 @@ footer {
         <p style="font-size:10.5px;color:var(--texto-ter);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Referencias</p>
         <p style="font-size:10px;color:var(--texto-ter);line-height:1.4;margin-bottom:3px;">Comisión Nacional para la Mejora Continua de la Educación. (2023). <em>¡Aprendamos en comunidad! Los ejes articuladores: pensar desde nuestra diversidad</em> (Fascículo 4). Mejoredu.</p>
         <p style="font-size:10px;color:var(--texto-ter);line-height:1.4;">Rosa, C. (2024). Ejes articuladores: capacidades humanas para una sociedad democrática y plural. Luces y algunos claroscuros. En <em>La educación en el sexenio 2018-2024: Miradas desde la investigación educativa</em> (pp. 212–217). Instituto de Investigaciones sobre la Universidad y la Educación, UNAM.</p>
+      </div>
+      <div style="margin-top:0.75rem;font-size:10px;color:var(--texto-ter);text-align:center;">
+        Plataforma desarrollada por el LabNIE con asistencia de inteligencia artificial (Anthropic)
       </div>
     </div>
   </footer>
