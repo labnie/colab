@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Co-Laboratorio de Didáctica y Currículum · Secundaria "José María Garma González"</title>
+<meta property="og:title" content="Caleidoscopio de saberes desde la NEM">
+<meta property="og:description" content="Una plataforma para problematizar desde los ejes articuladores · Co-Laboratorio de Didáctica y Currículum · Secundaria José María Garma González · El Centenario, La Paz, BCS">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Caleidoscopio de saberes desde la NEM">
+<meta name="twitter:description" content="Una plataforma para problematizar desde los ejes articuladores · Co-Laboratorio de Didáctica y Currículum · Secundaria José María Garma González · El Centenario, La Paz, BCS">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fondo: #f7f6f2;
+  --blanco: #ffffff;
+  --superficie: #f0efe9;
+  --borde: #e2e0d8;
+  --borde-fuerte: #c8c5bc;
+  --texto: #1c1b18;
+  --texto-sec: #5a5850;
+  --texto-ter: #9a9890;
+  --acento: #2d5a4e;
+  --radius: 12px;
+  --radius-sm: 7px;
+  --sombra: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.05);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--borde) 1px, transparent 1px),
+    linear-gradient(90deg, var(--borde) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--borde);
+  animation: fadeUp 0.6s ease both;
+}
+.header-texto { flex: 1; }
+.escuela-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-ter);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--texto);
+  margin-bottom: 6px;
+}
+header .subtitulo { font-size: 13px; color: var(--texto-ter); }
+.header-logo {
+  width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.barra-info {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.btn-info {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 99px;
+  border: 1px solid var(--borde-fuerte);
+  background: var(--blanco);
+  color: var(--texto-sec);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex; align-items: center; gap: 7px;
+  box-shadow: var(--sombra);
+}
+.btn-info:hover { background: var(--acento); color: #fff; border-color: var(--acento); }
+.btn-info .pip { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.card-problema {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--sombra);
+  animation: fadeUp 0.6s 0.15s ease both;
+  position: relative; overflow: hidden;
+}
+.card-problema::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--acento);
+  border-radius: 4px 0 0 4px;
+}
+.card-problema h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600;
+  color: var(--acento);
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.01em;
+}
+.card-problema p { font-size: 13.5px; color: var(--texto-sec); line-height: 1.85; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+.tag {
+  font-size: 11px; padding: 3px 10px;
+  border-radius: 99px;
+  background: #eef4f2; color: var(--acento);
+  border: 1px solid #c9ddd8; font-weight: 500;
+}
+.instruccion {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  animation: fadeUp 0.6s 0.25s ease both;
+}
+.instruccion span {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--acento);
+  letter-spacing: 0.03em;
+  padding: 8px 20px;
+  border: 1.5px solid var(--acento);
+  border-radius: 99px;
+  background: rgba(45,90,78,0.06);
+}
+.zona-central {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.icono-eje-wrap {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+.icono-eje {
+  width: 80px; height: 80px;
+  object-fit: contain;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  border: 2px solid transparent;
+  background: transparent;
+  transition: all 0.22s ease;
+}
+.icono-eje:hover { transform: scale(1.15); filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18)); }
+.icono-eje.activo { border-color: var(--acento); background: rgba(45,90,78,0.08); }
+.icono-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--texto);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 9px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+}
+.icono-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--texto);
+}
+.icono-eje-wrap:hover .icono-tooltip { opacity: 1; }
+#canvas-wrap { display: flex; align-items: center; justify-content: center; }
+canvas {
+  border-radius: 50%; display: block;
+}
+#panel {
+  display: none;
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra);
+  animation: fadeUp 0.3s ease both;
+  background: var(--blanco);
+}
+.p-head {
+  padding: 1.1rem 1.75rem;
+  border-bottom: 1px solid var(--borde);
+  display: flex; align-items: center; gap: 12px;
+}
+.p-head-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.p-head h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-weight: 500; flex: 1;
+}
+.p-head .sub { font-size: 11px; color: var(--texto-ter); letter-spacing: 0.04em; margin-top: 2px; }
+.p-body {
+  padding: 1.5rem 1.75rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2.5rem;
+}
+.bloque h4 {
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.6rem; color: var(--texto-ter);
+}
+.bloque p, .bloque li { font-size: 13px; color: var(--texto-sec); line-height: 1.8; }
+.bloque ul { padding-left: 1rem; }
+.bloque li { margin-bottom: 4px; }
+.bloque-lectura { grid-column: 1 / -1; }
+.preg {
+  border-radius: var(--radius-sm); padding: 9px 13px; margin-top: 6px;
+  font-size: 13px; font-style: italic; color: var(--texto); line-height: 1.7;
+  border-left-width: 2.5px; border-left-style: solid;
+  background: var(--superficie);
+}
+.p-foot {
+  padding: 0.85rem 1.75rem;
+  border-top: 1px solid var(--borde);
+  display: flex; align-items: center; justify-content: flex-end;
+  background: var(--superficie);
+}
+.btn-cerrar {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; color: var(--texto-ter);
+  background: none; border: none; cursor: pointer; letter-spacing: 0.03em;
+}
+.btn-cerrar:hover { color: var(--texto-sec); }
+footer {
+  text-align: center; margin-top: 3.5rem;
+  padding-top: 1.5rem; border-top: 1px solid var(--borde);
+  font-size: 11.5px; color: var(--texto-ter); letter-spacing: 0.05em;
+}
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(28,27,24,0.5);
+  z-index: 100; align-items: flex-start; justify-content: center;
+  padding: 2.5rem 1rem; overflow-y: auto;
+  backdrop-filter: blur(3px);
+}
+.overlay.abierto { display: flex; }
+.modal {
+  background: var(--blanco); border: 1px solid var(--borde);
+  border-radius: var(--radius); width: 100%; max-width: 700px;
+  overflow: hidden; animation: fadeUp 0.28s ease both; margin: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+}
+.modal-head {
+  padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--borde);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  background: var(--superficie);
+}
+.modal-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 500; color: var(--texto);
+}
+.modal-head .sub-modal { font-size: 11px; color: var(--texto-ter); margin-top: 3px; letter-spacing: 0.04em; }
+.btn-x {
+  background: none; border: 1px solid var(--borde); border-radius: 50%;
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  color: var(--texto-ter); font-size: 14px; cursor: pointer; flex-shrink: 0; transition: all 0.15s;
+}
+.btn-x:hover { background: var(--borde); color: var(--texto); }
+.modal-body { padding: 1.5rem 1.75rem; }
+.modal-intro {
+  font-size: 13.5px; color: var(--texto-sec); line-height: 1.85;
+  margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--borde);
+}
+.modal-intro strong { color: var(--texto); font-weight: 500; }
+.ejes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 9px; }
+.eje-card { border-radius: var(--radius-sm); padding: 11px 13px; border: 1px solid; }
+.eje-card .eje-nombre { font-size: 12.5px; font-weight: 500; margin-bottom: 4px; }
+.eje-card .eje-desc { font-size: 11.5px; line-height: 1.65; color: var(--texto-sec); }
+.jc-bloque {
+  margin-bottom: 1rem; padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm); border-left: 3px solid; background: var(--superficie);
+}
+.jc-bloque p { font-size: 13.5px; color: var(--texto-sec); line-height: 1.85; }
+.jc-bloque .fuente { font-size: 11px; color: var(--texto-ter); margin-top: 7px; font-style: italic; letter-spacing: 0.03em; }
+.jc-nota {
+  margin-top: 1rem; padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm); background: #eef4f2;
+  border: 1px solid #c9ddd8; font-size: 12.5px; color: var(--acento); line-height: 1.7;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 720px) {
+  .wrap { padding: 1rem 0.9rem 3rem; }
+  header { flex-direction: row; align-items: flex-start; gap: 0.75rem; }
+  header h1 { font-size: 1.3rem; }
+  .header-logo img { width: 54px !important; height: 54px !important; }
+  .escuela-label { font-size: 9.5px; }
+  .barra-info { gap: 7px; }
+  .btn-info { font-size: 11px; padding: 6px 11px; }
+  /* Zona orbital → iconos en cuadrícula 4+3 debajo del caleidoscopio */
+  #kaleido-orbit {
+    width: 100% !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: static !important;
+  }
+  #kaleido-orbit > div:first-child {
+    position: static !important;
+    transform: none !important;
+    margin-bottom: 1.25rem;
+  }
+  #kaleido-orbit canvas {
+    width: 220px !important;
+    height: 220px !important;
+  }
+  #iconos-ejes {
+    position: static !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .icono-eje-wrap {
+    position: static !important;
+    transform: none !important;
+  }
+  .icono-eje { width: 62px; height: 62px; }
+  /* Tooltip arriba en móvil puede salirse, mejor abajo */
+  .icono-tooltip {
+    bottom: auto;
+    top: calc(100% + 6px);
+    font-size: 10px;
+  }
+  .icono-tooltip::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: var(--texto);
+  }
+  .p-body { grid-template-columns: 1fr; }
+  .bloque-lectura { grid-column: 1; }
+  .p-head h3 { font-size: 0.95rem; }
+  .modal-body { padding: 1rem 1.1rem; }
+  .ejes-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) {
+  #kaleido-orbit canvas { width: 180px !important; height: 180px !important; }
+  .icono-eje { width: 48px; height: 48px; }
+  header h1 { font-size: 1.15rem; }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="header-texto">
+      <div class="escuela-label">Co-Laboratorio de Didáctica y Currículum · Secundaria "José María Garma González" · El Centenario, La Paz, BCS</div>
+      <h1>Caleidoscopio de saberes<br>desde la NEM</h1>
+      <p class="subtitulo">Una plataforma para problematizar desde los ejes articuladores</p>
+    </div>
+    <div class="header-logo" style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <img src="https://raw.githubusercontent.com/labnie/logotipos/main/original-logo-2-lab.png" alt="Logotipo LabNIE" style="width:90px;height:90px;object-fit:contain;">
+      <img src="https://raw.githubusercontent.com/labnie/colab/main/ISUEE.png" alt="Logotipo ISUEE" style="width:120px;height:120px;object-fit:contain;">
+    </div>
+  </header>
+
+  <div style="background:rgba(45,90,78,0.06);border-left:3px solid var(--acento);border-radius:var(--radius-sm);padding:0.9rem 1.25rem;margin-bottom:1.5rem;animation:fadeUp 0.6s 0.05s ease both;">
+    <p style="font-size:13px;color:var(--texto-sec);line-height:1.8;">Esta es una plataforma para ejemplificar cómo hacer una lectura de la realidad desde distintas perspectivas. Recomendamos leer el problema identificado en la comunidad escolar de la Secundaria "José María Garma González", y posteriormente seleccionar cualquiera de los siete ejes articuladores de la Nueva Escuela Mexicana para avanzar en la problematización desde ángulos diferentes. Cada eje revela dimensiones distintas del problema. Lo importante para nosotros es reconocer que los ejes articuladores son <strong style="color:var(--acento);">lentes que nos permiten hacer lecturas complejas de la realidad</strong> en la que participamos.</p>
+  </div>
+
+  <div class="barra-info">
+    <button class="btn-info" onclick="abrirModal('modal-ejes')">
+      <span class="pip" style="background:var(--acento)"></span>
+      ¿Qué son los ejes articuladores?
+    </button>
+    <button class="btn-info" onclick="abrirModal('modal-jc')">
+      <span class="pip" style="background:#BA7517"></span>
+      Justicia curricular desde la NEM
+    </button>
+  </div>
+
+  <!-- MODAL EJES -->
+  <div class="overlay" id="modal-ejes" onclick="cerrarModalFondo(event,'modal-ejes')">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2>Los ejes articuladores de la NEM</h2>
+          <div class="sub-modal">Nueva Escuela Mexicana · Componente curricular · Sec. "José María Garma González" · El Centenario, La Paz</div>
+        </div>
+        <button class="btn-x" onclick="cerrarModal('modal-ejes')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-intro">
+          Los ejes articuladores constituyen un componente que permite desarrollar el currículo desde una <strong>perspectiva ética para aprender y enseñar en, desde y para la comunidad</strong>. Ayudan a mirar, desde diferentes perspectivas, las situaciones o problemas de nuestra realidad para evitar generar, profundizar o acrecentar las condiciones de desigualdad y exclusión basadas en el género, la condición física, sociocultural, económica o de otro tipo.
+          <br><br>
+          Tienen una <strong>doble función</strong>: vincular el currículo con situaciones o problemas de nuestra realidad concreta; y ampliar las formas en que miramos y pensamos los conocimientos, las sociedades, el mundo y la vida.
+        </div>
+        <div class="ejes-grid">
+          <div class="eje-card" style="background:#f4f3fd;border-color:#c5c2ef;">
+            <div class="eje-nombre" style="color:#4a44a0;">Inclusión y equidad</div>
+            <div class="eje-desc">Centra la mirada en desigualdad, exclusión, racismo y barreras estructurales que limitan la participación y dignidad de las personas.</div>
+          </div>
+          <div class="eje-card" style="background:#f1f7ea;border-color:#b5d18a;">
+            <div class="eje-nombre" style="color:#3b6d11;">Pensamiento crítico</div>
+            <div class="eje-desc">Cuestiona normas, prácticas y formas de organización naturalizadas; busca analizar de dónde provienen y si pueden transformarse.</div>
+          </div>
+          <div class="eje-card" style="background:#fef3ee;border-color:#f0b49a;">
+            <div class="eje-nombre" style="color:#8a3a1a;">Interculturalidad crítica</div>
+            <div class="eje-desc">Reconoce distintas maneras de vivir, pensar y organizar la vida; problematiza relaciones de poder y visiones dominantes.</div>
+          </div>
+          <div class="eje-card" style="background:#eef4f2;border-color:#9fd4c1;">
+            <div class="eje-nombre" style="color:#0f6e56;">Vida saludable</div>
+            <div class="eje-desc">Relaciona bienestar físico, emocional y comunitario con condiciones materiales y sociales de vida, no sólo con hábitos individuales.</div>
+          </div>
+          <div class="eje-card" style="background:#edf4fd;border-color:#93c0ec;">
+            <div class="eje-nombre" style="color:#0c447c;">Apropiación de culturas y lectoescritura</div>
+            <div class="eje-desc">Entiende la lectura y escritura como herramientas para recuperar memoria colectiva, narrar experiencias y fortalecer identidades culturales.</div>
+          </div>
+          <div class="eje-card" style="background:#fdf0f5;border-color:#efaac6;">
+            <div class="eje-nombre" style="color:#7a2248;">Igualdad de género</div>
+            <div class="eje-desc">Analiza cómo los roles y estereotipos de género generan desigualdades en la experiencia cotidiana.</div>
+          </div>
+          <div class="eje-card" style="background:#fdf5e8;border-color:#f0c97a;">
+            <div class="eje-nombre" style="color:#633806;">Artes y experiencias estéticas</div>
+            <div class="eje-desc">Propone reconocer emociones, sensibilidades y formas de expresión como parte de la comprensión y transformación de la realidad.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL JUSTICIA CURRICULAR -->
+  <div class="overlay" id="modal-jc" onclick="cerrarModalFondo(event,'modal-jc')">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2>Justicia curricular desde la NEM</h2>
+          <div class="sub-modal">Nueva Escuela Mexicana · Fundamento pedagógico</div>
+        </div>
+        <button class="btn-x" onclick="cerrarModal('modal-jc')">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-intro">
+          La justicia curricular es un principio central de la Nueva Escuela Mexicana que orienta la construcción de un currículo <strong>contextualizado, inclusivo y comunitario</strong>, capaz de reconocer la diversidad y combatir activamente las desigualdades presentes en la realidad social.
+        </div>
+        <div class="jc-bloque" style="border-color:#1D9E75;">
+          <p>La justicia curricular es una propuesta educativa orientada a que <strong>nadie quede atrás ni fuera de la escuela</strong>, mediante un currículo contextualizado, inclusivo y comunitario que reconozca la diversidad y combata la desigualdad, la exclusión y el racismo presentes en la realidad social.</p>
+          <div class="fuente">MEJOREDU, 2023</div>
+        </div>
+        <div class="jc-bloque" style="border-color:#7F77DD;">
+          <p>La justicia curricular implica construir una <strong>educación democrática y plural</strong> que reconozca la diversidad cultural, social y epistémica como fundamento del currículo, articulando escuela y comunidad para desarrollar capacidades humanas orientadas a la dignidad, la inclusión, la crítica social y la transformación de las desigualdades históricas.</p>
+          <div class="fuente">Rosa, 2024</div>
+        </div>
+        <div class="jc-nota">
+          <p style="font-size:10.5px;color:var(--acento);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Referencias</p>
+          <p style="font-size:11px;color:var(--texto-sec);line-height:1.7;margin-bottom:4px;">Comisión Nacional para la Mejora Continua de la Educación. (2023). <em>¡Aprendamos en comunidad! Los ejes articuladores: pensar desde nuestra diversidad</em> (Fascículo 4). Mejoredu.</p>
+          <p style="font-size:11px;color:var(--texto-sec);line-height:1.7;">Rosa, C. (2024). Ejes articuladores: capacidades humanas para una sociedad democrática y plural. Luces y algunos claroscuros. En <em>La educación en el sexenio 2018-2024: Miradas desde la investigación educativa</em> (pp. 212–217). Instituto de Investigaciones sobre la Universidad y la Educación, UNAM.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMÁTICA -->
+  <div class="card-problema">
+    <h2>El problema</h2>
+    <p>El Centenario es una localidad ubicada aproximadamente a 15 kilómetros al oeste de La Paz, la capital de Baja California Sur, en la periferia de la ciudad y con cercanía a la ensenada paceña. Fue fundada como un ejido por un grupo de personas que llegaron a trabajar la tierra, a tener ganado y a vivir bajo una cultura de cuidado del entorno: las parcelas, los animales, lo que se produce del trabajo duro del día a día. Esas familias, muchas de ellas migrantes del centro del país con arraigada tradición campesina, construyeron un paisaje singular en pleno desierto sudcaliforniano: huertas de árboles frutales, patios con plantas de la región y, de manera notable, cultivos de nopal, una práctica poco común en este entorno árido que habla de un saber particular, cultivado con esfuerzo y memoria territorial. Con el tiempo, El Centenario fue convirtiéndose en un suburbio de La Paz, pero durante décadas conservó ese carácter ejidal y campesino que le dio identidad.</p>
+    <p style="margin-top:0.9rem;">En los últimos años, El Centenario ha experimentado un acelerado proceso de gentrificación impulsado por su cercanía con la ensenada de La Paz y su atractivo como zona periférica en expansión. El valor de la tierra se ha disparado y quienes llegan no comparten ni conocen la memoria vinculada a la tierra que fundó El Centenario. Las huertas ceden espacio ante fraccionamientos y desarrollos inmobiliarios, y los saberes vinculados al trabajo con la tierra —el cultivo del nopal, el cuidado de los árboles frutales, los ciclos agrícolas— corren el riesgo de desaparecer junto con quienes los practican.</p>
+    <p style="margin-top:0.9rem;">Frente a este proceso, la comunidad escolar se pregunta qué papel puede jugar la escuela en la preservación de esa identidad. Un grupo de docentes de la Secundaria José María Garma González ha iniciado un proyecto de agroforestería para recuperar los árboles frutales y las huertas escolares, reconociendo que la escuela todavía guarda algo de esa memoria viva. Sin embargo, el reto mayor sigue pendiente: ¿cómo hacer que la escuela se convierta en un espacio de resistencia cultural, capaz de nombrar, valorar y transmitir los saberes de El Centenario ante la presión de un proceso que los borra?</p>
+    <div class="tags">
+      <span class="tag">Gentrificación</span>
+      <span class="tag">Identidad comunitaria</span>
+      <span class="tag">Saberes campesinos</span>
+      <span class="tag">Agroforestería escolar</span>
+      <span class="tag">Memoria territorial</span>
+      <span class="tag">Resistencia cultural</span>
+    </div>
+  </div>
+
+
+  <p class="instruccion"><span>Selecciona un eje articulador para leer la problemática desde ese ángulo</span></p>
+
+  <div class="zona-central">
+    <div id="kaleido-orbit" style="position:relative;width:460px;height:460px;margin:0 auto;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+        <canvas id="kaleido" width="280" height="280" style="border-radius:50%;display:block;"></canvas>
+      </div>
+      <div id="iconos-ejes"></div>
+    </div>
+  </div>
+
+  <div id="panel"></div>
+
+  <footer>
+    <div style="margin-bottom:1rem;">
+      Nueva Escuela Mexicana &nbsp;·&nbsp; 7 Ejes articuladores &nbsp;·&nbsp; Co-Laboratorio de Didáctica y Currículum &nbsp;·&nbsp; Sec. "José María Garma González" · El Centenario, La Paz, BCS
+    </div>
+    <div style="max-width:780px;margin:0 auto;text-align:left;border-top:1px solid var(--borde);padding-top:1rem;">
+      <div style="background:rgba(255,255,255,0.6);border:1px solid var(--borde);border-radius:var(--radius-sm);padding:10px 14px;">
+        <p style="font-size:10.5px;color:var(--texto-ter);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Referencias</p>
+        <p style="font-size:10px;color:var(--texto-ter);line-height:1.4;margin-bottom:3px;">Comisión Nacional para la Mejora Continua de la Educación. (2023). <em>¡Aprendamos en comunidad! Los ejes articuladores: pensar desde nuestra diversidad</em> (Fascículo 4). Mejoredu.</p>
+        <p style="font-size:10px;color:var(--texto-ter);line-height:1.4;">Rosa, C. (2024). Ejes articuladores: capacidades humanas para una sociedad democrática y plural. Luces y algunos claroscuros. En <em>La educación en el sexenio 2018-2024: Miradas desde la investigación educativa</em> (pp. 212–217). Instituto de Investigaciones sobre la Universidad y la Educación, UNAM.</p>
+      </div>
+      <div style="margin-top:0.75rem;font-size:10px;color:var(--texto-ter);text-align:center;">
+        Plataforma desarrollada por el LabNIE con asistencia de inteligencia artificial (Anthropic)
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+const BASE = "https://raw.githubusercontent.com/labnie/colab/main/";
+const EJES = [
+  {
+    nombre:"Igualdad de género", color:"#c04070", bg:"#fdf0f5", txt:"#7a2248", dotColor:"#D4537E",
+    icono: BASE + "Igualdad%20de%20genero.png",
+    paleta:['#D4537E','#ED93B1','#f9dce9','#993556','#e07090','#F4C0D1','#7a2248'],
+    lectura:"El eje de igualdad de género permite identificar cómo los saberes vinculados al trabajo con la tierra han sido transmitidos y vividos de manera diferenciada entre hombres y mujeres en El Centenario. En las comunidades campesinas, ciertas prácticas agrícolas y de cuidado del entorno han sido históricamente asignadas según el género: los hombres en el trabajo de la parcela, las mujeres en el huerto doméstico, la cocina, la conservación de semillas y el conocimiento de plantas medicinales y remedios tradicionales. El proceso de gentrificación no borra estos saberes de forma neutral: afecta de manera distinta a hombres y mujeres, y puede invisibilizar especialmente los conocimientos femeninos ligados al cuidado, la alimentación, la salud comunitaria y la reproducción de la vida. Este eje invita a preguntarse qué voces y qué cuerpos han sostenido la memoria campesina de El Centenario, y cuáles corren mayor riesgo de ser silenciados.",
+    puntos:["Recuperar y visibilizar los saberes de mujeres de la comunidad vinculados al huerto, la cocina, la conservación de semillas, las plantas medicinales y el cuidado del entorno.","Incorporar las voces de abuelas y mujeres mayores de la comunidad como portadoras de memoria agrícola, culinaria y medicinal.","Cuestionar la división genérica de roles en las actividades del proyecto de agroforestería escolar, promoviendo la participación equitativa de todos los géneros.","Problematizar con el alumnado qué saberes han sido considerados 'de hombres' o 'de mujeres', y por qué algunos han sido más valorados o reconocidos que otros.","Generar espacios de diálogo intergeneracional donde los saberes femeninos sean tratados como conocimiento legítimo y valioso para la comunidad escolar."],
+    preguntas:["¿Quiénes han cuidado históricamente las huertas, las plantas medicinales y los saberes de salud en las familias de El Centenario? ¿Han sido igual hombres que mujeres?","¿Qué ocurre con el conocimiento sobre medicina tradicional y plantas cuando una comunidad cambia tan rápidamente como está cambiando El Centenario?"]
+  },
+  {
+    nombre:"Interculturalidad crítica", color:"#8a3a1a", bg:"#fef3ee", txt:"#6b2c12", dotColor:"#D85A30",
+    icono: BASE + "Interculturalidad.png",
+    paleta:['#D85A30','#F0997B','#fde5d8','#993C1D','#e07050','#F5C4B3','#6b2c12'],
+    lectura:"El eje de interculturalidad crítica permite comprender que las identidades vinculadas con el trabajo con la tierra en El Centenario no surgieron de forma aislada, sino como resultado de un proceso de migración y arraigo territorial protagonizado por familias que trajeron consigo formas de vida, saberes agrícolas y vínculos con la tierra propios de sus regiones de origen en el centro del país. Esa cultura campesina —con sus semillas, sus ciclos, sus plantas y sus formas de organizar el trabajo— se adaptó creativamente al desierto sudcaliforniano, produciendo un conocimiento local singular e irreemplazable. El proceso de gentrificación introduce una nueva presencia cultural que no dialoga con esa memoria, sino que la desplaza. Este eje invita a reconocer que no todas las culturas tienen el mismo peso en los procesos de transformación urbana, y que la pérdida de los saberes de El Centenario no es un fenómeno natural sino el resultado de relaciones de poder desiguales entre quienes llegaron a trabajar la tierra y quienes llegan hoy a comprarla.",
+    puntos:["Recuperar y documentar la historia oral de las familias fundadoras de El Centenario y sus saberes agrícolas.","Problematizar con el alumnado las diferencias entre quienes construyeron la comunidad y quienes llegan hoy atraídos por el valor del suelo.","Incorporar en el proyecto de agroforestería los saberes de distintas regiones de origen de las familias de la comunidad.","Generar espacios de encuentro y diálogo entre la memoria vinculada a la tierra y las nuevas presencias culturales.","Cuestionar qué culturas y saberes son visibilizados o invisibilizados en la escuela y en la comunidad."],
+    preguntas:["¿De dónde vienen las familias que fundaron El Centenario y qué saberes trajeron consigo?","¿Qué ocurre cuando una comunidad cambia tan rápido que los recién llegados no conocen ni comparten la memoria de quienes la construyeron?"]
+  },
+  {
+    nombre:"Inclusión y equidad", color:"#4a44a0", bg:"#f4f3fd", txt:"#32307a", dotColor:"#7F77DD",
+    icono: BASE + "Inclusion.png",
+    paleta:['#7F77DD','#AFA9EC','#e8e6fa','#534AB7','#9088e0','#CECBF6','#32307a'],
+    lectura:"El eje de inclusión y equidad permite reconocer que el proceso de gentrificación en El Centenario no afecta a todas las familias por igual. Las familias con mayor arraigo en la comunidad, muchas de ellas de origen campesino y con menores recursos económicos, son quienes enfrentan con mayor vulnerabilidad la presión sobre la tierra, el encarecimiento de la vida y el desplazamiento cultural. Sus hijas e hijos llegan a la escuela cargando una memoria y unos saberes que el sistema educativo tradicional raramente reconoce como conocimiento legítimo. Al mismo tiempo, las nuevas familias que arriban a El Centenario lo hacen desde condiciones económicas y culturales muy distintas, generando asimetrías dentro de la propia comunidad escolar. Este eje invita a preguntarse si la escuela está siendo un espacio verdaderamente incluyente, capaz de reconocer y valorar los saberes de quienes construyeron esta comunidad, o si reproduce las mismas lógicas de exclusión que operan afuera de sus muros.",
+    puntos:["Reconocer los saberes vinculados a la tierra como conocimiento legítimo dentro del currículo escolar.","Identificar las desigualdades que existen dentro de la comunidad escolar derivadas del proceso de gentrificación.","Asegurarse de que el proyecto de agroforestería sea un espacio de participación abierto a todas y todos, sin distinción de origen o condición económica.","Evitar prácticas que invisibilicen o menosprecien las experiencias de vida de las familias con mayor arraigo en la comunidad.","Construir puentes entre la memoria campesina y las nuevas realidades del alumnado, sin borrar ninguna de las dos."],
+    preguntas:["¿Quiénes se benefician y quiénes pierden con los cambios que está viviendo El Centenario?","¿De qué manera la escuela puede convertirse en un espacio que valore por igual los saberes de todas las familias que la conforman?"]
+  },
+  {
+    nombre:"Apropiación de culturas y lectoescritura", color:"#0c447c", bg:"#edf4fd", txt:"#083060", dotColor:"#378ADD",
+    icono: BASE + "Apropiacion%20de%20la%20cultua_.png",
+    paleta:['#378ADD','#85B7EB','#d8eaf8','#185FA5','#5090d0','#B5D4F4','#083060'],
+    lectura:"El eje de apropiación de culturas y lectoescritura permite reconocer que los saberes vinculados al trabajo con la tierra en El Centenario habitan principalmente en la memoria oral de sus habitantes: en los relatos de los fundadores, en los nombres locales de las plantas, en las instrucciones transmitidas de generación en generación sobre cómo sembrar el nopal en el desierto, cómo cuidar un árbol frutal, cómo preparar un remedio con lo que da la huerta. Esa memoria oral es frágil frente a los cambios acelerados que trae la gentrificación. La lectura y la escritura pueden convertirse en herramientas poderosas para que las y los estudiantes documenten, narren y preserven esos saberes antes de que se pierdan, transformando la experiencia viva de su comunidad en texto, en imagen, en archivo. Este eje invita a pensar la lectoescritura no como una habilidad abstracta, sino como un acto de memoria y resistencia cultural.",
+    puntos:["Promover proyectos de escritura donde las y los estudiantes documenten la historia oral de las familias fundadoras de El Centenario.","Crear registros escritos y visuales sobre las plantas, los saberes agrícolas y las prácticas medicinales de la comunidad.","Utilizar el proyecto de agroforestería como detonador de actividades de lectura y escritura vinculadas al entorno natural y cultural.","Recuperar los nombres locales, las historias y los significados que la comunidad ha construido alrededor de la tierra y sus productos.","Favorecer diversas formas de expresión —crónica, testimonio, recetario, herbario, cartografía comunitaria— como géneros legítimos dentro del aula."],
+    preguntas:["¿Qué historias sobre la tierra y el trabajo agrícola existen en las familias de El Centenario que todavía no han sido escritas?","¿Cómo podemos usar la lectura y la escritura para que los saberes de nuestra comunidad no se pierdan?"]
+  },
+  {
+    nombre:"Artes y experiencias estéticas", color:"#633806", bg:"#fdf5e8", txt:"#4a2904", dotColor:"#BA7517",
+    icono: BASE + "Arte%20y%20experiencia%20est%C3%A9tica.png",
+    paleta:['#BA7517','#EF9F27','#fdebc8','#854F0B','#d08520','#FAC775','#4a2904'],
+    lectura:"El eje de artes y experiencias estéticas permite reconocer que el paisaje de El Centenario —sus huertas, sus nopales, sus árboles frutales, el desierto que los rodea— no es solamente un espacio productivo, sino también un espacio de belleza, de pertenencia y de emoción. La transformación acelerada de ese paisaje por efecto de la gentrificación no genera únicamente pérdidas materiales o culturales, sino también pérdidas afectivas y estéticas: se borran los colores, los olores, las texturas y los sonidos que han formado la sensibilidad de generaciones de habitantes de El Centenario. Las artes ofrecen un lenguaje para nombrar esa pérdida, para celebrar lo que todavía existe y para imaginar lo que se quiere preservar. Este eje invita a la comunidad escolar a mirar su entorno con ojos sensibles, a reconocer la belleza de lo propio y a usar la expresión artística como forma de resistencia frente a lo que se quiere borrar.",
+    puntos:["Promover actividades artísticas que recuperen el paisaje huertero y desértico de El Centenario como tema y como inspiración.","Generar proyectos de fotografía, ilustración, muralismo o instalación que documenten y celebren los saberes y los espacios vinculados a la tierra.","Utilizar la música, la narrativa oral y el teatro como herramientas para recuperar y transmitir la memoria de las familias fundadoras.","Incorporar la dimensión estética del proyecto de agroforestería: el diseño del huerto, la selección de plantas, el cuidado del espacio como experiencia sensible.","Crear un archivo vivo de imágenes, sonidos y relatos que den cuenta del paisaje y la identidad de El Centenario antes y durante el proceso de transformación."],
+    preguntas:["¿Qué imágenes, olores, sabores o sonidos asocias con El Centenario que sientes que están desapareciendo?","¿Cómo puede el arte ayudarnos a preservar y comunicar lo que amamos de nuestra comunidad?"]
+  },
+  {
+    nombre:"Vida saludable", color:"#0f6e56", bg:"#eef4f2", txt:"#08503d", dotColor:"#1D9E75",
+    icono: BASE + "Vida%20saludable.png",
+    paleta:['#1D9E75','#5DCAA5','#d0ede5','#0F6E56','#30b080','#9FE1CB','#08503d'],
+    lectura:"El eje de vida saludable permite reconocer que la relación con la tierra en El Centenario no era únicamente una actividad económica, sino una forma de vida que sostenía el bienestar físico, emocional y comunitario de sus habitantes. El acceso a alimentos frescos producidos localmente, el contacto con el entorno natural, el trabajo compartido en la parcela y el conocimiento de plantas medicinales y remedios tradicionales constituían una red de cuidado colectivo construida a lo largo de generaciones. El proceso de gentrificación amenaza esa red: encarece el acceso a la tierra, fragmenta los lazos comunitarios y sustituye formas de vida vinculadas al entorno por dinámicas urbanas desconectadas de él. Este eje invita a comprender que la salud no depende únicamente de decisiones individuales o de servicios médicos, sino también de las condiciones territoriales, culturales y comunitarias en las que se vive, y que preservar los saberes de la tierra es también un acto de cuidado de la salud colectiva.",
+    puntos:["Vincular el proyecto de agroforestería con el conocimiento sobre alimentación saludable y plantas medicinales de la comunidad.","Promover el contacto con la naturaleza y el trabajo con la tierra como experiencias que favorecen el bienestar emocional del alumnado.","Recuperar saberes comunitarios sobre el cuidado del cuerpo y la salud ligados al entorno natural de El Centenario.","Generar reflexiones sobre cómo los cambios en el territorio afectan el acceso a alimentos frescos, espacios de convivencia y redes de apoyo comunitario.","Construir en la escuela un espacio de cuidado colectivo donde el huerto y la naturaleza sean parte de la vida cotidiana del alumnado."],
+    preguntas:["¿De qué manera el trabajo con la tierra y el acceso a los productos de la huerta han contribuido al bienestar de las familias de El Centenario?","¿Qué relación existe entre la pérdida de los espacios naturales y agrícolas de la comunidad y la salud física y emocional de quienes la habitan?"]
+  },
+  {
+    nombre:"Pensamiento crítico", color:"#3b6d11", bg:"#f1f7ea", txt:"#2a5009", dotColor:"#639922",
+    icono: BASE + "Pensamieto%20critico.png",
+    paleta:['#639922','#97C459','#dff0c0','#3B6D11','#70aa28','#C0DD97','#2a5009'],
+    lectura:"El eje de pensamiento crítico permite cuestionar las condiciones económicas, políticas y culturales que están detrás del proceso de gentrificación que vive El Centenario. La transformación de esta localidad no es un fenómeno espontáneo ni inevitable: es el resultado de decisiones sobre el valor del suelo, la especulación inmobiliaria, la atracción de inversión extranjera y la expansión urbana de La Paz hacia su periferia. Este eje invita a preguntarse quién decide qué se construye y qué se destruye, quién se beneficia del aumento en el precio de la tierra y quién pierde, y por qué ciertos saberes y formas de vida son considerados prescindibles frente al avance del desarrollo inmobiliario. Pensar críticamente sobre la gentrificación también implica cuestionar las narrativas que la presentan como sinónimo de progreso, modernización o mejora, y reconocer que el desarrollo que no considera la memoria, la identidad y los saberes de una comunidad no es desarrollo, sino despojo.",
+    puntos:["Analizar con el alumnado qué es la gentrificación, cómo opera y qué efectos tiene sobre las comunidades que la experimentan.","Problematizar las ideas de 'progreso' y 'desarrollo' que subyacen a los cambios que vive El Centenario.","Vincular el proyecto de agroforestería con una reflexión sobre la soberanía alimentaria, el derecho al territorio y la autonomía comunitaria.","Promover investigaciones escolares sobre la historia de El Centenario y los procesos de transformación que ha vivido.","Generar espacios donde el alumnado pueda tomar postura, argumentar y proponer frente a los problemas que afectan a su comunidad."],
+    preguntas:["¿A quién beneficia y a quién perjudica el encarecimiento de la tierra en El Centenario?","¿Qué diferencia hay entre un desarrollo que incluye la memoria y los saberes de una comunidad y uno que los borra?"]
+  }
+];
+
+const canvas = document.getElementById('kaleido');
+let ejeActivo = -1;
+const palDef = ['#7F77DD','#D4537E','#D85A30','#1D9E75','#BA7517','#378ADD','#639922'];
+
+// ── CALEIDOSCOPIO 3D CON PANELES GEOMÉTRICOS ─────────────────────────
+const W = 280, H = 280;
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setSize(W, H);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+camera.position.z = 4.5;
+
+function hexToRgb(hex){
+  return [parseInt(hex.slice(1,3),16)/255, parseInt(hex.slice(3,5),16)/255, parseInt(hex.slice(5,7),16)/255];
+}
+function hexToColor(hex){ return new THREE.Color(hex); }
+
+let currentPal = palDef.slice();
+
+// Grupo contenedor
+const group = new THREE.Group();
+scene.add(group);
+
+// ── Esfera base semitransparente ──
+const sphereGeo = new THREE.SphereGeometry(1.55, 48, 48);
+const sphereMat = new THREE.MeshPhongMaterial({
+  color: 0xccccff, transparent: true, opacity: 0.08,
+  shininess: 200, specular: 0xffffff, side: THREE.FrontSide
+});
+group.add(new THREE.Mesh(sphereGeo, sphereMat));
+
+// ── Paneles sobre dodecaedro ──
+const dodGeo = new THREE.DodecahedronGeometry(1.5, 0);
+const posArr = dodGeo.attributes.position;
+const panels = [];
+
+// Extraer centros de cara del dodecaedro
+const faceCount = posArr.count / 3;
+for(let f = 0; f < faceCount; f++){
+  const i = f * 3;
+  const ax=posArr.getX(i),   ay=posArr.getY(i),   az=posArr.getZ(i);
+  const bx=posArr.getX(i+1), by=posArr.getY(i+1), bz=posArr.getZ(i+1);
+  const cx=posArr.getX(i+2), cy2=posArr.getY(i+2),cz=posArr.getZ(i+2);
+  const center = new THREE.Vector3((ax+bx+cx)/3,(ay+by+cy2)/3,(az+bz+cz)/3).normalize().multiplyScalar(1.52);
+  const normal = center.clone().normalize();
+
+  // Panel: pentágono extruido
+  const shape = new THREE.Shape();
+  const sides = f % 3 === 0 ? 5 : f % 3 === 1 ? 4 : 3;
+  const size = 0.38 + (f % 3) * 0.04;
+  for(let s=0; s<sides; s++){
+    const a = (s/sides)*Math.PI*2 - Math.PI/2;
+    const px = Math.cos(a)*size, py = Math.sin(a)*size;
+    s===0 ? shape.moveTo(px,py) : shape.lineTo(px,py);
+  }
+  shape.closePath();
+
+  const extGeo = new THREE.ExtrudeGeometry(shape, { depth:0.08, bevelEnabled:true, bevelThickness:0.02, bevelSize:0.015, bevelSegments:2 });
+  const col = hexToColor(currentPal[f % currentPal.length]);
+  const mat = new THREE.MeshPhongMaterial({ color: col, shininess:150, specular:0xffffff });
+  const panel = new THREE.Mesh(extGeo, mat);
+
+  // Posicionar en la cara
+  panel.position.copy(center);
+  panel.lookAt(center.clone().multiplyScalar(2));
+  // Borde/outline
+  const edgesGeo = new THREE.EdgesGeometry(extGeo);
+  const borderColors = ['#ff2244','#111111','#00cc88','#ffffff'];
+  const edgeMat = new THREE.LineBasicMaterial({ color: borderColors[f % borderColors.length], linewidth: 1 });
+  const edges = new THREE.LineSegments(edgesGeo, edgeMat);
+  panel.add(edges);
+  group.add(panel);
+  panels.push({ mesh: panel, faceIdx: f });
+}
+
+// ── Estrellas en algunos vértices ──
+function starShape(pts, r1, r2){
+  const s = new THREE.Shape();
+  for(let i=0; i<pts*2; i++){
+    const a = (i/(pts*2))*Math.PI*2 - Math.PI/2;
+    const r = i%2===0 ? r1 : r2;
+    const px=Math.cos(a)*r, py=Math.sin(a)*r;
+    i===0 ? s.moveTo(px,py) : s.lineTo(px,py);
+  }
+  s.closePath(); return s;
+}
+
+const starPositions = [
+  new THREE.Vector3(0,1.55,0), new THREE.Vector3(0,-1.55,0),
+  new THREE.Vector3(1.55,0,0), new THREE.Vector3(-1.55,0,0),
+  new THREE.Vector3(0,0,1.55)
+];
+starPositions.forEach((pos, si) => {
+  const sg = new THREE.ExtrudeGeometry(starShape(5,0.28,0.12),{ depth:0.06, bevelEnabled:false });
+  const sm = new THREE.MeshPhongMaterial({ color: hexToColor(currentPal[si % currentPal.length]), shininess:200, specular:0xffffff });
+  const star = new THREE.Mesh(sg, sm);
+  star.position.copy(pos);
+  star.lookAt(pos.clone().multiplyScalar(2));
+  group.add(star);
+  panels.push({ mesh: star, faceIdx: si + faceCount });
+});
+
+// ── Luces ──
+scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+const dl1 = new THREE.DirectionalLight(0xffffff, 1.4);
+dl1.position.set(3, 4, 5); scene.add(dl1);
+const dl2 = new THREE.DirectionalLight(0x6666ff, 0.7);
+dl2.position.set(-3,-2,-3); scene.add(dl2);
+const pl = new THREE.PointLight(0xffffff, 1.0, 12);
+pl.position.set(0,0,4); scene.add(pl);
+
+// ── Animación ──
+let t = 0;
+function animate(){
+  requestAnimationFrame(animate);
+  t += 0.005;
+  group.rotation.y = t * 0.5;
+  group.rotation.x = Math.sin(t * 0.3) * 0.35;
+  group.rotation.z = Math.cos(t * 0.2) * 0.15;
+  // Pulso suave en escala
+  const s = 1 + Math.sin(t * 1.5) * 0.025;
+  group.scale.setScalar(s);
+  // Luz color dinámica
+  dl2.color.setHSL((t*15%360)/360, 0.7, 0.55);
+  renderer.render(scene, camera);
+}
+animate();
+
+// ── Cambio de paleta ──
+function updatePalette(pal){
+  currentPal = pal;
+  panels.forEach(({mesh}, i) => {
+    mesh.material.color = hexToColor(pal[i % pal.length]);
+  });
+}
+
+// Generar iconos alrededor del caleidoscopio
+function renderIconos() {
+  const wrap = document.getElementById('iconos-ejes');
+  wrap.innerHTML = '';
+  const cx = 230, cy = 230, r = 190;
+  const total = EJES.length;
+  EJES.forEach((e, i) => {
+    const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    const div = document.createElement('div');
+    div.className = 'icono-eje-wrap';
+    div.style.left = x + 'px';
+    div.style.top = y + 'px';
+    div.innerHTML = `
+      <div class="icono-tooltip">${e.nombre}</div>
+      <img class="icono-eje" id="icono-${i}" src="${e.icono}" alt="${e.nombre}" onclick="selEje(${i})">
+    `;
+    wrap.appendChild(div);
+  });
+}
+
+function selEje(idx) {
+  document.querySelectorAll('.icono-eje').forEach((ic, i) => {
+    ic.classList.toggle('activo', i === idx);
+    ic.style.borderColor = i === idx ? EJES[idx].dotColor : '';
+    ic.style.background = i === idx ? EJES[idx].bg : '';
+  });
+  ejeActivo = idx;
+  updatePalette(EJES[idx].paleta);
+  const e = EJES[idx];
+  const panel=document.getElementById('panel');
+  panel.style.display='block';
+  panel.innerHTML=`
+    <div class="p-head" style="background:${e.bg};">
+      <img src="${e.icono}" alt="${e.nombre}" style="width:52px;height:52px;object-fit:contain;flex-shrink:0;">
+      <div style="flex:1;">
+        <h3 style="color:${e.txt};">${e.nombre}</h3>
+        <div class="sub">Eje articulador · Nueva Escuela Mexicana · Sec. "José María Garma González" · El Centenario, La Paz</div>
+      </div>
+    </div>
+    <div class="p-body">
+      <div class="bloque bloque-lectura">
+        <h4 style="color:${e.color};">¿Qué revela este eje?</h4>
+        <p>${e.lectura}</p>
+      </div>
+      <div class="bloque">
+        <h4 style="color:${e.color};">¿Qué puede hacer la escuela?</h4>
+        <ul>${e.puntos.map(p=>`<li>${p}</li>`).join('')}</ul>
+      </div>
+      <div class="bloque">
+        <h4 style="color:${e.color};">Preguntas para el aula</h4>
+        ${e.preguntas.map(q=>`<div class="preg" style="border-left-color:${e.dotColor};">${q}</div>`).join('')}
+      </div>
+    </div>
+    <div class="p-foot">
+      <button class="btn-cerrar" onclick="cerrar()">↑ Elegir otro eje</button>
+    </div>`;
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function cerrar(){
+  document.getElementById('panel').style.display='none';
+  document.querySelectorAll('.icono-eje').forEach(ic=>{
+    ic.classList.remove('activo');
+    ic.style.borderColor='';
+    ic.style.background='';
+  });
+  ejeActivo=-1;
+  updatePalette(palDef);
+}
+
+function abrirModal(id){document.getElementById(id).classList.add('abierto');document.body.style.overflow='hidden';}
+function cerrarModal(id){document.getElementById(id).classList.remove('abierto');document.body.style.overflow='';}
+function cerrarModalFondo(e,id){if(e.target===document.getElementById(id))cerrarModal(id);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.querySelectorAll('.overlay.abierto').forEach(o=>{o.classList.remove('abierto');document.body.style.overflow='';});
+});
+
+renderIconos();
+</script>
+</body>
+</html>
