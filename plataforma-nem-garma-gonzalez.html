@@ -40,11 +40,23 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
+  background-image: url('https://raw.githubusercontent.com/labnie/colab/main/fondo_Garma.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
   background-image:
     linear-gradient(var(--borde) 1px, transparent 1px),
     linear-gradient(90deg, var(--borde) 1px, transparent 1px);
   background-size: 48px 48px;
-  opacity: 0.45;
+  opacity: 0.35;
   pointer-events: none;
   z-index: 0;
 }
@@ -502,7 +514,7 @@ footer {
 
   <!-- PROBLEMÁTICA -->
   <div class="card-problema">
-    <h2>El problema</h2>
+    <h2>El problema: la gentrificación y la memoria colectiva</h2>
     <p>El Centenario es una localidad ubicada aproximadamente a 15 kilómetros al oeste de La Paz, la capital de Baja California Sur, en la periferia de la ciudad y con cercanía a la ensenada paceña. Fue fundada como un ejido por un grupo de personas que llegaron a trabajar la tierra, a tener ganado y a vivir bajo una cultura de cuidado del entorno: las parcelas, los animales, lo que se produce del trabajo duro del día a día. Esas familias, muchas de ellas migrantes del centro del país con arraigada tradición campesina, construyeron un paisaje singular en pleno desierto sudcaliforniano: huertas de árboles frutales, patios con plantas de la región y, de manera notable, cultivos de nopal, una práctica poco común en este entorno árido que habla de un saber particular, cultivado con esfuerzo y memoria territorial. Con el tiempo, El Centenario fue convirtiéndose en un suburbio de La Paz, pero durante décadas conservó ese carácter ejidal y campesino que le dio identidad.</p>
     <p style="margin-top:0.9rem;">En los últimos años, El Centenario ha experimentado un acelerado proceso de gentrificación impulsado por su cercanía con la ensenada de La Paz y su atractivo como zona periférica en expansión. El valor de la tierra se ha disparado y quienes llegan no comparten ni conocen la memoria vinculada a la tierra que fundó El Centenario. Las huertas ceden espacio ante fraccionamientos y desarrollos inmobiliarios, y los saberes vinculados al trabajo con la tierra —el cultivo del nopal, el cuidado de los árboles frutales, los ciclos agrícolas— corren el riesgo de desaparecer junto con quienes los practican.</p>
     <p style="margin-top:0.9rem;">Frente a este proceso, la comunidad escolar se pregunta qué papel puede jugar la escuela en la preservación de esa identidad. Un grupo de docentes de la Secundaria José María Garma González ha iniciado un proyecto de agroforestería para recuperar los árboles frutales y las huertas escolares, reconociendo que la escuela todavía guarda algo de esa memoria viva. Sin embargo, el reto mayor sigue pendiente: ¿cómo hacer que la escuela se convierta en un espacio de resistencia cultural, capaz de nombrar, valorar y transmitir los saberes de El Centenario ante la presión de un proceso que los borra?</p>
