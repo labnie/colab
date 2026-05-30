@@ -722,48 +722,53 @@ starPositions.forEach((pos, si) => {
   panels.push({ mesh: star, faceIdx: si + faceCount });
 });
 
-// ── Esfera gris oscura central con meridianos visibles ──
+// ── Esfera negra central con meridianos tubulares blancos ──
 const innerSphereGeo = new THREE.SphereGeometry(0.775, 48, 48);
 const innerSphereMat = new THREE.MeshPhongMaterial({
-  color: 0x333333,
+  color: 0x000000,
   shininess: 200,
-  specular: 0x888888,
+  specular: 0x444444,
 });
 const innerSphere = new THREE.Mesh(innerSphereGeo, innerSphereMat);
 innerSphere.position.set(0, 0, 0);
 innerSphere.renderOrder = 1;
 scene.add(innerSphere);
 
-// Meridianos (líneas verticales)
-const meridianMat = new THREE.LineBasicMaterial({ color: 0x888888 });
+const tubeMat = new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 100 });
+const tubeR = 0.018; // grosor del tubo
+
+// Meridianos (tubos verticales)
 for (let m = 0; m < 8; m++) {
   const pts = [];
   const phi = (m / 8) * Math.PI * 2;
   for (let i = 0; i <= 40; i++) {
     const theta = (i / 40) * Math.PI;
     pts.push(new THREE.Vector3(
-      0.78 * Math.sin(theta) * Math.cos(phi),
-      0.78 * Math.cos(theta),
-      0.78 * Math.sin(theta) * Math.sin(phi)
+      0.782 * Math.sin(theta) * Math.cos(phi),
+      0.782 * Math.cos(theta),
+      0.782 * Math.sin(theta) * Math.sin(phi)
     ));
   }
-  const mGeo = new THREE.BufferGeometry().setFromPoints(pts);
-  innerSphere.add(new THREE.Line(mGeo, meridianMat));
+  const curve = new THREE.CatmullRomCurve3(pts);
+  const tGeo = new THREE.TubeGeometry(curve, 40, tubeR, 6, false);
+  innerSphere.add(new THREE.Mesh(tGeo, tubeMat));
 }
-// Paralelos (líneas horizontales)
+
+// Paralelos (tubos horizontales)
 for (let p = 1; p < 5; p++) {
   const pts = [];
   const theta = (p / 5) * Math.PI;
   for (let i = 0; i <= 64; i++) {
     const phi = (i / 64) * Math.PI * 2;
     pts.push(new THREE.Vector3(
-      0.78 * Math.sin(theta) * Math.cos(phi),
-      0.78 * Math.cos(theta),
-      0.78 * Math.sin(theta) * Math.sin(phi)
+      0.782 * Math.sin(theta) * Math.cos(phi),
+      0.782 * Math.cos(theta),
+      0.782 * Math.sin(theta) * Math.sin(phi)
     ));
   }
-  const pGeo = new THREE.BufferGeometry().setFromPoints(pts);
-  innerSphere.add(new THREE.Line(pGeo, meridianMat));
+  const curve = new THREE.CatmullRomCurve3(pts, true);
+  const tGeo = new THREE.TubeGeometry(curve, 64, tubeR, 6, true);
+  innerSphere.add(new THREE.Mesh(tGeo, tubeMat));
 }
 
 // ── Luces ──
