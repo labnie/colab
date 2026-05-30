@@ -330,123 +330,8 @@ footer {
   border: 1px solid #c9ddd8; font-size: 12.5px; color: var(--acento); line-height: 1.7;
 }
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes pulseRing {
-  0%   { box-shadow: 0 0 0 0 rgba(45,90,78,0.35); }
-  70%  { box-shadow: 0 0 0 10px rgba(45,90,78,0); }
-  100% { box-shadow: 0 0 0 0 rgba(45,90,78,0); }
-}
-@keyframes iconoEntrada {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-@keyframes panelSlide {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger para hijos directos */
-.reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0.05s; }
-.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: 0.12s; }
-.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: 0.19s; }
-.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: 0.26s; }
-.reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay: 0.33s; }
-
-/* Card problema hover */
-.card-problema {
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-.card-problema:hover {
-  box-shadow: 0 6px 28px rgba(45,90,78,0.13);
-  transform: translateY(-2px);
-}
-
-/* Tags animados */
-.tag {
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-.tag:hover {
-  background: var(--acento);
-  color: #fff;
-  transform: scale(1.07);
-  cursor: default;
-}
-
-/* Ícono eje mejorado */
-.icono-eje {
-  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), filter 0.22s ease, border-color 0.22s ease, background 0.22s ease;
-}
-.icono-eje:hover {
-  transform: scale(1.22) !important;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.22));
-}
-.icono-eje.activo {
-  animation: pulseRing 1.4s ease-out;
-}
-
-/* Panel de eje con transición */
-#panel {
-  transition: none;
-}
-#panel.animando {
-  animation: panelSlide 0.35s cubic-bezier(.22,1,.36,1) both;
-}
-
-/* Botones info */
-.btn-info {
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease, box-shadow 0.18s ease;
-}
-.btn-info:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(45,90,78,0.18);
-}
-.btn-info:active { transform: translateY(0); }
-
-/* Modal con animación mejorada */
-.modal {
-  animation: fadeUp 0.32s cubic-bezier(.22,1,.36,1) both;
-}
-.overlay {
-  animation: fadeIn 0.22s ease both;
-}
-
-
-
-/* Instrucción pulsante suave */
-.instruccion span {
-  animation: fadeUp 0.6s 0.3s ease both;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.instruccion span:hover {
-  background: rgba(45,90,78,0.12);
-}
-
-/* Footer reveal */
-footer {
-  transition: opacity 0.6s ease;
 }
 @media (max-width: 720px) {
   .wrap { padding: 1rem 0.9rem 3rem; }
@@ -533,7 +418,7 @@ footer {
     <p style="font-size:13px;color:var(--texto-sec);line-height:1.8;">Esta es una plataforma para ejemplificar cómo hacer una lectura de la realidad desde distintas perspectivas. Recomendamos leer el problema identificado en la comunidad escolar de la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", y posteriormente seleccionar cualquiera de los siete ejes articuladores de la Nueva Escuela Mexicana para avanzar en la problematización desde ángulos diferentes. Cada eje revela dimensiones distintas del problema. Lo importante para nosotros es reconocer que los ejes articuladores son <strong style="color:var(--acento);">lentes que nos permiten hacer lecturas complejas de la realidad</strong> en la que participamos.</p>
   </div>
 
-  <div class="barra-info reveal-stagger">
+  <div class="barra-info">
     <button class="btn-info" onclick="abrirModal('modal-ejes')">
       <span class="pip" style="background:var(--acento)"></span>
       ¿Qué son los ejes articuladores?
@@ -626,24 +511,23 @@ footer {
   </div>
 
   <!-- PROBLEMÁTICA -->
-  <div class="card-problema reveal">
+  <div class="card-problema">
     <h2>El problema</h2>
-    <p>La comunidad de docentes de la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", ubicada en una zona marginada de Cabo San Lucas, realizamos una lectura crítica de nuestra realidad como parte de la primera fase del proceso de contextualización y territorialización curricular. Con ello, si bien identificamos diversas problemáticas sociales que inciden en la vida escolar y áulica, destacamos una en particular: el uso inadecuado de los teléfonos móviles.</p>
-    <p style="margin-top:0.85rem;">Estos dispositivos, de uso cada vez más extendido y frecuente, han transformado profundamente las formas en que las personas se definen a sí mismas y nos relacionamos en los distintos campos de la vida social —la familia, la escuela, el trabajo—, así como el tipo de convivencia que sostenemos, las maneras de compartir y asimilar información e, incluso, los modos en que enseñamos y aprendemos.</p>
-    <p style="margin-top:0.85rem;">En la escuela, los teléfonos móviles han sido una herramienta valiosa tanto para docentes como para estudiantes; sin embargo, su uso inadecuado ha exacerbado problemas serios como la violencia psicológica, el acoso entre pares y hacia el personal docente, la exclusión social y el racismo, entre otros.</p>
-    <p style="margin-top:0.85rem;">Frente a esta realidad, nos preguntamos cómo puede la escuela acompañar a su comunidad en el desarrollo de una relación más crítica, consciente y ética con la tecnología, y de qué manera los ejes articuladores de la Nueva Escuela Mexicana nos permiten leer esta problemática desde distintas dimensiones.</p>
+    <p>La comunidad de docentes de la Escuela Secundaria No. 35 &ldquo;Ra&uacute;l Enrique Guerrero Monta&ntilde;o&rdquo;, ubicada en una zona marginada de Cabo San Lucas, realizamos una lectura cr&iacute;tica de nuestra realidad como parte de la primera fase del proceso de contextualizaci&oacute;n y territorializaci&oacute;n curricular. Con ello, si bien identificamos diversas problem&aacute;ticas sociales que inciden en la vida escolar y &aacute;ulica, destacamos una en particular: el uso inadecuado de los tel&eacute;fonos m&oacute;viles.</p>
+    <p style="margin-top:0.85rem;">Estos dispositivos, de uso cada vez m&aacute;s extendido y frecuente, han transformado profundamente las formas en que las personas se definen a s&iacute; mismas y nos relacionamos en los distintos campos de la vida social &mdash;la familia, la escuela, el trabajo&mdash;, as&iacute; como el tipo de convivencia que sostenemos, las maneras de compartir y asimilar informaci&oacute;n e, incluso, los modos en que ense&ntilde;amos y aprendemos.</p>
+    <p style="margin-top:0.85rem;">En la escuela, los tel&eacute;fonos m&oacute;viles han sido una herramienta valiosa tanto para docentes como para estudiantes; sin embargo, su uso inadecuado ha exacerbado problemas serios como la violencia psicol&oacute;gica, el acoso entre pares y hacia el personal docente, la exclusi&oacute;n social y el racismo, entre otros.</p>
+    <p style="margin-top:0.85rem;">Frente a esta realidad, nos preguntamos c&oacute;mo puede la escuela acompa&ntilde;ar a su comunidad en el desarrollo de una relaci&oacute;n m&aacute;s cr&iacute;tica, consciente y &eacute;tica con la tecnolog&iacute;a, y de qu&eacute; manera los ejes articuladores de la Nueva Escuela Mexicana nos permiten leer esta problem&aacute;tica desde distintas dimensiones.</p>
     <div class="tags">
-      <span class="tag">Uso inadecuado del móvil</span>
-      <span class="tag">Violencia psicológica</span>
+      <span class="tag">Uso inadecuado del m&oacute;vil</span>
+      <span class="tag">Violencia psicol&oacute;gica</span>
       <span class="tag">Acoso escolar</span>
-      <span class="tag">Exclusión social</span>
-      <span class="tag">Tecnología y convivencia</span>
+      <span class="tag">Exclusi&oacute;n social</span>
+      <span class="tag">Tecnolog&iacute;a y convivencia</span>
     </div>
-  </div>
 
-  <p class="instruccion reveal"><span>Selecciona un eje articulador para leer la problemática desde ese ángulo</span></p>
+  <p class="instruccion"><span>Selecciona un eje articulador para leer la problemática desde ese ángulo</span></p>
 
-  <div class="zona-central reveal">
+  <div class="zona-central">
     <div id="kaleido-orbit" style="position:relative;width:460px;height:460px;margin:0 auto;">
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
         <canvas id="kaleido" width="280" height="280" style="border-radius:50%;display:block;"></canvas>
@@ -871,7 +755,7 @@ function updatePalette(pal){
   });
 }
 
-// ── ANIMACIÓN DE ENTRADA DE ÍCONOS ORBITALES ─────────────────────────
+// Generar iconos alrededor del caleidoscopio
 function renderIconos() {
   const wrap = document.getElementById('iconos-ejes');
   wrap.innerHTML = '';
@@ -885,7 +769,6 @@ function renderIconos() {
     div.className = 'icono-eje-wrap';
     div.style.left = x + 'px';
     div.style.top = y + 'px';
-    div.style.animation = `iconoEntrada 0.5s cubic-bezier(.34,1.56,.64,1) ${0.15 + i * 0.08}s both`;
     div.innerHTML = `
       <div class="icono-tooltip">${e.nombre}</div>
       <img class="icono-eje" id="icono-${i}" src="${e.icono}" alt="${e.nombre}" onclick="selEje(${i})">
@@ -893,6 +776,8 @@ function renderIconos() {
     wrap.appendChild(div);
   });
 }
+
+function selEje(idx) {
   document.querySelectorAll('.icono-eje').forEach((ic, i) => {
     ic.classList.toggle('activo', i === idx);
     ic.style.borderColor = i === idx ? EJES[idx].dotColor : '';
@@ -903,9 +788,6 @@ function renderIconos() {
   const e = EJES[idx];
   const panel=document.getElementById('panel');
   panel.style.display='block';
-  panel.classList.remove('animando');
-  void panel.offsetWidth; // reflow para reiniciar animación
-  panel.classList.add('animando');
   panel.innerHTML=`
     <div class="p-head" style="background:${e.bg};">
       <img src="${e.icono}" alt="${e.nombre}" style="width:52px;height:52px;object-fit:contain;flex-shrink:0;">
@@ -953,21 +835,6 @@ document.addEventListener('keydown',e=>{
 });
 
 renderIconos();
-
-// ── SCROLL REVEAL ─────────────────────────────────────────────────────
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
-  revealObserver.observe(el);
-});
-
 </script>
 </body>
 </html>
