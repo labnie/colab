@@ -38,12 +38,21 @@ body {
   background-color: var(--fondo);
   background-image: url('https://raw.githubusercontent.com/labnie/colab/main/fondo_35.png');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-attachment: fixed;
   color: var(--texto);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: top center;
+  }
 }
 
 .wrap {
