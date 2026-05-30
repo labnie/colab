@@ -873,8 +873,26 @@ function updatePalette(pal){
 
 // ── ANIMACIÓN DE ENTRADA DE ÍCONOS ORBITALES ─────────────────────────
 function renderIconos() {
-
-function selEje(idx) {
+  const wrap = document.getElementById('iconos-ejes');
+  wrap.innerHTML = '';
+  const cx = 230, cy = 230, r = 190;
+  const total = EJES.length;
+  EJES.forEach((e, i) => {
+    const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    const div = document.createElement('div');
+    div.className = 'icono-eje-wrap';
+    div.style.left = x + 'px';
+    div.style.top = y + 'px';
+    div.style.animation = `iconoEntrada 0.5s cubic-bezier(.34,1.56,.64,1) ${0.15 + i * 0.08}s both`;
+    div.innerHTML = `
+      <div class="icono-tooltip">${e.nombre}</div>
+      <img class="icono-eje" id="icono-${i}" src="${e.icono}" alt="${e.nombre}" onclick="selEje(${i})">
+    `;
+    wrap.appendChild(div);
+  });
+}
   document.querySelectorAll('.icono-eje').forEach((ic, i) => {
     ic.classList.toggle('activo', i === idx);
     ic.style.borderColor = i === idx ? EJES[idx].dotColor : '';
@@ -950,30 +968,6 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
   revealObserver.observe(el);
 });
 
-
-
-// ── ANIMACIÓN DE ENTRADA DE ÍCONOS ORBITALES ─────────────────────────
-function renderIconos() {
-  const wrap = document.getElementById('iconos-ejes');
-  wrap.innerHTML = '';
-  const cx = 230, cy = 230, r = 190;
-  const total = EJES.length;
-  EJES.forEach((e, i) => {
-    const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
-    const div = document.createElement('div');
-    div.className = 'icono-eje-wrap';
-    div.style.left = x + 'px';
-    div.style.top = y + 'px';
-    div.style.animation = `iconoEntrada 0.5s cubic-bezier(.34,1.56,.64,1) ${0.15 + i * 0.08}s both`;
-    div.innerHTML = `
-      <div class="icono-tooltip">${e.nombre}</div>
-      <img class="icono-eje" id="icono-${i}" src="${e.icono}" alt="${e.nombre}" onclick="selEje(${i})">
-    `;
-    wrap.appendChild(div);
-  });
-}
 </script>
 </body>
 </html>
