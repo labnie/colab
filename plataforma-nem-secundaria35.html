@@ -35,30 +35,25 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--fondo);
+  background-color: var(--fondo);
+  background-image: url('https://raw.githubusercontent.com/labnie/colab/main/fondo_35.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--texto);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--borde) 1px, transparent 1px),
-    linear-gradient(90deg, var(--borde) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.45;
-  pointer-events: none;
-  z-index: 0;
-}
+
 .wrap {
   position: relative;
   z-index: 1;
   max-width: 1080px;
   margin: 0 auto;
   padding: 2.5rem 2rem 5rem;
+  background: rgba(247, 246, 242, 0.82);
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 header {
   display: flex;
@@ -509,13 +504,16 @@ footer {
   <!-- PROBLEMÁTICA -->
   <div class="card-problema">
     <h2>El problema</h2>
-    <p>Muchas de las familias de las y los jóvenes que estudian en la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", en Cabo San Lucas, son migrantes y viven en condiciones económicas muy precarias. Debido a las necesidades del hogar, varios estudiantes se han visto en la necesidad de buscar empleos de medio tiempo o incluso de tiempo completo para contribuir al gasto familiar. Esta situación ha comenzado a impactar de manera significativa en la vida escolar y personal de los adolescentes. Algunos estudiantes presentan problemas de alimentación, cansancio constante y poca energía para participar en las actividades académicas. Asimismo, se ha observado baja participación en clase, dificultades para realizar tareas escolares, ausentismo y, en algunos casos, aislamiento social respecto a sus compañeros. Frente a esta realidad, la comunidad escolar se pregunta de qué manera la escuela puede acompañar a las y los estudiantes considerando las condiciones sociales, económicas y culturales que atraviesan sus vidas, y cómo generar estrategias educativas más inclusivas, solidarias y vinculadas con su contexto.</p>
+    <p>La comunidad de docentes de la Escuela Secundaria No. 35 "Raúl Enrique Guerrero Montaño", ubicada en una zona marginada de Cabo San Lucas, realizamos una lectura crítica de nuestra realidad como parte de la primera fase del proceso de contextualización y territorialización curricular. Con ello, si bien identificamos diversas problemáticas sociales que inciden en la vida escolar y áulica, destacamos una en particular: el uso inadecuado de los teléfonos móviles.</p>
+    <p style="margin-top:0.85rem;">Estos dispositivos, de uso cada vez más extendido y frecuente, han transformado profundamente las formas en que las personas se definen a sí mismas y nos relacionamos en los distintos campos de la vida social —la familia, la escuela, el trabajo—, así como el tipo de convivencia que sostenemos, las maneras de compartir y asimilar información e, incluso, los modos en que enseñamos y aprendemos.</p>
+    <p style="margin-top:0.85rem;">En la escuela, los teléfonos móviles han sido una herramienta valiosa tanto para docentes como para estudiantes; sin embargo, su uso inadecuado ha exacerbado problemas serios como la violencia psicológica, el acoso entre pares y hacia el personal docente, la exclusión social y el racismo, entre otros.</p>
+    <p style="margin-top:0.85rem;">Frente a esta realidad, nos preguntamos cómo puede la escuela acompañar a su comunidad en el desarrollo de una relación más crítica, consciente y ética con la tecnología, y de qué manera los ejes articuladores de la Nueva Escuela Mexicana nos permiten leer esta problemática desde distintas dimensiones.</p>
     <div class="tags">
-      <span class="tag">Trabajo adolescente</span>
-      <span class="tag">Familias migrantes</span>
-      <span class="tag">Ausentismo escolar</span>
-      <span class="tag">Desigualdad económica</span>
-      <span class="tag">Derecho a la educación</span>
+      <span class="tag">Uso inadecuado del móvil</span>
+      <span class="tag">Violencia psicológica</span>
+      <span class="tag">Acoso escolar</span>
+      <span class="tag">Exclusión social</span>
+      <span class="tag">Tecnología y convivencia</span>
     </div>
   </div>
 
@@ -556,57 +554,57 @@ const EJES = [
     nombre:"Igualdad de género", color:"#c04070", bg:"#fdf0f5", txt:"#7a2248", dotColor:"#D4537E",
     icono: BASE + "Igualdad%20de%20genero.png",
     paleta:['#D4537E','#ED93B1','#f9dce9','#993556','#e07090','#F4C0D1','#7a2248'],
-    lectura:"El eje de igualdad de género permite identificar cómo las condiciones económicas y familiares afectan de manera diferenciada a hombres y mujeres jóvenes. En contextos de migración y precariedad, muchas estudiantes pueden asumir labores domésticas, de cuidado o responsabilidades familiares además de las escolares, mientras que algunos estudiantes varones pueden verse presionados socialmente a incorporarse tempranamente al trabajo remunerado. El eje ayuda a reconocer cómo los estereotipos y roles de género influyen en la participación escolar, el cansancio, la permanencia educativa y las oportunidades de desarrollo.",
-    puntos:["Identificar desigualdades relacionadas con roles familiares y laborales.","Generar espacios de diálogo sobre estereotipos de género.","Evitar prácticas escolares que refuercen desigualdades.","Promover relaciones basadas en el respeto y la equidad.","Acompañar a estudiantes en situaciones de sobrecarga familiar o laboral."],
-    preguntas:["¿Las responsabilidades familiares y laborales afectan igual a hombres y mujeres jóvenes? ¿Por qué?","¿Qué ideas o expectativas sociales influyen en las actividades que realizan las y los estudiantes fuera de la escuela?"]
+    lectura:"El eje de igualdad de género permite identificar cómo el uso de los teléfonos móviles no afecta de igual manera a hombres y mujeres jóvenes. Las dinámicas digitales pueden reproducir y amplificar estereotipos, roles y expectativas de género: las estudiantes pueden enfrentar formas específicas de acoso, presión estética, hipersexualización o vigilancia en entornos digitales, mientras que los estudiantes varones pueden verse sometidos a mandatos de masculinidad que también se expresan y refuerzan en redes sociales y plataformas. Este eje ayuda a reconocer que el problema no es neutral: el género atraviesa las formas de usar la tecnología, las violencias que se ejercen a través de ella y las posibilidades de participación segura en los entornos digitales.",
+    puntos:["Identificar cómo el acoso y la violencia digital afectan de manera diferenciada a estudiantes según su género.","Generar espacios de diálogo sobre estereotipos y roles de género presentes en redes sociales y plataformas digitales.","Promover un uso de la tecnología basado en el respeto, la equidad y el consentimiento.","Evitar prácticas que normalicen la vigilancia, el control o la exposición no consentida en entornos digitales.","Fortalecer la capacidad del estudiantado para identificar y denunciar situaciones de violencia de género en línea."],
+    preguntas:["¿El acoso y la violencia que ocurren a través del teléfono móvil afectan igual a hombres y mujeres jóvenes? ¿Por qué?","¿Qué estereotipos de género se reproducen o refuerzan en las redes sociales que usamos cotidianamente?"]
   },
   {
     nombre:"Interculturalidad crítica", color:"#8a3a1a", bg:"#fef3ee", txt:"#6b2c12", dotColor:"#D85A30",
     icono: BASE + "Interculturalidad.png",
     paleta:['#D85A30','#F0997B','#fde5d8','#993C1D','#e07050','#F5C4B3','#6b2c12'],
-    lectura:"El eje de interculturalidad crítica permite comprender que el trabajo infantil y adolescente no puede analizarse únicamente como una decisión individual o familiar, sino como una situación vinculada con condiciones históricas, económicas, sociales y culturales que atraviesan a muchas familias migrantes. En distintos contextos, el trabajo de niñas, niños y jóvenes puede ser visto como una forma de apoyo familiar, supervivencia o responsabilidad comunitaria. Este eje ayuda a cuestionar las desigualdades estructurales que obligan a muchas familias a incorporar a sus hijos e hijas al trabajo, así como las formas de discriminación y exclusión que viven dentro y fuera de la escuela.",
-    puntos:["Reconocer las condiciones sociales y culturales que viven las familias migrantes.","Evitar estigmatizar a estudiantes que trabajan.","Generar espacios de escucha y diálogo sobre las experiencias laborales de las y los jóvenes.","Incorporar problemáticas comunitarias y territoriales en las actividades escolares.","Promover una cultura escolar basada en el respeto y la dignidad."],
-    preguntas:["¿Por qué algunos adolescentes necesitan trabajar mientras estudian?","¿Qué desigualdades sociales y económicas influyen en el trabajo infantil y adolescente en nuestra comunidad?"]
+    lectura:"El eje de interculturalidad crítica permite comprender que el uso de los teléfonos móviles no ocurre en un vacío cultural, sino que está mediado por relaciones de poder que determinan qué contenidos circulan, qué voces son visibles y qué formas de vida se presentan como deseables o normales. En comunidades como la nuestra —diversa, migrante y ubicada en un contexto de desigualdad—, las plataformas digitales pueden reproducir visiones dominantes que invisibilizan, estereotipan o discriminan identidades culturales, lingüísticas y sociales. Este eje ayuda a reconocer que el racismo, la exclusión y la discriminación también se expresan y amplifican en los entornos digitales, y que una relación crítica con la tecnología implica cuestionar quién produce los contenidos que consumimos y desde qué perspectivas.",
+    puntos:["Promover la reflexión sobre los contenidos digitales que circulan y las visiones del mundo que reproducen.","Identificar formas de discriminación, racismo y exclusión presentes en redes sociales y plataformas.","Valorar y visibilizar las identidades, saberes y experiencias culturales de la comunidad escolar en entornos digitales.","Generar espacios de diálogo sobre el impacto de los medios digitales en la construcción de identidades culturales.","Fomentar una mirada crítica hacia los algoritmos y los intereses que determinan qué se ve y qué no en las redes."],
+    preguntas:["¿Qué culturas, formas de vida e identidades aparecen con más frecuencia en las redes sociales que usamos? ¿Cuáles están ausentes o son ridiculizadas?","¿De qué manera el racismo y la discriminación se expresan en los entornos digitales que habitamos cotidianamente?"]
   },
   {
     nombre:"Inclusión y equidad", color:"#4a44a0", bg:"#f4f3fd", txt:"#32307a", dotColor:"#7F77DD",
     icono: BASE + "Inclusion.png",
     paleta:['#7F77DD','#AFA9EC','#e8e6fa','#534AB7','#9088e0','#CECBF6','#32307a'],
-    lectura:"El eje de inclusión permite reconocer que el trabajo infantil y adolescente genera condiciones de desigualdad que afectan la participación, el aprendizaje y la permanencia escolar de muchas y muchos estudiantes. Las jornadas laborales, el cansancio, la mala alimentación y las responsabilidades familiares colocan a algunos jóvenes en desventaja frente a otros compañeros. Este eje ayuda a comprender que las dificultades académicas no deben interpretarse únicamente como falta de interés o compromiso, sino como resultado de condiciones sociales y económicas que limitan el acceso pleno al derecho a la educación.",
-    puntos:["Identificar barreras que dificultan la participación y aprendizaje de estudiantes que trabajan.","Evitar prácticas de exclusión, estigmatización o castigo.","Generar estrategias de acompañamiento académico y emocional.","Fortalecer la comunicación con las familias.","Construir ambientes escolares más empáticos y solidarios."],
-    preguntas:["¿De qué manera el trabajo afecta las oportunidades educativas de algunos adolescentes?","¿Cómo puede la escuela apoyar a estudiantes que viven situaciones económicas difíciles sin excluirlos o señalarlos?"]
+    lectura:"El eje de inclusión y equidad permite reconocer que el acceso y el uso de los teléfonos móviles no es igual para todas y todos los estudiantes. Las condiciones económicas, sociales y territoriales de las familias determinan el tipo de dispositivo disponible, la calidad de la conexión y las posibilidades reales de participación en entornos digitales. Esta desigualdad puede traducirse en nuevas formas de exclusión dentro del aula y la comunidad escolar. Al mismo tiempo, el uso inadecuado de los móviles puede generar dinámicas de señalamiento, burla y aislamiento que afectan especialmente a quienes ya se encuentran en situaciones de mayor vulnerabilidad. Este eje invita a reconocer que no todas las personas habitan el mundo digital desde las mismas condiciones ni con las mismas posibilidades de protección.",
+    puntos:["Identificar las desigualdades de acceso tecnológico presentes en la comunidad escolar.","Evitar prácticas que excluyan o estigmaticen a estudiantes por su relación con la tecnología.","Construir ambientes escolares donde el uso del móvil no genere nuevas jerarquías ni dinámicas de exclusión.","Generar estrategias de acompañamiento para estudiantes que enfrentan situaciones de acoso o violencia digital.","Promover una cultura escolar basada en la solidaridad, el respeto y la participación equitativa."],
+    preguntas:["¿Todas y todos los estudiantes tienen las mismas posibilidades de acceso y uso de la tecnología? ¿Qué consecuencias tiene esa desigualdad?","¿De qué manera el uso del teléfono móvil puede generar exclusión o reforzar desigualdades dentro de la escuela?"]
   },
   {
     nombre:"Apropiación de culturas y lectoescritura", color:"#0c447c", bg:"#edf4fd", txt:"#083060", dotColor:"#378ADD",
     icono: BASE + "Apropiacion%20de%20la%20cultua_.png",
     paleta:['#378ADD','#85B7EB','#d8eaf8','#185FA5','#5090d0','#B5D4F4','#083060'],
-    lectura:"Este eje permite reconocer que las experiencias de trabajo infantil y adolescente forman parte de las historias, saberes y realidades que viven muchas familias migrantes en la comunidad. La lectura y la escritura pueden convertirse en herramientas para que las y los estudiantes narren sus experiencias, recuperen la memoria de sus familias y reflexionen críticamente sobre las condiciones sociales y económicas que atraviesan sus vidas. Asimismo, ayuda a visibilizar que las prácticas escolares pueden fortalecerse cuando incorporan las voces, lenguajes y experiencias reales del alumnado.",
-    puntos:["Promover actividades de lectura y escritura vinculadas con la vida cotidiana del estudiantado.","Recuperar relatos, historias y experiencias de las familias migrantes.","Favorecer espacios de expresión oral y escrita sobre problemáticas comunitarias.","Incorporar diversos lenguajes y formas de comunicación.","Utilizar la lectura y escritura como herramientas de reflexión crítica y participación."],
-    preguntas:["¿Qué historias y experiencias sobre el trabajo existen en nuestras familias y comunidad?","¿Cómo pueden la lectura y la escritura ayudarnos a comprender y expresar las problemáticas que viven las y los jóvenes?"]
+    lectura:"El eje de apropiación de culturas y lectoescritura permite reconocer que los teléfonos móviles han transformado profundamente las formas en que leemos, escribimos y nos comunicamos. El consumo acelerado de contenidos breves, fragmentados y visuales puede desplazar prácticas de lectura y escritura más reflexivas y sostenidas, afectando la capacidad de los jóvenes para comprender textos complejos, argumentar con claridad y construir pensamiento propio. Al mismo tiempo, este eje invita a reconocer que los entornos digitales también son espacios de expresión, creación y circulación cultural, y que la escuela puede acompañar a los jóvenes en el desarrollo de una lectoescritura crítica y situada que les permita habitar esos espacios de manera consciente y creativa.",
+    puntos:["Promover prácticas de lectura y escritura que dialoguen con los entornos digitales que habitan los jóvenes.","Desarrollar la capacidad de los estudiantes para leer críticamente los contenidos que circulan en redes y plataformas.","Incorporar la producción de contenidos digitales como forma de expresión, narración y participación cultural.","Reflexionar sobre cómo el lenguaje digital transforma las formas de comunicar, argumentar y relacionarse.","Fortalecer habilidades de comprensión lectora frente a la sobreabundancia informativa del entorno digital."],
+    preguntas:["¿De qué manera el uso cotidiano del teléfono móvil está transformando nuestras formas de leer, escribir y comunicarnos?","¿Cómo podemos distinguir entre consumir información y comprenderla críticamente en los entornos digitales?"]
   },
   {
     nombre:"Artes y experiencias estéticas", color:"#633806", bg:"#fdf5e8", txt:"#4a2904", dotColor:"#BA7517",
     icono: BASE + "Arte%20y%20experiencia%20est%C3%A9tica.png",
     paleta:['#BA7517','#EF9F27','#fdebc8','#854F0B','#d08520','#FAC775','#4a2904'],
-    lectura:"Este eje permite reconocer que el trabajo infantil y adolescente no sólo tiene consecuencias económicas o escolares, sino también emocionales y humanas. Las y los estudiantes pueden experimentar cansancio, frustración, estrés, preocupación o sentimientos de exclusión que muchas veces no logran expresar en los espacios escolares tradicionales. Las artes y las experiencias estéticas abren posibilidades para representar, comunicar y reflexionar sobre las vivencias relacionadas con el trabajo, la migración, la desigualdad y la vida cotidiana, favoreciendo la empatía y la sensibilidad colectiva.",
-    puntos:["Generar espacios de expresión artística sobre experiencias de vida y trabajo.","Promover actividades de teatro, dibujo, fotografía, música o narrativa comunitaria.","Favorecer el reconocimiento y expresión de emociones.","Utilizar el arte para reflexionar sobre problemáticas sociales.","Fortalecer la empatía y el sentido de comunidad."],
-    preguntas:["¿Qué emociones experimentan las y los jóvenes que trabajan mientras estudian?","¿Cómo puede el arte ayudarnos a expresar y comprender las desigualdades presentes en nuestra comunidad?"]
+    lectura:"El eje de artes y experiencias estéticas permite reconocer que los teléfonos móviles se han convertido en uno de los principales mediadores de la experiencia sensible de los jóvenes: a través de ellos se consume música, imagen, video y una enorme variedad de expresiones culturales. Sin embargo, el consumo acelerado y poco reflexivo de estos contenidos puede empobrecer la capacidad de detenerse, contemplar y dejarse afectar por una experiencia estética. Al mismo tiempo, este eje invita a valorar que los dispositivos móviles también pueden ser herramientas de creación, expresión y comunicación artística. La escuela tiene la oportunidad de acompañar a los jóvenes en el desarrollo de una mirada más sensible, crítica y creativa hacia los contenidos que producen y consumen en sus pantallas.",
+    puntos:["Generar espacios de expresión artística que incorporen los lenguajes y formatos digitales que usan los jóvenes.","Promover la reflexión sobre los contenidos estéticos que circulan en redes y plataformas: ¿qué nos generan, qué nos dicen, a quién benefician?","Favorecer experiencias de contemplación, escucha y creación que contrasten con el consumo acelerado de contenidos digitales.","Utilizar la fotografía, el video, el audio y otros formatos digitales como herramientas de expresión y narración comunitaria.","Fortalecer la sensibilidad y la capacidad crítica del estudiantado frente a los contenidos que consumen cotidianamente."],
+    preguntas:["¿Qué emociones y sensaciones nos generan los contenidos que consumimos en nuestros teléfonos? ¿Nos detenemos a reflexionar sobre ellas?","¿De qué manera podemos usar el teléfono móvil como una herramienta de creación y expresión, y no solo de consumo?"]
   },
   {
     nombre:"Vida saludable", color:"#0f6e56", bg:"#eef4f2", txt:"#08503d", dotColor:"#1D9E75",
     icono: BASE + "Vida%20saludable.png",
     paleta:['#1D9E75','#5DCAA5','#d0ede5','#0F6E56','#30b080','#9FE1CB','#08503d'],
-    lectura:"El eje de vida saludable permite reconocer que el trabajo infantil y adolescente impacta directamente en el bienestar físico, emocional y social de las y los estudiantes. Las largas jornadas laborales, la mala alimentación, el cansancio y la falta de descanso afectan la concentración, la participación escolar y la salud integral de los jóvenes. Este eje ayuda a comprender que la salud no depende únicamente de decisiones individuales, sino también de las condiciones económicas y sociales en las que viven las familias.",
-    puntos:["Identificar factores que afectan el bienestar físico y emocional del alumnado.","Promover hábitos de descanso, alimentación y autocuidado.","Generar espacios de escucha y acompañamiento emocional.","Evitar dinámicas escolares que incrementen el agotamiento.","Vincular a la comunidad escolar con acciones de apoyo y cuidado colectivo."],
-    preguntas:["¿Cómo afecta el trabajo al descanso, la alimentación y la salud de las y los adolescentes?","¿Qué acciones puede realizar la comunidad escolar para favorecer el bienestar de estudiantes que trabajan?"]
+    lectura:"El eje de vida saludable permite reconocer que el uso inadecuado de los teléfonos móviles tiene consecuencias directas en el bienestar físico, emocional y social de las y los estudiantes. El tiempo prolongado frente a las pantallas, la interrupción del sueño, el sedentarismo y la exposición constante a contenidos que generan ansiedad, comparación o malestar afectan la salud integral de los jóvenes. Este eje ayuda a comprender que la salud no depende únicamente de decisiones individuales, sino también de los entornos, las dinámicas sociales y las condiciones en que se produce el uso de la tecnología. Una relación saludable con el teléfono móvil implica reconocer sus efectos en el cuerpo, las emociones y los vínculos, y desarrollar la capacidad de establecer límites conscientes y sostenidos.",
+    puntos:["Generar espacios de reflexión sobre los efectos del uso prolongado del teléfono móvil en el cuerpo y las emociones.","Promover hábitos de descanso digital y autocuidado entre el estudiantado.","Acompañar emocionalmente a estudiantes que viven situaciones de malestar vinculadas al uso de la tecnología.","Evitar dinámicas escolares que normalicen la hiperconectividad o la disponibilidad permanente.","Vincular el bienestar digital con una concepción integral de la salud que incluya lo físico, lo emocional y lo social."],
+    preguntas:["¿De qué manera el uso cotidiano del teléfono móvil afecta nuestro sueño, nuestro cuerpo y nuestro estado emocional?","¿Qué significaría tener una relación saludable con la tecnología? ¿Cómo podríamos construirla colectivamente?"]
   },
   {
     nombre:"Pensamiento crítico", color:"#3b6d11", bg:"#f1f7ea", txt:"#2a5009", dotColor:"#639922",
     icono: BASE + "Pensamieto%20critico.png",
     paleta:['#639922','#97C459','#dff0c0','#3B6D11','#70aa28','#C0DD97','#2a5009'],
-    lectura:"El eje de pensamiento crítico permite cuestionar las condiciones sociales, económicas y culturales que normalizan el trabajo infantil y adolescente en la comunidad. Ayuda a reflexionar sobre por qué algunos jóvenes deben trabajar para sostener a sus familias mientras otros pueden dedicar mayor tiempo al estudio, así como analizar las desigualdades estructurales relacionadas con la pobreza, la migración y el acceso a oportunidades educativas. Este eje invita a problematizar las ideas que consideran el abandono escolar, el cansancio o la baja participación académica como responsabilidad exclusiva del estudiante.",
-    puntos:["Promover el análisis crítico de las desigualdades sociales presentes en la comunidad.","Generar espacios de diálogo sobre pobreza, migración y derechos de niñas, niños y adolescentes.","Relacionar los contenidos escolares con problemáticas reales del contexto.","Favorecer la reflexión colectiva y la participación estudiantil.","Cuestionar prácticas escolares que invisibilicen las condiciones de vida del alumnado."],
-    preguntas:["¿Por qué algunas niñas, niños y adolescentes necesitan trabajar para apoyar económicamente a sus familias?","¿Qué responsabilidades tienen la sociedad, el Estado y la escuela frente al trabajo infantil y adolescente?"]
+    lectura:"El eje de pensamiento crítico permite cuestionar las condiciones sociales, económicas y culturales que rodean el uso de los teléfonos móviles y las plataformas digitales. Ayuda a reflexionar sobre quién diseña estos dispositivos y aplicaciones, con qué intereses, y de qué manera sus lógicas —la búsqueda de atención, el consumo acelerado, la validación social— influyen en las formas de pensar, sentir y relacionarse de los jóvenes. Este eje invita a problematizar la idea de que el uso inadecuado del móvil es únicamente un problema de voluntad o disciplina individual, y a reconocer que existen estructuras, algoritmos e intereses comerciales que moldean activamente nuestros hábitos digitales. Desarrollar pensamiento crítico frente a la tecnología es una condición necesaria para habitarla con mayor autonomía y consciencia.",
+    puntos:["Promover el análisis crítico de las plataformas digitales, sus lógicas de funcionamiento e intereses comerciales.","Generar espacios de reflexión colectiva sobre los hábitos digitales y sus efectos en la vida cotidiana.","Cuestionar la naturalización del uso intensivo del teléfono móvil como algo inevitable o neutral.","Desarrollar la capacidad del estudiantado para identificar desinformación, manipulación y sesgos en los contenidos digitales.","Fomentar una actitud de indagación, duda y análisis frente a la información que circula en redes y plataformas."],
+    preguntas:["¿Quién diseña las aplicaciones y plataformas que usamos y con qué intereses? ¿Cómo influyen en nuestras decisiones y emociones?","¿Qué diferencia hay entre usar la tecnología y ser usados por ella?"]
   }
 ];
 
