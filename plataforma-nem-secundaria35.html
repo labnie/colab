@@ -350,10 +350,7 @@ footer {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes shimmer {
-  0%   { background-position: -400px 0; }
-  100% { background-position: 400px 0; }
-}
+
 
 /* Scroll reveal */
 .reveal {
@@ -436,15 +433,7 @@ footer {
   animation: fadeIn 0.22s ease both;
 }
 
-/* Skeleton loader del caleidoscopio */
-#kaleido-loader {
-  width: 280px; height: 280px; border-radius: 50%;
-  background: linear-gradient(90deg, #e8e6e0 25%, #f2f0ea 50%, #e8e6e0 75%);
-  background-size: 800px 100%;
-  animation: shimmer 1.4s infinite linear;
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 
 /* Instrucción pulsante suave */
 .instruccion span {
@@ -657,8 +646,7 @@ footer {
   <div class="zona-central reveal">
     <div id="kaleido-orbit" style="position:relative;width:460px;height:460px;margin:0 auto;">
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
-        <div id="kaleido-loader"></div>
-        <canvas id="kaleido" width="280" height="280" style="border-radius:50%;display:block;opacity:0;transition:opacity 0.6s ease;"></canvas>
+        <canvas id="kaleido" width="280" height="280" style="border-radius:50%;display:block;"></canvas>
       </div>
       <div id="iconos-ejes"></div>
     </div>
@@ -962,13 +950,7 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
   revealObserver.observe(el);
 });
 
-// ── SKELETON LOADER → mostrar caleidoscopio ──────────────────────────
-setTimeout(() => {
-  const loader = document.getElementById('kaleido-loader');
-  const cv = document.getElementById('kaleido');
-  if (loader) { loader.style.opacity = '0'; loader.style.transition = 'opacity 0.4s'; setTimeout(() => loader.remove(), 400); }
-  if (cv) cv.style.opacity = '1';
-}, 900);
+
 
 // ── ANIMACIÓN DE ENTRADA DE ÍCONOS ORBITALES ─────────────────────────
 function renderIconos() {
