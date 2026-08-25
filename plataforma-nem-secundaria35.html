@@ -17,147 +17,37 @@
 <meta name="twitter:image" content="https://raw.githubusercontent.com/labnie/colab/main/fondo_35.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<script>
-// ── Configuración Firestore REST ───────────────────────────────────────
-const PROJECT_ID = "secundaria35-57dbd";
-const API_KEY    = "AIzaSyBoIu-1pgKvWUie_2d4m6bERQGcKtKzHzo";
-const DOC_URL    = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/plataforma/contenido?key=${API_KEY}`;
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const CLAVE_CORRECTA = "PlataformaCQ35";
-const PASS_CORRECTA  = "Colaboratorio35";
-
-// ── Cargar contenido al arrancar ───────────────────────────────────────
-async function cargarContenido() {
-  try {
-    const res = await fetch(DOC_URL);
-    if (!res.ok) return;
-    const data = await res.json();
-    const fields = data.fields;
-    if (!fields) return;
-    if (fields.problema?.stringValue) {
-      document.getElementById('texto-problema').innerHTML = fields.problema.stringValue;
-    }
-    if (fields.ejes?.arrayValue?.values) {
-      fields.ejes.arrayValue.values.forEach((ev, i) => {
-        const ef = ev.mapValue.fields;
-        if (window.EJES && window.EJES[i]) {
-          if (ef.lectura?.stringValue)   window.EJES[i].lectura   = ef.lectura.stringValue;
-          if (ef.puntos?.arrayValue)     window.EJES[i].puntos    = ef.puntos.arrayValue.values.map(v => v.stringValue);
-          if (ef.preguntas?.arrayValue)  window.EJES[i].preguntas = ef.preguntas.arrayValue.values.map(v => v.stringValue);
-        }
-      });
-    }
-  } catch(e) { console.log("Sin datos remotos, usando contenido local."); }
-}
-
-// ── Login docente ──────────────────────────────────────────────────────
-window.loginDocente = function() {
-  const clave = document.getElementById('fb-clave').value.trim();
-  const pass  = document.getElementById('fb-pass').value.trim();
-  const err   = document.getElementById('fb-error');
-  if (clave !== CLAVE_CORRECTA || pass !== PASS_CORRECTA) {
-    err.textContent = 'Clave o contraseña incorrecta.';
-    return;
-  }
-  err.textContent = '';
-  document.getElementById('login-box').style.display    = 'none';
-  document.getElementById('panel-editor').style.display = 'block';
-  document.getElementById('btn-editar').style.display   = 'none';
-  construirEditor();
-};
-
-window.logoutDocente = function() {
-  document.getElementById('panel-editor').style.display = 'none';
-  document.getElementById('btn-editar').style.display   = 'block';
-};
-
-// ── Guardar cambios via REST ───────────────────────────────────────────
-window.guardarCambios = async function() {
-  const problema = document.getElementById('edit-problema').value;
-  const ejesData = window.EJES.map((e, i) => ({
-    lectura:   document.getElementById('edit-lectura-'   + i)?.value || e.lectura,
-    puntos:    (document.getElementById('edit-puntos-'   + i)?.value || e.puntos.join('\n')).split('\n').filter(l => l.trim()),
-    preguntas: (document.getElementById('edit-preguntas-'+ i)?.value || e.preguntas.join('\n')).split('\n').filter(l => l.trim()),
-  }));
-
-  // Convertir a formato Firestore
-  const body = {
-    fields: {
-      problema: { stringValue: problema },
-      ejes: {
-        arrayValue: {
-          values: ejesData.map(e => ({
-            mapValue: {
-              fields: {
-                lectura:   { stringValue: e.lectura },
-                puntos:    { arrayValue: { values: e.puntos.map(p => ({ stringValue: p })) } },
-                preguntas: { arrayValue: { values: e.preguntas.map(p => ({ stringValue: p })) } }
-              }
-            }
-          }))
-        }
-      }
-    }
+  const firebaseConfig = {
+    apiKey: "AIzaSyBoIu-1pgKvWUie_2d4m6bERQGcKtKzHzo",
+    authDomain: "secundaria35-57dbd.firebaseapp.com",
+    databaseURL: "https://secundaria35-57dbd-default-rtdb.firebaseio.com",
+    projectId: "secundaria35-57dbd",
+    storageBucket: "secundaria35-57dbd.firebasestorage.app",
+    messagingSenderId: "512527543868",
+    appId: "1:512527543868:web:22692a263f1b978575dd39"
   };
 
-  try {
-    const res = await fetch(DOC_URL, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error?.message || res.statusText);
-    }
-    // Aplicar cambios en vivo
-    document.getElementById('texto-problema').innerHTML = problema;
-    ejesData.forEach((e, i) => {
-      window.EJES[i].lectura   = e.lectura;
-      window.EJES[i].puntos    = e.puntos;
-      window.EJES[i].preguntas = e.preguntas;
-    });
-    document.getElementById('fb-status').textContent = '✓ Cambios guardados correctamente.';
-    setTimeout(() => document.getElementById('fb-status').textContent = '', 3000);
-  } catch(e) {
-    document.getElementById('fb-status').textContent = 'Error al guardar: ' + e.message;
-  }
-};
+  const fbApp = initializeApp(firebaseConfig);
+  const db = getDatabase(fbApp);
+  const auth = getAuth(fbApp);
 
-function construirEditor() {
-  const ejesHtml = window.EJES.map((e, i) => `
-    <details style="margin-bottom:1rem;border:1px solid #ddd;border-radius:8px;overflow:hidden;">
-      <summary style="padding:0.75rem 1rem;background:#f5f5f5;cursor:pointer;font-weight:600;">${e.nombre}</summary>
-      <div style="padding:1rem;display:flex;flex-direction:column;gap:0.75rem;">
-        <label style="font-size:0.85rem;font-weight:600;">¿Qué revela este eje?</label>
-        <textarea id="edit-lectura-${i}" rows="5" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;resize:vertical;box-sizing:border-box;">${e.lectura}</textarea>
-        <label style="font-size:0.85rem;font-weight:600;">¿Qué puede hacer la escuela? <span style="font-weight:400;">(una acción por línea)</span></label>
-        <textarea id="edit-puntos-${i}" rows="5" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;resize:vertical;box-sizing:border-box;">${e.puntos.join('\n')}</textarea>
-        <label style="font-size:0.85rem;font-weight:600;">Preguntas para el aula <span style="font-weight:400;">(una por línea)</span></label>
-        <textarea id="edit-preguntas-${i}" rows="3" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;resize:vertical;box-sizing:border-box;">${e.preguntas.join('\n')}</textarea>
-      </div>
-    </details>
-  `).join('');
+  window.fbRef = ref;
+  window.fbSet = set;
+  window.fbGet = get;
+  window.fbDb = db;
+  window.fbReady = false;
 
-  document.getElementById('panel-editor').innerHTML = `
-    <div style="background:#fff;border:2px solid var(--acento);border-radius:12px;padding:1.5rem;margin-top:2rem;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-        <h3 style="margin:0;color:var(--acento);">✏️ Modo edición docente</h3>
-        <button onclick="logoutDocente()" style="background:#eee;border:none;padding:0.4rem 1rem;border-radius:6px;cursor:pointer;font-size:0.85rem;">Cerrar sesión</button>
-      </div>
-      <label style="font-size:0.85rem;font-weight:600;">Texto del problema</label>
-      <textarea id="edit-problema" rows="8" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;margin:0.5rem 0 1.5rem;resize:vertical;box-sizing:border-box;">${document.getElementById('texto-problema').innerText}</textarea>
-      <h4 style="margin:0 0 0.75rem;color:var(--acento);">Ejes articuladores</h4>
-      ${ejesHtml}
-      <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
-        <button onclick="guardarCambios()" style="background:var(--acento);color:#fff;border:none;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;">Guardar cambios</button>
-        <span id="fb-status" style="color:green;font-size:0.85rem;"></span>
-      </div>
-    </div>
-  `;
-}
-
-window.addEventListener('load', cargarContenido);
+  signInAnonymously(auth)
+    .then(() => {
+      window.fbReady = true;
+      window.dispatchEvent(new Event('firebase-ready'));
+    })
+    .catch(e => console.error('Error de autenticación:', e));
 </script>
 <style>
 :root {
@@ -1033,6 +923,116 @@ document.addEventListener('keydown',e=>{
 });
 
 renderIconos();
+
+// ── Firebase: esperar autenticación anónima ───────────────────────────
+function esperarFirebase() {
+  return new Promise((resolve, reject) => {
+    if (window.fbReady) { resolve(); return; }
+    const t = setTimeout(() => reject(new Error('Tiempo de espera agotado.')), 10000);
+    window.addEventListener('firebase-ready', () => { clearTimeout(t); resolve(); }, { once: true });
+  });
+}
+
+// ── Cargar contenido desde Realtime Database ──────────────────────────
+async function cargarContenido() {
+  try {
+    await esperarFirebase();
+    const snap = await window.fbGet(window.fbRef(window.fbDb, 'plataforma/contenido'));
+    if (!snap.exists()) return;
+    const data = snap.val();
+    if (data.problema) document.getElementById('texto-problema').innerHTML = data.problema;
+    if (data.ejes && Array.isArray(data.ejes)) {
+      data.ejes.forEach((e, i) => {
+        if (window.EJES && window.EJES[i]) {
+          if (e.lectura)   window.EJES[i].lectura   = e.lectura;
+          if (e.puntos)    window.EJES[i].puntos     = e.puntos;
+          if (e.preguntas) window.EJES[i].preguntas  = e.preguntas;
+        }
+      });
+    }
+  } catch(e) { console.log('Sin datos remotos, usando contenido local.'); }
+}
+
+// ── Login docente ──────────────────────────────────────────────────────
+const CLAVE_CORRECTA = 'PlataformaCQ35';
+const PASS_CORRECTA  = 'Colaboratorio35';
+
+window.loginDocente = function() {
+  const clave = document.getElementById('fb-clave').value.trim();
+  const pass  = document.getElementById('fb-pass').value.trim();
+  const err   = document.getElementById('fb-error');
+  if (clave !== CLAVE_CORRECTA || pass !== PASS_CORRECTA) {
+    err.textContent = 'Clave o contraseña incorrecta.'; return;
+  }
+  err.textContent = '';
+  document.getElementById('login-box').style.display    = 'none';
+  document.getElementById('panel-editor').style.display = 'block';
+  document.getElementById('btn-editar').style.display   = 'none';
+  construirEditor();
+};
+
+window.logoutDocente = function() {
+  document.getElementById('panel-editor').style.display = 'none';
+  document.getElementById('btn-editar').style.display   = 'block';
+};
+
+// ── Guardar cambios en Realtime Database ──────────────────────────────
+window.guardarCambios = async function() {
+  const problema = document.getElementById('edit-problema').value;
+  const ejesData = window.EJES.map((e, i) => ({
+    lectura:   document.getElementById('edit-lectura-'   + i)?.value || e.lectura,
+    puntos:    (document.getElementById('edit-puntos-'   + i)?.value || e.puntos.join('\n')).split('\n').filter(l => l.trim()),
+    preguntas: (document.getElementById('edit-preguntas-'+ i)?.value || e.preguntas.join('\n')).split('\n').filter(l => l.trim()),
+  }));
+  try {
+    await esperarFirebase();
+    await window.fbSet(window.fbRef(window.fbDb, 'plataforma/contenido'), { problema, ejes: ejesData });
+    document.getElementById('texto-problema').innerHTML = problema;
+    ejesData.forEach((e, i) => {
+      window.EJES[i].lectura   = e.lectura;
+      window.EJES[i].puntos    = e.puntos;
+      window.EJES[i].preguntas = e.preguntas;
+    });
+    document.getElementById('fb-status').textContent = '✓ Cambios guardados correctamente.';
+    setTimeout(() => document.getElementById('fb-status').textContent = '', 3000);
+  } catch(e) {
+    document.getElementById('fb-status').textContent = 'Error al guardar: ' + e.message;
+  }
+};
+
+function construirEditor() {
+  const ejesHtml = window.EJES.map((e, i) => `
+    <details style="margin-bottom:1rem;border:1px solid #ddd;border-radius:8px;overflow:hidden;">
+      <summary style="padding:0.75rem 1rem;background:#f5f5f5;cursor:pointer;font-weight:600;">${e.nombre}</summary>
+      <div style="padding:1rem;display:flex;flex-direction:column;gap:0.75rem;">
+        <label style="font-size:0.85rem;font-weight:600;">¿Qué revela este eje?</label>
+        <textarea id="edit-lectura-${i}" rows="5" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;resize:vertical;box-sizing:border-box;">${e.lectura}</textarea>
+        <label style="font-size:0.85rem;font-weight:600;">¿Qué puede hacer la escuela? <span style="font-weight:400;">(una acción por línea)</span></label>
+        <textarea id="edit-puntos-${i}" rows="5" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;resize:vertical;box-sizing:border-box;">${e.puntos.join('\n')}</textarea>
+        <label style="font-size:0.85rem;font-weight:600;">Preguntas para el aula <span style="font-weight:400;">(una por línea)</span></label>
+        <textarea id="edit-preguntas-${i}" rows="3" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;resize:vertical;box-sizing:border-box;">${e.preguntas.join('\n')}</textarea>
+      </div>
+    </details>
+  `).join('');
+  document.getElementById('panel-editor').innerHTML = `
+    <div style="background:#fff;border:2px solid var(--acento);border-radius:12px;padding:1.5rem;margin-top:2rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h3 style="margin:0;color:var(--acento);">✏️ Modo edición docente</h3>
+        <button onclick="logoutDocente()" style="background:#eee;border:none;padding:0.4rem 1rem;border-radius:6px;cursor:pointer;font-size:0.85rem;">Cerrar sesión</button>
+      </div>
+      <label style="font-size:0.85rem;font-weight:600;">Texto del problema</label>
+      <textarea id="edit-problema" rows="8" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:6px;font-size:0.85rem;margin:0.5rem 0 1.5rem;resize:vertical;box-sizing:border-box;">${document.getElementById('texto-problema').innerText}</textarea>
+      <h4 style="margin:0 0 0.75rem;color:var(--acento);">Ejes articuladores</h4>
+      ${ejesHtml}
+      <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
+        <button onclick="guardarCambios()" style="background:var(--acento);color:#fff;border:none;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;">Guardar cambios</button>
+        <span id="fb-status" style="color:green;font-size:0.85rem;"></span>
+      </div>
+    </div>
+  `;
+}
+
+cargarContenido();
 </script>
 
 <!-- ── BOTÓN EDITAR + LOGIN + PANEL EDITOR ── -->
