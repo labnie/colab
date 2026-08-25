@@ -17,50 +17,40 @@
 <meta name="twitter:image" content="https://raw.githubusercontent.com/labnie/colab/main/fondo_35.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+<script>
+// ── Configuración Firestore REST ───────────────────────────────────────
+const PROJECT_ID = "secundaria35-57dbd";
+const API_KEY    = "AIzaSyBoIu-1pgKvWUie_2d4m6bERQGcKtKzHzo";
+const DOC_URL    = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/plataforma/contenido?key=${API_KEY}`;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBoIu-1pgKvWUie_2d4m6bERQGcKtKzHzo",
-  authDomain: "secundaria35-57dbd.firebaseapp.com",
-  projectId: "secundaria35-57dbd",
-  storageBucket: "secundaria35-57dbd.firebasestorage.app",
-  messagingSenderId: "512527543868",
-  appId: "1:512527543868:web:22692a263f1b978575dd39"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// ── Credenciales docentes ──────────────────────────────────────────────
 const CLAVE_CORRECTA = "PlataformaCQ35";
 const PASS_CORRECTA  = "Colaboratorio35";
 
-// ── Cargar contenido desde Firestore al arrancar ──────────────────────
+// ── Cargar contenido al arrancar ───────────────────────────────────────
 async function cargarContenido() {
   try {
-    const snap = await getDoc(doc(db, "plataforma", "contenido"));
-    if (snap.exists()) aplicarContenido(snap.data());
-  } catch(e) { console.log("Sin datos en Firestore, usando contenido local."); }
+    const res = await fetch(DOC_URL);
+    if (!res.ok) return;
+    const data = await res.json();
+    const fields = data.fields;
+    if (!fields) return;
+    if (fields.problema?.stringValue) {
+      document.getElementById('texto-problema').innerHTML = fields.problema.stringValue;
+    }
+    if (fields.ejes?.arrayValue?.values) {
+      fields.ejes.arrayValue.values.forEach((ev, i) => {
+        const ef = ev.mapValue.fields;
+        if (window.EJES && window.EJES[i]) {
+          if (ef.lectura?.stringValue)   window.EJES[i].lectura   = ef.lectura.stringValue;
+          if (ef.puntos?.arrayValue)     window.EJES[i].puntos    = ef.puntos.arrayValue.values.map(v => v.stringValue);
+          if (ef.preguntas?.arrayValue)  window.EJES[i].preguntas = ef.preguntas.arrayValue.values.map(v => v.stringValue);
+        }
+      });
+    }
+  } catch(e) { console.log("Sin datos remotos, usando contenido local."); }
 }
 
-function aplicarContenido(data) {
-  if (data.problema) {
-    document.getElementById('texto-problema').innerHTML = data.problema;
-  }
-  if (data.ejes && Array.isArray(data.ejes)) {
-    data.ejes.forEach((e, i) => {
-      if (window.EJES && window.EJES[i]) {
-        if (e.lectura)   window.EJES[i].lectura   = e.lectura;
-        if (e.puntos)    window.EJES[i].puntos     = e.puntos;
-        if (e.preguntas) window.EJES[i].preguntas  = e.preguntas;
-      }
-    });
-  }
-}
-
-// ── Login docente (validación local) ──────────────────────────────────
+// ── Login docente ──────────────────────────────────────────────────────
 window.loginDocente = function() {
   const clave = document.getElementById('fb-clave').value.trim();
   const pass  = document.getElementById('fb-pass').value.trim();
@@ -81,7 +71,7 @@ window.logoutDocente = function() {
   document.getElementById('btn-editar').style.display   = 'block';
 };
 
-// ── Guardar cambios en Firestore ───────────────────────────────────────
+// ── Guardar cambios via REST ───────────────────────────────────────────
 window.guardarCambios = async function() {
   const problema = document.getElementById('edit-problema').value;
   const ejesData = window.EJES.map((e, i) => ({
@@ -89,8 +79,38 @@ window.guardarCambios = async function() {
     puntos:    (document.getElementById('edit-puntos-'   + i)?.value || e.puntos.join('\n')).split('\n').filter(l => l.trim()),
     preguntas: (document.getElementById('edit-preguntas-'+ i)?.value || e.preguntas.join('\n')).split('\n').filter(l => l.trim()),
   }));
+
+  // Convertir a formato Firestore
+  const body = {
+    fields: {
+      problema: { stringValue: problema },
+      ejes: {
+        arrayValue: {
+          values: ejesData.map(e => ({
+            mapValue: {
+              fields: {
+                lectura:   { stringValue: e.lectura },
+                puntos:    { arrayValue: { values: e.puntos.map(p => ({ stringValue: p })) } },
+                preguntas: { arrayValue: { values: e.preguntas.map(p => ({ stringValue: p })) } }
+              }
+            }
+          }))
+        }
+      }
+    }
+  };
+
   try {
-    await setDoc(doc(db, "plataforma", "contenido"), { problema, ejes: ejesData });
+    const res = await fetch(DOC_URL, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error?.message || res.statusText);
+    }
+    // Aplicar cambios en vivo
     document.getElementById('texto-problema').innerHTML = problema;
     ejesData.forEach((e, i) => {
       window.EJES[i].lectura   = e.lectura;
@@ -137,7 +157,7 @@ function construirEditor() {
   `;
 }
 
-cargarContenido();
+window.addEventListener('load', cargarContenido);
 </script>
 <style>
 :root {
