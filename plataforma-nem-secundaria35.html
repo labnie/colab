@@ -758,6 +758,248 @@ footer {
 
   <div id="panel"></div>
 
+  <!-- ── SECCIÓN PLANEACIONES ── -->
+  <div id="seccion-planeaciones" style="margin-top:3rem;animation:fadeUp 0.7s 0.4s ease both;">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:1.5rem;">
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:500;color:var(--gold);white-space:nowrap;letter-spacing:0.02em;">Planeación colectiva por campo formativo</h2>
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:1.75rem;text-align:center;">Formatos de ruta de planeación articulados al problema comunitario identificado. Selecciona un campo formativo para explorar las disciplinas, actividades y estrategias de evaluación propuestas.</p>
+
+    <!-- Tarjetas de campos -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:2rem;">
+
+      <button onclick="abrirPlaneacion('etica')"
+        style="background:rgba(16,85,60,0.25);border:1px solid rgba(29,158,117,0.35);border-radius:var(--radius);padding:1.25rem 1rem;cursor:pointer;text-align:left;transition:all 0.22s ease;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);"
+        onmouseover="this.style.background='rgba(16,85,60,0.42)';this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.background='rgba(16,85,60,0.25)';this.style.transform='translateY(0)'">
+        <div style="font-size:22px;margin-bottom:0.5rem;">🌿</div>
+        <div style="font-size:13px;font-weight:600;color:#5DCAA5;margin-bottom:4px;">Ética, naturaleza y sociedad</div>
+        <div style="font-size:11.5px;color:var(--text-2);line-height:1.6;">Geografía · Historia · Formación Cívica y Ética</div>
+        <div style="margin-top:0.75rem;font-size:11px;color:#5DCAA5;letter-spacing:0.05em;">Ver planeación →</div>
+      </button>
+
+      <button onclick="abrirPlaneacion('saberes')"
+        style="background:rgba(15,50,100,0.25);border:1px solid rgba(55,138,221,0.35);border-radius:var(--radius);padding:1.25rem 1rem;cursor:pointer;text-align:left;transition:all 0.22s ease;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);"
+        onmouseover="this.style.background='rgba(15,50,100,0.42)';this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.background='rgba(15,50,100,0.25)';this.style.transform='translateY(0)'">
+        <div style="font-size:22px;margin-bottom:0.5rem;">🔬</div>
+        <div style="font-size:13px;font-weight:600;color:#85B7EB;margin-bottom:4px;">Saberes y pensamiento científico</div>
+        <div style="font-size:11.5px;color:var(--text-2);line-height:1.6;">Matemáticas · Biología · Física · Química</div>
+        <div style="margin-top:0.75rem;font-size:11px;color:#85B7EB;letter-spacing:0.05em;">Ver planeación →</div>
+      </button>
+
+      <button onclick="abrirPlaneacion('lenguajes')"
+        style="background:rgba(99,56,6,0.25);border:1px solid rgba(186,117,23,0.35);border-radius:var(--radius);padding:1.25rem 1rem;cursor:pointer;text-align:left;transition:all 0.22s ease;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);"
+        onmouseover="this.style.background='rgba(99,56,6,0.42)';this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.background='rgba(99,56,6,0.25)';this.style.transform='translateY(0)'">
+        <div style="font-size:22px;margin-bottom:0.5rem;">📚</div>
+        <div style="font-size:13px;font-weight:600;color:#EF9F27;margin-bottom:4px;">Lenguajes</div>
+        <div style="font-size:11.5px;color:var(--text-2);line-height:1.6;">Español · Inglés · Artes</div>
+        <div style="margin-top:0.75rem;font-size:11px;color:#EF9F27;letter-spacing:0.05em;">Ver planeación →</div>
+      </button>
+
+      <button onclick="abrirPlaneacion('humano')"
+        style="background:rgba(100,30,60,0.25);border:1px solid rgba(212,83,126,0.35);border-radius:var(--radius);padding:1.25rem 1rem;cursor:pointer;text-align:left;transition:all 0.22s ease;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);"
+        onmouseover="this.style.background='rgba(100,30,60,0.42)';this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.background='rgba(100,30,60,0.25)';this.style.transform='translateY(0)'">
+        <div style="font-size:22px;margin-bottom:0.5rem;">🤝</div>
+        <div style="font-size:13px;font-weight:600;color:#ED93B1;margin-bottom:4px;">De lo humano y lo comunitario</div>
+        <div style="font-size:11.5px;color:var(--text-2);line-height:1.6;">Tecnología · Ed. Socioemocional · Ed. Física</div>
+        <div style="margin-top:0.75rem;font-size:11px;color:#ED93B1;letter-spacing:0.05em;">Ver planeación →</div>
+      </button>
+
+    </div>
+
+    <!-- Panel de planeación expandible -->
+    <div id="plan-panel" style="display:none;animation:fadeUp 0.35s ease both;">
+
+      <!-- Campo: Ética, naturaleza y sociedad -->
+      <div id="plan-etica">
+        <!-- Encabezado -->
+        <div style="background:rgba(16,85,60,0.30);border:1px solid rgba(29,158,117,0.35);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5DCAA5;margin-bottom:6px;font-weight:500;">Campo formativo</div>
+              <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--text-1);margin-bottom:4px;">Ética, naturaleza y sociedad</h3>
+              <div style="font-size:12px;color:var(--text-2);margin-bottom:0.75rem;">Proyecto: <strong style="color:#5DCAA5;">Ponte buso con el uso</strong></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:640px;">
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5DCAA5;margin-bottom:3px;">Problema social</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">Uso inadecuado del celular</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#5DCAA5;margin-bottom:3px;">Problema pedagógico</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">¿Cómo desarrollar en los estudiantes un uso ético, crítico y responsable de la tecnología?</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
+              <a href="https://docs.google.com/document/d/115WhIk-3tc5mpuBpMI5a9_8MnhtJtWSu/edit?usp=sharing" target="_blank"
+                style="display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);color:var(--gold);border:1px solid var(--border-gold);padding:0.5rem 1rem;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;transition:all 0.2s;"
+                onmouseover="this.style.background='rgba(201,168,76,0.28)'" onmouseout="this.style.background='var(--gold-dim)'">
+                ⬇ Descargar formato Word
+              </a>
+              <button onclick="cerrarPlaneacion()" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-3);padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:11.5px;">✕ Cerrar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Propósito -->
+        <div style="background:var(--glass);border:1px solid var(--border);border-left:3px solid #5DCAA5;border-radius:var(--radius);padding:1rem 1.4rem;margin-bottom:1.25rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#5DCAA5;margin-bottom:5px;font-weight:500;">Propósito</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;">Generar ambientes de enseñanza aprendizaje garantizando el respeto a los derechos de todos los miembros de la comunidad escolar.</p>
+        </div>
+
+        <!-- Tabla de disciplinas (generada por JS) -->
+        <div id="plan-etica-disciplinas" style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;"></div>
+
+        <!-- Actividad integradora -->
+        <div style="background:rgba(201,168,76,0.10);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-bottom:1rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:6px;font-weight:600;">🎪 Actividad integradora</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;"><strong style="color:var(--gold);">Feria educativa</strong> — Demostración de las actividades desarrolladas en las diversas disciplinas del campo formativo, organizada por estaciones: territorio, ser adolescente, tecnología y poder, derechos digitales y ciudadanía. Los estudiantes presentan sus aprendizajes a la comunidad escolar.</p>
+        </div>
+
+      </div><!-- /plan-etica -->
+
+      <!-- Campo: De lo humano y lo comunitario -->
+      <div id="plan-humano" style="display:none;">
+        <!-- Encabezado -->
+        <div style="background:rgba(100,30,60,0.30);border:1px solid rgba(212,83,126,0.35);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#ED93B1;margin-bottom:6px;font-weight:500;">Campo formativo</div>
+              <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--text-1);margin-bottom:4px;">De lo humano y lo comunitario</h3>
+              <div style="font-size:12px;color:var(--text-2);margin-bottom:0.75rem;">Proyecto: <strong style="color:#ED93B1;">Ponte buso con el uso</strong></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:640px;">
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#ED93B1;margin-bottom:3px;">Problema social</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">Uso inadecuado del celular</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#ED93B1;margin-bottom:3px;">Problema pedagógico</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">¿Cómo desarrollar en los estudiantes un uso ético, crítico y responsable de la tecnología?</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
+              <a href="https://docs.google.com/document/d/1hzUMJahHyPb9DHEkPQPPIuuoVsAOtUqJ/edit?usp=sharing" target="_blank"
+                style="display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);color:var(--gold);border:1px solid var(--border-gold);padding:0.5rem 1rem;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;transition:all 0.2s;"
+                onmouseover="this.style.background='rgba(201,168,76,0.28)'" onmouseout="this.style.background='var(--gold-dim)'">
+                ⬇ Descargar formato Word
+              </a>
+              <button onclick="cerrarPlaneacion()" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-3);padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:11.5px;">✕ Cerrar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disciplinas -->
+        <div id="plan-humano-disciplinas" style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;"></div>
+
+        <!-- Actividad integradora -->
+        <div style="background:rgba(201,168,76,0.10);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-bottom:1rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:6px;font-weight:600;">🎪 Actividad integradora</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;"><strong style="color:var(--gold);">Feria educativa de dos días (Rally)</strong> — Se realizará un proyecto tipo rally distinto por grado, así como uno individual por asignatura (Tecnología). Los alumnos de 1° presentan su proyecto a los de 2°, los de 2° a los de 3° y los de 3° a los de 1°. Se invita a los padres de familia para que participen en las dinámicas, acompañen a sus hijos, conozcan el proyecto, reflexionen y se lleven de tarea una propuesta de acuerdo familiar sobre el uso del celular.</p>
+        </div>
+      </div><!-- /plan-humano -->
+
+      <!-- Campo: Lenguajes -->
+      <div id="plan-lenguajes" style="display:none;">
+        <div style="background:rgba(99,56,6,0.30);border:1px solid rgba(186,117,23,0.35);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#EF9F27;margin-bottom:6px;font-weight:500;">Campo formativo</div>
+              <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--text-1);margin-bottom:4px;">Lenguajes</h3>
+              <div style="font-size:12px;color:var(--text-2);margin-bottom:0.75rem;">Proyecto: <strong style="color:#EF9F27;">Ponte buso con el uso</strong></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:640px;">
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#EF9F27;margin-bottom:3px;">Problema social</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">Uso inadecuado del celular</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#EF9F27;margin-bottom:3px;">Problema pedagógico</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">¿Cómo fortalecer las prácticas de comunicación oral y escrita para favorecer el diálogo presencial, la escucha activa y la interacción significativa?</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
+              <a href="https://docs.google.com/document/d/1rJIW6NWE2WU_FLY_IFQjsDCPqqC7Z6n-/edit?usp=sharing" target="_blank"
+                style="display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);color:var(--gold);border:1px solid var(--border-gold);padding:0.5rem 1rem;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;transition:all 0.2s;"
+                onmouseover="this.style.background='rgba(201,168,76,0.28)'" onmouseout="this.style.background='var(--gold-dim)'">
+                ⬇ Descargar formato Word
+              </a>
+              <button onclick="cerrarPlaneacion()" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-3);padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:11.5px;">✕ Cerrar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Propósito -->
+        <div style="background:var(--glass);border:1px solid var(--border);border-left:3px solid #EF9F27;border-radius:var(--radius);padding:1rem 1.4rem;margin-bottom:1.25rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#EF9F27;margin-bottom:5px;font-weight:500;">Propósito</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;">Generar ambientes de enseñanza aprendizaje garantizando el respeto a los derechos humanos, desarrollando estrategias de reflexión sobre el impacto del uso inadecuado del celular y el uso responsable de este.</p>
+        </div>
+
+        <div id="plan-lenguajes-disciplinas" style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;"></div>
+
+        <!-- Actividad integradora -->
+        <div style="background:rgba(201,168,76,0.10);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-bottom:1rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:6px;font-weight:600;">🎪 Actividad integradora</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:0.75rem;"><strong style="color:var(--gold);">Campaña escolar: "Diseño de una campaña para el uso responsable del celular"</strong></p>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:0.5rem;"><strong style="color:var(--text-1);">Objetivo:</strong> Diseñar una campaña visual para concientizar a la comunidad escolar sobre el uso responsable del teléfono móvil, promoviendo hábitos digitales saludables.</p>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:0.5rem;"><strong style="color:var(--text-1);">Formatos:</strong> Carteles, trípticos, logotipos, lemas, minidocumentales, crónicas en video y publicaciones para redes sociales.</p>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:0.5rem;"><strong style="color:var(--text-1);">Difusión:</strong> Exposición pública en áreas comunes del plantel y publicación en la página oficial de Facebook de la escuela.</p>
+          <p style="font-size:12px;color:var(--text-3);line-height:1.7;font-style:italic;">⚠️ Para cualquier material que incluya imagen de alumnos, se requiere firma previa del formato de consentimiento de padres o tutores.</p>
+        </div>
+      </div><!-- /plan-lenguajes -->
+
+      <!-- Campo: Saberes y pensamiento científico -->
+      <div id="plan-saberes" style="display:none;">
+        <div style="background:rgba(15,50,100,0.30);border:1px solid rgba(55,138,221,0.35);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#85B7EB;margin-bottom:6px;font-weight:500;">Campo formativo</div>
+              <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--text-1);margin-bottom:4px;">Saberes y pensamiento científico</h3>
+              <div style="font-size:12px;color:var(--text-2);margin-bottom:0.75rem;">Proyecto: <strong style="color:#85B7EB;">Ponte buso con el uso</strong></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:640px;">
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#85B7EB;margin-bottom:3px;">Problema social</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">Uso inadecuado del celular</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:0.6rem 0.9rem;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#85B7EB;margin-bottom:3px;">Problema pedagógico</div>
+                  <div style="font-size:12.5px;color:var(--text-2);">¿Qué estrategias didácticas puede establecer para regular y orientar el uso del celular en la jornada escolar?</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
+              <a href="https://docs.google.com/document/d/1n3vVKmqGGo0omTEaefdI5WBT83QSV-8p/edit?usp=sharing" target="_blank"
+                style="display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);color:var(--gold);border:1px solid var(--border-gold);padding:0.5rem 1rem;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;white-space:nowrap;transition:all 0.2s;"
+                onmouseover="this.style.background='rgba(201,168,76,0.28)'" onmouseout="this.style.background='var(--gold-dim)'">
+                ⬇ Descargar formato Word
+              </a>
+              <button onclick="cerrarPlaneacion()" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-3);padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:11.5px;">✕ Cerrar</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--glass);border:1px solid var(--border);border-left:3px solid #85B7EB;border-radius:var(--radius);padding:1rem 1.4rem;margin-bottom:1.25rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#85B7EB;margin-bottom:5px;font-weight:500;">Propósito</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;">Generar ambientes de enseñanza aprendizaje garantizando el respeto a los derechos humanos, desarrollando estrategias de reflexión sobre el impacto del uso inadecuado del celular y el uso responsable de este.</p>
+        </div>
+
+        <div id="plan-saberes-disciplinas" style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;"></div>
+
+        <div style="background:rgba(201,168,76,0.10);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.1rem 1.4rem;margin-bottom:1rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:6px;font-weight:600;">🎪 Actividad integradora</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:0.5rem;"><strong style="color:var(--gold);">Productos finales por disciplina</strong></p>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.8;">Cada disciplina genera un producto final a partir de la investigación y los datos recopilados. Los formatos posibles incluyen: <strong style="color:var(--text-1);">video blog, TikTok, podcast, folleto, tríptico, maqueta o cartel.</strong> Los mejores trabajos se presentan en la comunidad escolar.</p>
+        </div>
+      </div><!-- /plan-saberes -->
+
+    </div><!-- /plan-panel -->
+  </div><!-- /seccion-planeaciones -->
+
   <footer>
     <div style="margin-bottom:1rem;">
       Nueva Escuela Mexicana &nbsp;·&nbsp; 7 Ejes articuladores &nbsp;·&nbsp; Co-Laboratorio de Didáctica y Currículum &nbsp;·&nbsp; Sec. No. 35 Raúl Enrique Guerrero Montaño · Cabo San Lucas, BCS
@@ -1140,5 +1382,561 @@ renderIconos();
   <div id="panel-editor" style="display:none;"></div>
 
 </div>
+
+<script>
+// ── PLANEACIONES ─────────────────────────────────────────────────────────
+const PLAN_ETICA = [
+  {
+    disc: 'Geografía', grado: '',
+    contenido: 'Las categorías de análisis espacial y representaciones del espacio geográfico.',
+    pda: 'Comprende las categorías de análisis espacial para explicar las características del espacio geográfico: lugar, región, paisaje y territorio.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: '"El viaje de mi celular"', desc: '' },
+      { titulo: 'Actividad de inicio', desc: 'Mostrar a las alumnas y alumnos un celular dañado y plantear la pregunta detonante: <em>¿Qué hay dentro?</em> Generar una lluvia de ideas y anotar las aportaciones en el pizarrón.' },
+      { titulo: 'Trabajo en equipos', desc: 'Asignar a cada equipo un material del celular y pedir que contesten: ¿En qué parte del celular creen que se encuentra cada material y para qué sirve? Se profundiza en composición, propiedades y origen de los materiales.' },
+      { titulo: 'Preguntas de análisis', desc: '¿Para fabricar un celular se necesitan materiales de diferentes partes del planeta? ¿Un celular es un solo objeto o una combinación de muchos materiales?' },
+      { titulo: 'Reflexión personal', desc: 'Cada alumno completa la frase: <em>"Ahora veo mi celular de otra manera porque…"</em>' },
+      { titulo: 'Mapa temático', desc: 'Elaborar un mapa que represente el ciclo de vida del celular: extracción de minerales, producción de componentes, ensamblaje, transporte y comercialización.' },
+      { titulo: 'Reflexión sobre residuos', desc: 'Analizar qué sucede cuando un celular deja de utilizarse. Incluir posibilidades de reparación, reutilización, reciclaje o disposición inadecuada, así como impactos ambientales.' },
+      { titulo: 'Retroalimentación', desc: 'Frases incompletas sobre el origen de los materiales, los países involucrados en la fabricación, el impacto ambiental en zonas de extracción y cómo podemos reducir los residuos electrónicos.' }
+    ],
+    eval: 'Evaluación formativa · Rúbrica · Autoevaluación'
+  },
+  {
+    disc: 'Historia', grado: '1°',
+    contenido: 'La construcción histórica de las ideas sobre las juventudes e infancias.',
+    pda: 'Identifica las ideas y representaciones sociales sobre las juventudes e infancias en distintas épocas y contextos, y analiza cómo han cambiado.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: '"Ser adolescente antes y después del celular"', desc: '' },
+      { titulo: 'Análisis de imágenes históricas', desc: 'Presentar imágenes de distintas épocas: décadas de 1950, 1980, 2000 y actualidad. Preguntar: ¿Cómo se comunicaban los adolescentes de cada época? ¿Cómo se divertían? ¿Cómo realizaban sus tareas? ¿Cómo construían sus amistades? ¿Qué diferencias observan con los adolescentes actuales?' },
+      { titulo: 'Cuadro comparativo histórico', desc: 'En equipos, elaborar un cuadro comparativo de lo que realizan las juventudes actuales y del pasado, en los aspectos de: comunicación, acceso a información, entretenimiento, amistades, educación e identidad. Pueden agregar imágenes o dibujos.' },
+      { titulo: 'Investigación por equipo', desc: 'Cada equipo investiga una época específica y responde: ¿Cómo influyeron las tecnologías disponibles en la manera en que los jóvenes de esa época vivían, se comunicaban y aprendían?' },
+      { titulo: 'Presentación y debate', desc: 'Cada equipo presenta sus conclusiones respondiendo: ¿El celular ha mejorado o transformado la vida de los adolescentes? La condición es argumentar usando ejemplos históricos, sin responder solo "sí" o "no".' },
+      { titulo: 'Producto digital', desc: 'Adecuación de museo digital: agregar código QR con enlace digital donde los alumnos suban sus conclusiones.' }
+    ],
+    eval: 'Evaluación formativa · Rúbrica · Autoevaluación'
+  },
+  {
+    disc: 'Historia', grado: '2°',
+    contenido: 'La conformación de las metrópolis y los sistemas de dominación.',
+    pda: 'Problematiza sobre los factores políticos, económicos, culturales, tecnológicos, militares y religiosos que predominaban en los pueblos indígenas en el momento de su enfrentamiento con los españoles.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: '"La tecnología siempre ha servido para mejorar la vida de las personas… ¿o también para ejercer poder?"', desc: '' },
+      { titulo: 'Análisis comparativo histórico', desc: 'Mostrar ejemplos de tecnologías utilizadas por diferentes pueblos antes y durante la llegada de los colonizadores: armas y herramientas, sistemas de navegación, escritura, técnicas agrícolas, embarcaciones, instrumentos de orientación y sistemas de comunicación.' },
+      { titulo: 'Trabajo por factores', desc: 'Organizar equipos y asignar a cada uno un factor: Tecnológico, Militar, Económico, Político, Cultural y Religioso. Cada equipo investiga un ejemplo relacionado con la llegada de los colonizadores y completa el esquema: ¿Qué tecnología estaba presente?, ¿Quién la utilizaba?, ¿Para qué servía?, ¿Qué ventaja proporcionaba?, ¿Cómo se relacionaba con el poder?, ¿Qué consecuencias tuvo para otros pueblos?' },
+      { titulo: 'Conexión con el presente', desc: '¿El celular también puede convertirse en una herramienta de poder? Los estudiantes argumentan a partir de preguntas como: ¿Quién produce la información que vemos?, ¿Quién decide qué aparece primero?, ¿Cómo pueden las redes sociales influir en nuestras opiniones?, ¿Qué información personal proporcionamos al usar aplicaciones?, ¿El acceso al celular es igual para todas las personas?' },
+      { titulo: 'Infografía', desc: 'Elaborar una infografía: <em>"Tecnología y poder: del pasado al celular"</em>, con un ejemplo histórico de tecnología y poder, su relación con la dominación, un ejemplo actual relacionado con el celular, beneficios y riesgos, y una propuesta para usar responsablemente la tecnología.' }
+    ],
+    eval: 'Evaluación formativa · Rúbrica · Autoevaluación'
+  },
+  {
+    disc: 'Historia', grado: '3°',
+    contenido: 'Las tensiones en el siglo XX.',
+    pda: 'Analiza y comprende las causas y consecuencias de la Segunda Revolución Industrial y su aporte a la consolidación del capitalismo como sistema económico mundial.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: '"Industrialización a la revolución digital"', desc: '' },
+      { titulo: 'Pregunta generadora', desc: '¿Cómo el desarrollo tecnológico transformó las relaciones económicas y las formas de poder a escala mundial?' },
+      { titulo: 'Análisis de la Segunda Revolución Industrial', desc: 'Examinar los inventos y transformaciones: electricidad, petróleo, acero, industria química, motor de combustión interna, teléfono, nuevas formas de transporte y comunicación, producción industrial a gran escala y crecimiento de las empresas.' },
+      { titulo: 'Investigación local en Cabo San Lucas', desc: '¿Cómo se manifiesta este proceso histórico en mi comunidad? Los alumnos investigan: ¿Para qué utilizan el celular los estudiantes?, ¿Qué actividades económicas de la comunidad dependen de internet?, ¿Cómo utilizan los negocios las redes sociales?, ¿Qué ocurre cuando una persona no tiene acceso a internet?, ¿Todos tienen las mismas posibilidades de acceder a tecnología?' },
+      { titulo: 'Línea del tiempo grupal', desc: 'Construir colectivamente una línea histórica de la Segunda Revolución Industrial incorporando: Electricidad, Petróleo, Acero, Industria química, Motor de combustión interna, Teléfono, Ferrocarril y Automóvil. Reflexión: ¿Qué problema permitió resolver esta tecnología y qué nuevas posibilidades creó?' },
+      { titulo: 'Del teléfono al smartphone', desc: 'En equipos, elaborar una línea del tiempo sobre la evolución del teléfono hasta el smartphone. Para cada etapa incluir: año o periodo, tecnología o dispositivo, principales características, cambio que produjo en la comunicación y nueva función incorporada respecto a la etapa anterior.' },
+      { titulo: 'Reflexión final', desc: '<em>"¿La tecnología nos transforma o nosotros transformamos la tecnología?"</em> Analizar cómo el teléfono pasó de ser un medio de comunicación a intervenir en múltiples aspectos de la vida cotidiana. Responder en equipo: ¿Qué habilidades necesitamos para hacer un uso adecuado de la tecnología digital?' }
+    ],
+    eval: 'Evaluación formativa · Rúbrica · Autoevaluación'
+  },
+  {
+    disc: 'Formación Cívica y Ética', grado: '1°',
+    contenido: 'Consecuencias de la desigualdad en la calidad de vida.',
+    pda: 'Analiza las causas de las diferencias en la calidad de vida y las compara con el derecho a la igualdad sustantiva y a una vida digna.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: 'Análisis de situaciones', desc: 'Plantear y analizar con las alumnas y alumnos situaciones relacionadas con: Derecho a la información, Acceso a internet, Privacidad, Protección de datos, Libertad de expresión y Discriminación digital.' },
+      { titulo: 'Pregunta guía', desc: '¿El acceso a la tecnología puede considerarse una cuestión relacionada con los derechos humanos?' },
+      { titulo: 'La brecha digital', desc: 'Retomar el tema a través de la pregunta generadora: ¿Todos los estudiantes tienen las mismas posibilidades de contar con celular, internet y datos?' },
+      { titulo: 'Encuesta y gráficas', desc: 'Aplicar una encuesta en el grupo sobre acceso a tecnología y elaborar gráficas con los resultados para analizar las desigualdades dentro del propio grupo.' }
+    ],
+    eval: 'Evaluación formativa · Rúbrica · Autoevaluación'
+  },
+  {
+    disc: 'Formación Cívica y Ética', grado: '2°',
+    contenido: 'Normas, leyes, instituciones y organizaciones.',
+    pda: 'Participa en la creación y transformación de normas y leyes orientadas a favorecer la igualdad, libertad, justicia y derechos humanos.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: 'Espacio de reflexión', desc: '¿Qué normas necesitamos para proteger nuestros derechos cuando utilizamos el celular?' },
+      { titulo: 'Carta de derechos digitales', desc: 'Por equipos, elaborar una propuesta de <em>"Carta de derechos y responsabilidades digitales de los adolescentes"</em> que incluya:' },
+      { titulo: 'Contenidos de la carta', desc: '<ul style="margin:0.5rem 0 0 1.2rem;padding:0;line-height:2;color:inherit;"><li>Privacidad</li><li>Protección de datos</li><li>No discriminación</li><li>Libertad de expresión</li><li>Uso responsable de imágenes</li><li>Prevención del ciberacoso</li><li>Derecho a desconectarse</li><li>Responsabilidad al compartir información</li></ul>' }
+    ],
+    eval: 'Evaluación formativa · Rúbrica · Autoevaluación'
+  },
+  {
+    disc: 'Formación Cívica y Ética', grado: '3°',
+    contenido: 'Los derechos humanos en México y en el mundo como valores compartidos.',
+    pda: 'Debate acerca de la importancia de defender y exigir el respeto a los derechos humanos, como un reto de las sociedades actuales para vivir con dignidad, justicia e inclusión.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: 'Debate académico', desc: '¿El uso de los celulares fortalece nuestra libertad o genera nuevas formas de control y poder?' },
+      { titulo: 'Conceptos para argumentar', desc: 'Los estudiantes deberán argumentar utilizando conceptos como: libertad – privacidad – datos personales – información – poder – desigualdad – ciudadanía – derechos humanos.' }
+    ],
+    eval: 'Evaluación formativa · Rúbrica · Autoevaluación'
+  }
+];
+
+function renderDisciplinas() {
+  const container = document.getElementById('plan-etica-disciplinas');
+  if (!container) return;
+  container.innerHTML = PLAN_ETICA.map((d, i) => {
+    const ejesHtml = d.ejes.map(e =>
+      `<span style="font-size:10.5px;padding:3px 9px;border-radius:99px;background:rgba(93,202,165,0.12);color:#5DCAA5;border:1px solid rgba(93,202,165,0.25);white-space:nowrap;">${e}</span>`
+    ).join('');
+    return `
+    <details style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;gap:12px;list-style:none;transition:background 0.18s;"
+        onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(93,202,165,0.15);border:1px solid rgba(93,202,165,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:#5DCAA5;">${i+1}</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:600;color:var(--text-1);">${d.disc}${d.grado ? ' <span style="font-weight:400;color:var(--text-3);">'+d.grado+'</span>' : ''}</div>
+          <div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">${d.contenido.substring(0,70)}${d.contenido.length>70?'…':''}</div>
+        </div>
+        <div style="font-size:18px;color:var(--text-3);flex-shrink:0;">›</div>
+      </summary>
+      <div style="padding:1.1rem 1.25rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1rem;">
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#5DCAA5;margin-bottom:5px;font-weight:500;">Contenido</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.contenido}</p>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#5DCAA5;margin-bottom:5px;font-weight:500;">PDA — Progresión de aprendizaje</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.pda}</p>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#5DCAA5;margin-bottom:7px;font-weight:500;">Ejes articuladores</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">${ejesHtml}</div>
+        </div>
+        <div style="background:rgba(93,202,165,0.06);border-left:2.5px solid #5DCAA5;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.9rem 1rem;">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#5DCAA5;margin-bottom:10px;font-weight:500;">Actividades sugeridas</div>
+          ${Array.isArray(d.actividad) ? d.actividad.map((a, ai) => `
+            <div style="margin-bottom:${ai < d.actividad.length-1 ? '0.9rem' : '0'};">
+              ${a.titulo ? `<div style="font-size:12.5px;font-weight:600;color:var(--text-1);margin-bottom:${a.desc ? '4px' : '0'};">${ai === 0 ? '🎯 ' : ''}${a.titulo}</div>` : ''}
+              ${a.desc ? `<div style="font-size:13px;color:var(--text-2);line-height:1.75;">${a.desc}</div>` : ''}
+            </div>
+          `).join('') : `<p style="font-size:13px;color:var(--text-2);line-height:1.8;">${d.actividad}</p>`}
+        </div>
+        <div style="font-size:12px;color:var(--text-3);">📋 ${d.eval}</div>
+      </div>
+    </details>`;
+  }).join('');
+}
+
+// ── CAMPO: DE LO HUMANO Y LO COMUNITARIO ─────────────────────────────────
+const PLAN_HUMANO = [
+  {
+    disc: 'Tecnología', grado: '1°, 2° y 3°',
+    contenido: 'Pensamiento estratégico y creativo en la resolución de problemas.',
+    pda: 'Analiza necesidades del entorno cercano para plantear un problema, investigar alternativas de solución y seleccionar la que mejor se adapte a los criterios y condiciones contextuales.',
+    ejes: ['Pensamiento crítico', 'Vida saludable'],
+    actividad: [
+      { titulo: 'Rompecabezas QR (Diseño gráfico)', desc: 'Los alumnos conocerán los distintos códigos y sistemas de comunicación creando un rompecabezas integrado por cubos. El armado final reflejará un código QR distinto en cada uno de sus 4 laterales; escaneándolo con el celular, se consulta una página con un mensaje significativo sobre el uso adecuado del dispositivo. Posibles dinámicas para que aparezcan en el QR: juego, cartel o mensaje para completar.' },
+      { titulo: 'Bebidas mágicas (alimentos)', desc: 'Actividad práctica en torno a la temática de alimentos: "tomables o no tomables", conectando el análisis crítico con el uso responsable de información digital.' },
+      { titulo: 'Circuito electrónico (electrónica)', desc: 'Construcción de un circuito electrónico tipo operando que evidencie la relación entre tecnología, componentes y uso cotidiano del celular.' },
+      { titulo: 'Proyecto turístico', desc: 'Actividad de diseño y comunicación vinculada con el sector turístico de la comunidad (Cabo San Lucas), integrando el uso de dispositivos móviles como herramienta de difusión.' },
+      { titulo: 'Uso de dispositivos móviles en mi vida cotidiana', desc: 'Los alumnos contestan un test con preguntas sobre el uso de sus distintos dispositivos móviles y las actividades para las que los utilizan. La finalidad es concientizar sobre el tiempo dedicado al uso de las TIC, la convivencia física entre pares y las investigaciones escolares y de ocio. Se resaltan las afectaciones físicas: vista, trastornos del sueño, adicción y riesgos de la red.' }
+    ],
+    eval: 'Observación y registro · Escala de valoración (logrado, en proceso, requiere apoyo) · Autoevaluación · Escala de evaluación (alto, bajo, excesivo)'
+  },
+  {
+    disc: 'Educación Socioemocional', grado: '1°',
+    contenido: '', pda: '', ejes: [],
+    actividad: [{ titulo: 'Sin información registrada', desc: 'El formato de planeación no incluye contenido para esta disciplina y grado.' }],
+    eval: ''
+  },
+  {
+    disc: 'Educación Socioemocional', grado: '2°',
+    contenido: '', pda: '', ejes: [],
+    actividad: [{ titulo: 'Sin información registrada', desc: 'El formato de planeación no incluye contenido para esta disciplina y grado.' }],
+    eval: ''
+  },
+  {
+    disc: 'Educación Socioemocional', grado: '3°',
+    contenido: '', pda: '', ejes: [],
+    actividad: [{ titulo: 'Sin información registrada', desc: 'El formato de planeación no incluye contenido para esta disciplina y grado.' }],
+    eval: ''
+  },
+  {
+    disc: 'Educación Física', grado: '1°',
+    contenido: '', pda: '', ejes: [],
+    actividad: [{ titulo: 'Sin información registrada', desc: 'El formato de planeación no incluye contenido para esta disciplina y grado.' }],
+    eval: ''
+  },
+  {
+    disc: 'Educación Física', grado: '2°',
+    contenido: '', pda: '', ejes: [],
+    actividad: [{ titulo: 'Sin información registrada', desc: 'El formato de planeación no incluye contenido para esta disciplina y grado.' }],
+    eval: ''
+  },
+  {
+    disc: 'Educación Física', grado: '3°',
+    contenido: '', pda: '', ejes: [],
+    actividad: [{ titulo: 'Sin información registrada', desc: 'El formato de planeación no incluye contenido para esta disciplina y grado.' }],
+    eval: ''
+  }
+];
+
+function renderDisciplinasHumano() {
+  const container = document.getElementById('plan-humano-disciplinas');
+  if (!container) return;
+  const color = '#ED93B1';
+  const colorBg = 'rgba(212,83,126,0.12)';
+  const colorBorder = 'rgba(212,83,126,0.25)';
+  container.innerHTML = PLAN_HUMANO.map((d, i) => {
+    const ejesHtml = d.ejes.map(e =>
+      `<span style="font-size:10.5px;padding:3px 9px;border-radius:99px;background:${colorBg};color:${color};border:1px solid ${colorBorder};white-space:nowrap;">${e}</span>`
+    ).join('');
+    const sinInfo = !d.contenido && !d.pda;
+    return `
+    <details style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);${sinInfo?'opacity:0.55':''}">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;gap:12px;list-style:none;transition:background 0.18s;"
+        onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+        <div style="width:36px;height:36px;border-radius:50%;background:${colorBg};border:1px solid ${colorBorder};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:${color};">${i+1}</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:600;color:var(--text-1);">${d.disc} <span style="font-weight:400;color:var(--text-3);">${d.grado}</span></div>
+          ${d.contenido ? `<div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">${d.contenido.substring(0,70)}${d.contenido.length>70?'…':''}</div>` : `<div style="font-size:11.5px;color:var(--text-3);margin-top:2px;font-style:italic;">Sin información registrada</div>`}
+        </div>
+        <div style="font-size:18px;color:var(--text-3);flex-shrink:0;">›</div>
+      </summary>
+      <div style="padding:1.1rem 1.25rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1rem;">
+        ${d.contenido ? `<div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:5px;font-weight:500;">Contenido</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.contenido}</p>
+        </div>` : ''}
+        ${d.pda ? `<div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:5px;font-weight:500;">PDA — Progresión de aprendizaje</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.pda}</p>
+        </div>` : ''}
+        ${d.ejes.length ? `<div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:7px;font-weight:500;">Ejes articuladores</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">${ejesHtml}</div>
+        </div>` : ''}
+        <div style="background:rgba(212,83,126,0.06);border-left:2.5px solid ${color};border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.9rem 1rem;">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:10px;font-weight:500;">Actividades sugeridas</div>
+          ${Array.isArray(d.actividad) ? d.actividad.map((a, ai) => `
+            <div style="margin-bottom:${ai < d.actividad.length-1 ? '0.9rem' : '0'};">
+              ${a.titulo ? `<div style="font-size:12.5px;font-weight:600;color:var(--text-1);margin-bottom:${a.desc ? '4px' : '0'};">${sinInfo?'⚠️ ':'🎯 '}${a.titulo}</div>` : ''}
+              ${a.desc ? `<div style="font-size:13px;color:var(--text-2);line-height:1.75;">${a.desc}</div>` : ''}
+            </div>
+          `).join('') : `<p style="font-size:13px;color:var(--text-2);line-height:1.8;">${d.actividad}</p>`}
+        </div>
+        ${d.eval ? `<div style="font-size:12px;color:var(--text-3);">📋 ${d.eval}</div>` : ''}
+      </div>
+    </details>`;
+  }).join('');
+}
+
+// ── CAMPO: LENGUAJES ─────────────────────────────────────────────────────
+const PLAN_LENGUAJES = [
+  {
+    disc: 'Español', grado: '1°',
+    contenido: 'La función creativa del español en la expresión de necesidades e intereses comunitarios.',
+    pda: 'Identifica una situación problemática de la comunidad, haciendo uso del pensamiento crítico, para plantear diversas formas creativas de resolverla (cuento, crónica, texto periodístico).',
+    ejes: ['Pensamiento crítico'],
+    actividad: [
+      { titulo: '"Ponte buso con el uso"', desc: '' },
+      { titulo: 'Reflexión inicial', desc: 'Reflexionar sobre quién diseña los dispositivos y aplicaciones, con qué intereses, y de qué manera sus lógicas —la búsqueda de atención, el consumo acelerado, la validación social— influyen en las formas de pensar, sentir y relacionarse de los jóvenes.' },
+      { titulo: 'Producto creativo', desc: 'A partir del análisis, los alumnos eligen un género textual (cuento, crónica o texto periodístico) para expresar creativamente una propuesta de solución a la problemática del uso inadecuado del celular en su comunidad escolar.' }
+    ],
+    eval: 'Rúbrica de actitud ante la problemática y proceso de investigación · Rúbrica de autoevaluación del trabajo colaborativo · Rúbrica entre pares sobre el mensaje difundido'
+  },
+  {
+    disc: 'Español', grado: '2°',
+    contenido: 'La función creativa del español en la expresión de necesidades e intereses comunitarios.',
+    pda: 'Expresa, mediante un ensayo, una postura crítica sobre necesidades, intereses y problemas de la comunidad.',
+    ejes: ['Pensamiento crítico'],
+    actividad: [
+      { titulo: '"El celular en el aula: ¿aliado o distractor?"', desc: '' },
+      { titulo: 'Encuesta anónima', desc: 'Actividad de pensamiento crítico: los alumnos responden una encuesta anónima donde registran su tiempo de pantalla y el tipo de uso que le dan a su dispositivo, entre otros aspectos.' },
+      { titulo: 'Análisis colectivo', desc: 'Proyección de videos complementarios sobre el uso del celular. Se crea un espacio para compartir comentarios a partir de los resultados de la encuesta y el mensaje transmitido en los videos, orientado a la concientización.' },
+      { titulo: 'Elaboración del ensayo', desc: 'Con base en la investigación y reflexión colectiva, cada alumno redacta un ensayo argumentativo donde expresa su postura crítica sobre el uso del celular en el ámbito escolar y comunitario.' }
+    ],
+    eval: 'Observación · Lista de cotejo · Autoevaluación'
+  },
+  {
+    disc: 'Español', grado: '3°',
+    contenido: 'La función creativa del español en la expresión de necesidades e intereses comunitarios.',
+    pda: 'Crea textos literarios de distintos géneros para ofrecer una propuesta de solución a problemas de la comunidad.',
+    ejes: ['Pensamiento crítico'],
+    actividad: [
+      { titulo: '"Un día sin celular"', desc: '' },
+      { titulo: 'Reflexión inicial', desc: 'Reflexionar sobre la dependencia al teléfono móvil. Conversar sobre cuánto tiempo usan el celular al día y cómo se sentirían sin él.' },
+      { titulo: 'Escritura creativa', desc: 'Escribir un cuento donde el celular desaparece por una semana. El texto debe incluir: el problema que provoca el uso excesivo, las consecuencias de esa ausencia y la solución propuesta por los personajes.' }
+    ],
+    eval: 'Observación · Presentación · Autoevaluación'
+  },
+  {
+    disc: 'Inglés', grado: '1°',
+    contenido: 'La diversidad lingüística y sus formas de expresión en Cabo y México.',
+    pda: 'Hace uso del alfabeto, números cardinales y expresiones básicas en inglés.',
+    ejes: ['Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Crónica del recreo', desc: 'Los estudiantes observan cómo se usa el celular en la escuela durante el recreo, registran en inglés lo que ven y escriben colectivamente una crónica que sirve como espejo para reflexionar sobre sus propios hábitos digitales.' }
+    ],
+    eval: 'Observación · Desempeño de los alumnos · Análisis del desempeño'
+  },
+  {
+    disc: 'Inglés', grado: '2°',
+    contenido: 'La identidad y cultura de pueblos de habla inglesa.',
+    pda: 'Elabora fichas informativas en inglés sobre rasgos identitarios de pueblos de habla inglesa.',
+    ejes: ['Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Mini documental "Así somos"', desc: 'Con el celular, los estudiantes entrevistan a su comunidad escolar y familiar sobre el impacto del teléfono en la convivencia. Con esas entrevistas construyen un guion y producen un mini documental que refleja la identidad y los hábitos digitales de su comunidad.' }
+    ],
+    eval: 'Observación · Desempeño de los alumnos · Análisis del desempeño'
+  },
+  {
+    disc: 'Inglés', grado: '3°',
+    contenido: 'El uso del inglés para expresar necesidades, intereses y problemas de la comunidad.',
+    pda: 'Organiza una campaña en inglés sobre soluciones a problemas de la comunidad.',
+    ejes: ['Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Periódico mural "SMART PHONE – SMART LIFE"', desc: 'Los estudiantes investigan, analizan y reflexionan sobre el uso consciente del celular, y plasman en inglés información relevante en un periódico mural temático que se exhibe en la escuela.' }
+    ],
+    eval: 'Observación directa · Reflexión y análisis · Proyección'
+  },
+  {
+    disc: 'Artes', grado: '1°',
+    contenido: 'Los lenguajes artísticos en la expresión de problemas de la comunidad.',
+    pda: 'Usa intencionalmente formas, colores, movimientos y sonidos para recrear una situación problemática y manifestar una postura crítica.',
+    ejes: ['Interculturalidad crítica'],
+    actividad: [
+      { titulo: '¿Para qué usamos el celular?', desc: 'Lluvia de ideas y clasificación de usos del celular: comunicación, aprendizaje, entretenimiento, creatividad, información, redes sociales, etc.' },
+      { titulo: '"El celular tiene dos caras" — Collage', desc: 'Los alumnos realizan una composición visual dividida en dos partes: USO POSITIVO / USO INADECUADO. Utilizan colores, formas y símbolos como mensaje; incluyen recortes, dibujos, palabras e imágenes para representar cómo el celular influye en su vida cotidiana.' }
+    ],
+    eval: 'Observación · Análisis de producciones · Lista de cotejo · Rúbrica'
+  },
+  {
+    disc: 'Artes', grado: '2°',
+    contenido: 'Los lenguajes artísticos en la expresión de problemas de la comunidad.',
+    pda: 'Investiga propuestas artísticas colectivas de entornos rurales y urbanos a favor de la inclusión para presentar una postura crítica sobre un problema de la comunidad.',
+    ejes: ['Interculturalidad crítica'],
+    actividad: [
+      { titulo: 'Beneficios y desventajas del celular', desc: 'Realizar un cuadro comparativo y seleccionar las situaciones que más afectan la convivencia escolar.' },
+      { titulo: 'Investigación mediante entrevistas', desc: '¿Para qué utilizas más tu celular? ¿Cuándo te ayuda? ¿Cuándo te distrae? ¿Consideras que afecta la convivencia? ¿Qué propondrías para utilizarlo responsablemente?' },
+      { titulo: 'Productos artísticos', desc: 'Infografía artística, cartel y exposición titulada <em>"Lo que vemos, lo que vivimos"</em> donde se presentan los hallazgos de la investigación y las propuestas de los alumnos.' }
+    ],
+    eval: 'Observación · Análisis de producciones · Lista de cotejo · Rúbrica'
+  },
+  {
+    disc: 'Artes', grado: '3°',
+    contenido: 'Los lenguajes artísticos en la expresión de problemas de la comunidad.',
+    pda: 'Experimenta con técnicas artísticas y elige una que implemente en un proyecto escolar creativo, para imaginar y proponer posibles soluciones a problemas de la comunidad.',
+    ejes: ['Interculturalidad crítica'],
+    actividad: [
+      { titulo: '"El celular que quiero ver"', desc: 'En lugar de enfocarse únicamente en lo negativo, los alumnos imaginan cómo debería ser el uso del celular en una comunidad saludable. Diseñan visualmente su propuesta.' },
+      { titulo: 'Campaña escolar visual', desc: 'En equipos crean una pequeña campaña sobre el uso responsable del celular. Puede incluir: cartel, logotipo, lema y publicaciones simuladas para redes escolares.' }
+    ],
+    eval: 'Observación · Lista de cotejo · Rúbrica · Cuestionario de autoevaluación'
+  }
+];
+
+function renderDisciplinasLenguajes() {
+  const container = document.getElementById('plan-lenguajes-disciplinas');
+  if (!container) return;
+  const color = '#EF9F27';
+  const colorBg = 'rgba(186,117,23,0.12)';
+  const colorBorder = 'rgba(186,117,23,0.28)';
+  container.innerHTML = PLAN_LENGUAJES.map((d, i) => {
+    const ejesHtml = d.ejes.map(e =>
+      `<span style="font-size:10.5px;padding:3px 9px;border-radius:99px;background:${colorBg};color:${color};border:1px solid ${colorBorder};white-space:nowrap;">${e}</span>`
+    ).join('');
+    return `
+    <details style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;gap:12px;list-style:none;transition:background 0.18s;"
+        onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+        <div style="width:36px;height:36px;border-radius:50%;background:${colorBg};border:1px solid ${colorBorder};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:${color};">${i+1}</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:600;color:var(--text-1);">${d.disc} <span style="font-weight:400;color:var(--text-3);">${d.grado}</span></div>
+          <div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">${d.contenido.substring(0,70)}${d.contenido.length>70?'…':''}</div>
+        </div>
+        <div style="font-size:18px;color:var(--text-3);flex-shrink:0;">›</div>
+      </summary>
+      <div style="padding:1.1rem 1.25rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1rem;">
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:5px;font-weight:500;">Contenido</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.contenido}</p>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:5px;font-weight:500;">PDA — Progresión de aprendizaje</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.pda}</p>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:7px;font-weight:500;">Ejes articuladores</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">${ejesHtml}</div>
+        </div>
+        <div style="background:rgba(186,117,23,0.06);border-left:2.5px solid ${color};border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.9rem 1rem;">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:10px;font-weight:500;">Actividades sugeridas</div>
+          ${Array.isArray(d.actividad) ? d.actividad.map((a, ai) => `
+            <div style="margin-bottom:${ai < d.actividad.length-1 ? '0.9rem' : '0'};">
+              ${a.titulo ? `<div style="font-size:12.5px;font-weight:600;color:var(--text-1);margin-bottom:${a.desc ? '4px' : '0'};">${ai===0?'🎯 ':''}${a.titulo}</div>` : ''}
+              ${a.desc ? `<div style="font-size:13px;color:var(--text-2);line-height:1.75;">${a.desc}</div>` : ''}
+            </div>
+          `).join('') : `<p style="font-size:13px;color:var(--text-2);line-height:1.8;">${d.actividad}</p>`}
+        </div>
+        <div style="font-size:12px;color:var(--text-3);">📋 ${d.eval}</div>
+      </div>
+    </details>`;
+  }).join('');
+}
+
+// ── CAMPO: SABERES Y PENSAMIENTO CIENTÍFICO ──────────────────────────────
+const PLAN_SABERES = [
+  {
+    disc: 'Matemáticas', grado: '1°',
+    contenido: 'Obtención y representación de información.',
+    pda: 'Usa tablas, gráficas de barras y circulares para el análisis de información.',
+    ejes: ['Vida saludable', 'Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Recolección y análisis de datos', desc: 'Los alumnos diseñan y aplican encuestas sobre el uso del celular en la comunidad escolar. Registran y organizan los resultados obtenidos.' },
+      { titulo: 'Elaboración de tablas y gráficas', desc: 'Con los datos recopilados, construyen tablas de frecuencia y gráficas de barras o circulares que representan los patrones de uso del celular entre sus compañeros.' },
+      { titulo: 'Maqueta o producto final', desc: 'A partir del análisis, elaboran un producto comunicativo (maqueta, cartel, tríptico, video blog, TikTok o podcast) que presente los hallazgos a la comunidad escolar.' }
+    ],
+    eval: 'Observación directa · Bitácora de registro · Producciones escritas (investigación, registros de encuesta, tablas, gráficas) · Producto final'
+  },
+  {
+    disc: 'Matemáticas', grado: '2°',
+    contenido: 'Obtención y representación de información.',
+    pda: 'Recolecta, registra, lee y comunica información mediante histogramas, gráficas poligonales y de línea.',
+    ejes: ['Vida saludable', 'Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Encuesta sobre hábitos digitales', desc: 'Diseñan y aplican una encuesta en la escuela sobre el tiempo y tipo de uso del celular. Registran los datos obtenidos para su análisis estadístico.' },
+      { titulo: 'Elaboración de gráficas avanzadas', desc: 'Con los resultados de la encuesta, construyen histogramas, gráficas poligonales y de línea que permiten analizar tendencias en el uso de dispositivos digitales.' },
+      { titulo: 'Comunicación de resultados', desc: 'Presentan sus hallazgos mediante un producto final: video blog, TikTok, podcast, folleto, tríptico, maqueta o cartel.' }
+    ],
+    eval: 'Observación directa · Bitácora de registro · Producciones escritas (investigación, registros de encuesta, tablas, gráficas) · Producto final'
+  },
+  {
+    disc: 'Matemáticas', grado: '3°',
+    contenido: 'Obtención y representación de información.',
+    pda: 'Lee, interpreta y comunica información de cualquier tipo de gráficas.',
+    ejes: ['Vida saludable', 'Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Investigación estadística', desc: 'Los alumnos diseñan una investigación más amplia sobre el uso del celular en la comunidad escolar y su relación con el bienestar personal y académico.' },
+      { titulo: 'Interpretación de múltiples gráficas', desc: 'Leen e interpretan diferentes tipos de gráficas para extraer conclusiones sobre los patrones de uso digital y sus consecuencias.' },
+      { titulo: 'Exposición por equipos', desc: 'Presentan y comunican los resultados a la comunidad escolar mediante una exposición organizada por equipos, apoyada en materiales visuales o digitales.' }
+    ],
+    eval: 'Observación directa · Bitácora de registro · Producciones escritas (investigación, registros de encuesta, tablas, gráficas) · Producto final'
+  },
+  {
+    disc: 'Biología', grado: '1°',
+    contenido: 'Funcionamiento del cuerpo humano coordinado por los sistemas nervioso y endocrino.',
+    pda: 'Explica los efectos del consumo de sustancias adictivas en el sistema nervioso y en el funcionamiento integral del cuerpo humano, argumenta la importancia de evitar su consumo y comparte sus aprendizajes por distintos medios.',
+    ejes: ['Vida saludable', 'Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Introducción a la ciencia y tecnología', desc: 'Establecer conceptos clave sobre ciencia y tecnología. Analizar la transición histórica de la tecnología y su influencia en la sociedad y el cuerpo humano.' },
+      { titulo: 'Componentes de los dispositivos digitales', desc: 'Investigación sobre los componentes de los dispositivos tecnológicos, sus elementos, propiedades y el aprovechamiento de los mismos en el uso cotidiano.' },
+      { titulo: 'Cuadro comparativo', desc: 'Elaborar un cuadro comparativo de los beneficios y desventajas de la ciencia y la tecnología, orientado específicamente al uso de dispositivos digitales y su impacto en la salud.' },
+      { titulo: 'Encuesta comunitaria y reflexión', desc: 'Realizar una encuesta a diferentes actores de la comunidad escolar (alumnos, docentes, padres) acerca del uso de los dispositivos digitales y la inteligencia artificial. Generar espacios de reflexión a partir de los resultados.' },
+      { titulo: 'Producto integrador', desc: 'Generar un producto con la información y los datos recopilados durante el desarrollo del contenido (video blog, TikTok, podcast, folleto, tríptico, maqueta o cartel).' }
+    ],
+    eval: 'Observación directa · Bitácora de registro · Producciones escritas (investigación, registros de encuesta, tablas, gráficas) · Producto final'
+  },
+  {
+    disc: 'Física', grado: '2°',
+    contenido: 'El pensamiento científico, una forma de plantear y solucionar problemas y su incidencia en la transformación de la sociedad.',
+    pda: 'Describe problemas comunes de la vida cotidiana explicando cómo se procede para buscarles solución; conoce y caracteriza el pensamiento científico para plantearse y resolver problemas en la escuela y su cotidianeidad.',
+    ejes: ['Vida saludable', 'Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Ciencia y tecnología: introducción', desc: 'Establecer conceptos clave sobre el método científico. Analizar cómo la transición histórica de la tecnología ha influido en la forma en que la sociedad plantea y resuelve problemas.' },
+      { titulo: 'Investigación de dispositivos', desc: 'Investigar los componentes de los dispositivos digitales y tecnológicos: elementos, propiedades físicas y el aprovechamiento de las mismas en el uso cotidiano.' },
+      { titulo: 'Cuadro comparativo', desc: 'Elaborar un cuadro comparativo de los beneficios y desventajas de la ciencia y la tecnología, orientado al uso de dispositivos digitales desde una perspectiva del pensamiento científico.' },
+      { titulo: 'Encuesta y reflexión', desc: 'Realizar una encuesta a diferentes actores de la comunidad escolar sobre el uso de los dispositivos digitales y la IA. Generar espacios de reflexión y análisis crítico de los datos obtenidos.' },
+      { titulo: 'Producto integrador', desc: 'Generar un producto comunicativo con la información recopilada: video blog, TikTok, podcast, folleto, tríptico, maqueta o cartel.' }
+    ],
+    eval: 'Observación directa · Bitácora de registro · Producciones escritas (investigación, registros de encuesta, tablas, gráficas) · Producto final'
+  },
+  {
+    disc: 'Química', grado: '3°',
+    contenido: 'Los hitos que contribuyeron al avance del conocimiento científico y tecnológico en el ámbito nacional e internacional, así como su relación con la satisfacción de necesidades humanas y sus implicaciones en la naturaleza.',
+    pda: 'Reflexiona acerca de los hábitos de consumo responsable a partir del análisis de actividades relacionadas con el cuidado del medio ambiente a nivel personal, familiar y social, como base para la toma de decisiones orientadas a la sustentabilidad.',
+    ejes: ['Vida saludable', 'Pensamiento crítico'],
+    actividad: [
+      { titulo: 'Historia de la ciencia y tecnología', desc: 'Revisar los hitos más importantes en el avance del conocimiento científico y tecnológico, analizando cómo estos impactaron en la satisfacción de necesidades humanas y en el medio ambiente.' },
+      { titulo: 'Componentes y residuos de dispositivos', desc: 'Investigar los componentes químicos de los dispositivos digitales, sus propiedades y el impacto ambiental de su producción y desecho (residuos electrónicos, extracción de minerales, contaminación).' },
+      { titulo: 'Cuadro comparativo', desc: 'Elaborar un cuadro comparativo de los beneficios y desventajas de la ciencia y la tecnología, orientado al consumo responsable de dispositivos digitales y su relación con la sustentabilidad.' },
+      { titulo: 'Encuesta y reflexión', desc: 'Realizar una encuesta a la comunidad escolar sobre el uso de dispositivos digitales y la IA. Reflexionar sobre los hábitos de consumo tecnológico y sus implicaciones ambientales y sociales.' },
+      { titulo: 'Producto integrador', desc: 'Generar un producto con los datos recopilados que comunique a la comunidad las conclusiones sobre consumo responsable de tecnología: video blog, TikTok, podcast, folleto, tríptico, maqueta o cartel.' }
+    ],
+    eval: 'Observación directa · Bitácora de registro · Producciones escritas (investigación, registros de encuesta, tablas, gráficas) · Producto final'
+  }
+];
+
+function renderDisciplinasSaberes() {
+  const container = document.getElementById('plan-saberes-disciplinas');
+  if (!container) return;
+  const color = '#85B7EB';
+  const colorBg = 'rgba(55,138,221,0.12)';
+  const colorBorder = 'rgba(55,138,221,0.28)';
+  container.innerHTML = PLAN_SABERES.map((d, i) => {
+    const ejesHtml = d.ejes.map(e =>
+      `<span style="font-size:10.5px;padding:3px 9px;border-radius:99px;background:${colorBg};color:${color};border:1px solid ${colorBorder};white-space:nowrap;">${e}</span>`
+    ).join('');
+    return `
+    <details style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;gap:12px;list-style:none;transition:background 0.18s;"
+        onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+        <div style="width:36px;height:36px;border-radius:50%;background:${colorBg};border:1px solid ${colorBorder};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:${color};">${i+1}</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:600;color:var(--text-1);">${d.disc} <span style="font-weight:400;color:var(--text-3);">${d.grado}</span></div>
+          <div style="font-size:11.5px;color:var(--text-3);margin-top:2px;">${d.contenido.substring(0,70)}${d.contenido.length>70?'…':''}</div>
+        </div>
+        <div style="font-size:18px;color:var(--text-3);flex-shrink:0;">›</div>
+      </summary>
+      <div style="padding:1.1rem 1.25rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1rem;">
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:5px;font-weight:500;">Contenido</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.contenido}</p>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:5px;font-weight:500;">PDA — Progresión de aprendizaje</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.75;">${d.pda}</p>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:7px;font-weight:500;">Ejes articuladores</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">${ejesHtml}</div>
+        </div>
+        <div style="background:rgba(55,138,221,0.06);border-left:2.5px solid ${color};border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.9rem 1rem;">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:${color};margin-bottom:10px;font-weight:500;">Actividades sugeridas</div>
+          ${d.actividad.map((a, ai) => `
+            <div style="margin-bottom:${ai < d.actividad.length-1 ? '0.9rem' : '0'};">
+              <div style="font-size:12.5px;font-weight:600;color:var(--text-1);margin-bottom:4px;">${ai===0?'🎯 ':''}${a.titulo}</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.75;">${a.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div style="font-size:12px;color:var(--text-3);">📋 ${d.eval}</div>
+      </div>
+    </details>`;
+  }).join('');
+}
+
+window.abrirPlaneacion = function(campo) {
+  document.getElementById('plan-panel').style.display = 'block';
+  document.getElementById('plan-etica').style.display     = campo === 'etica'     ? 'block' : 'none';
+  document.getElementById('plan-humano').style.display    = campo === 'humano'    ? 'block' : 'none';
+  document.getElementById('plan-lenguajes').style.display = campo === 'lenguajes' ? 'block' : 'none';
+  document.getElementById('plan-saberes').style.display   = campo === 'saberes'   ? 'block' : 'none';
+  if (campo === 'etica')     renderDisciplinas();
+  if (campo === 'humano')    renderDisciplinasHumano();
+  if (campo === 'lenguajes') renderDisciplinasLenguajes();
+  if (campo === 'saberes')   renderDisciplinasSaberes();
+  document.getElementById('plan-panel').scrollIntoView({behavior:'smooth', block:'nearest'});
+};
+
+window.cerrarPlaneacion = function() {
+  document.getElementById('plan-panel').style.display = 'none';
+};
+</script>
 </body>
 </html>
